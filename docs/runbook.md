@@ -1,6 +1,6 @@
 # Fresh-checkout runbook
 
-Release: portable preview. Use this sequence from the repository root. [Fresh-copy verification evidence](../reports/validation/fresh-checkout.json) records the actual development-platform execution; GitHub CI and macOS/Windows Python matrix executions remain unrun here.
+Release: portable preview. Use this sequence from the repository root. [Fresh-copy verification evidence](../reports/validation/fresh-checkout.json) records the actual development-platform execution. [Hosted CI passed](https://github.com/quocbao210/iis-purple-lab/actions/runs/35430608975) for Python replay on Linux, Windows and macOS, plus the application and PowerShell static jobs. This does not validate native IIS installation or telemetry.
 
 ## Portable dependencies, replay and evaluation
 

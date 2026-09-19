@@ -66,14 +66,16 @@
   },
   "independent_fresh_copy": {"passed": true, "evidence": "fresh-checkout.json"},
   "final_review_audit": {
-    "local_file_and_html_evidence_links_checked": 658,
+    "local_file_and_html_evidence_links_checked": 661,
     "fragment_links_checked": 374,
     "broken_links": 0,
     "bundle_hashes_verified": 15,
     "fresh_copy_tested_source_hashes_matching_current_files": 63,
     "workflow_yaml_parsed": true,
     "workflow_jobs": 3,
-    "workflow_execution_claimed": false,
+    "workflow_execution_claimed": true,
+    "hosted_jobs_passed": 5,
+    "hosted_evidence": "publication.json",
     "git_remotes": 1,
     "private_preflight_and_raw_test_reports_gitignored": true
   },
@@ -82,8 +84,7 @@
     "Sysmon/audit configuration and authentic scenario event collection",
     "Native B/C process execution, staged artifact/receiver hash validation",
     "Native request-to-process correlation and hardened same-request host retests",
-    "Native containment, rollback and recoverable cleanup integration",
-    "GitHub Actions execution and macOS/Windows Python replay matrix"
+    "Native containment, rollback and recoverable cleanup integration"
   ],
   "blocker": "No disposable configured/elevated Windows IIS/.NET10/Sysmon VM was available. The accessible workstation was used for read-only preflight and static validation only.",
   "remaining_commands": "../../docs/windows-runbook.md",

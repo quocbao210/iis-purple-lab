@@ -14,6 +14,8 @@
 
 **Experience gained.** The project offers reproducible exercises in policy testing, detection engineering, evidence attribution and incident response. [The learning checklist](docs/learning-checklist.md) asks the owner to investigate an unfamiliar case, change a rule, demonstrate a fix and explain a blind spot before claiming personal proficiency.
 
+[![Portable preview checks](https://github.com/quocbao210/iis-purple-lab/actions/workflows/portable.yml/badge.svg)](https://github.com/quocbao210/iis-purple-lab/actions/workflows/portable.yml)
+
 ## Report preview
 
 ![IIS Purple Lab evidence report showing fixture provenance, findings and linked evidence](docs/assets/report-preview.png)
@@ -22,9 +24,11 @@ Actual report rendering from the bundled handcrafted fixtures. Desktop, mobile a
 
 ## Quick start
 
-Python 3.11+; tested here with 3.14.4. Run from this repository root. No IIS, Docker, paid service or LLM API is required for replay.
+Python 3.11+; tested here with 3.14.4. Clone the repository, then run the checks from its root. No IIS, Docker, paid service or LLM API is required for replay.
 
 ```bash
+git clone https://github.com/quocbao210/iis-purple-lab.git
+cd iis-purple-lab
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.lock
@@ -57,6 +61,6 @@ Tests use in-process HTTP and a mocked process launcher. The separate portable c
 | Native process attribution / remediation | Required Windows capture | Not measured | [Remaining gates](docs/windows-runbook.md#required-evidence-before-a-validated-windows-release) | Disposable Windows VM unavailable. |
 | Analyst productivity / savings | No controlled study | Not measured | [Limitations](docs/limitations.md) | No ROI or production effectiveness claim. |
 
-Start with [verification status](IMPLEMENTATION_STATUS.md), [fresh-checkout runbook](docs/runbook.md), [architecture](docs/architecture.md), [policy](docs/access-policy.md), [detection catalogue](detections/README.md), [five-minute demo](docs/demo.md), or [project brief](docs/project-brief.md). Native evidence stays local and ignored by git. GitHub Actions configuration is provided, but has not run on GitHub; local checks are recorded separately.
+Start with [verification status](IMPLEMENTATION_STATUS.md), [fresh-checkout runbook](docs/runbook.md), [architecture](docs/architecture.md), [policy](docs/access-policy.md), [detection catalogue](detections/README.md), [five-minute demo](docs/demo.md), or [project brief](docs/project-brief.md). Native evidence stays local and ignored by git. [GitHub Actions passed](https://github.com/quocbao210/iis-purple-lab/actions/runs/35430608975) on Linux, Windows and macOS, with separate application and PowerShell static jobs. [Publication verification](reports/validation/publication.json) records the checked commit; native IIS integration remains pending.
 
 Source and original lab fixtures are [MIT licensed](LICENSE); vendor dependencies retain their own licences. [Attribution and primary references](docs/sources.md). No vendor installers, native endpoint logs, real customer records, paid bounty claims, or employer endorsements are bundled.

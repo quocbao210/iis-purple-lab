@@ -1,6 +1,6 @@
 # Review handover
 
-Release label: **IIS Purple Lab 0.1 portable preview**. The owner authorized publication at [quocbao210/iis-purple-lab](https://github.com/quocbao210/iis-purple-lab). This publishes project source and reviewed fixture reports, not a hosted application or native endpoint logs.
+Release label: **IIS Purple Lab 0.1 portable preview**. Published publicly at [quocbao210/iis-purple-lab](https://github.com/quocbao210/iis-purple-lab) with the owner's explicit authorization. This publishes project source and reviewed fixture reports, not a hosted application or native endpoint logs. An anonymous public clone passed replay, all 63 Python tests plus 7 subtests, and source/evidence hash checks.
 
 Start with [README](../README.md), [the status audit](../IMPLEMENTATION_STATUS.md), [fresh-checkout instructions](runbook.md), [sample report](../reports/generated/demo/report.html) and [comparison](../reports/generated/evaluation/evaluation.md). The [validation summary](../reports/validation/summary.json) distinguishes local Python/.NET/PowerShell checks, actual Kestrel HTTP, fixture replay, and pending native Windows gates.
 
@@ -8,7 +8,7 @@ Implemented: synthetic authenticated support/reporting API, vulnerable/hardened 
 
 Measured fixture results: 19 held-out runs (7 malicious labels, 12 benign); combined 6 TP, 1 FP, 1 FN, 11 TN. IIS-only 0 TP, application+IIS 2 TP, Windows-only 4 TP. On the 10 report-run comparison cases, the tuned predicate retains 4 TP and reduces FP from 6 to 1. The remaining maintenance false positive and unlogged-policy miss are visible, not suppressed from denominators. No live latency, analyst-time, collection CPU or economic benefit was measured.
 
-Native blocker: no disposable configured/elevated IIS/.NET10/Sysmon VM was available. Windows PowerShell syntax and static path/selector checks ran on the development host without configuration changes. Follow [the native runbook](windows-runbook.md) for actual setup/capture/correlation/receiver-hash/remediation/cleanup gates before naming a validated Windows release. Hosted CI is configured but has not run on GitHub.
+Native blocker: no disposable configured/elevated IIS/.NET10/Sysmon VM was available. Windows PowerShell syntax and static path/selector checks ran on the development host without configuration changes. Follow [the native runbook](windows-runbook.md) for actual setup/capture/correlation/receiver-hash/remediation/cleanup gates before naming a validated Windows release. [All five hosted CI jobs passed](https://github.com/quocbao210/iis-purple-lab/actions/runs/35430608975); the tested commit and public-clone checks are recorded in [publication verification](../reports/validation/publication.json).
 
 GitHub description: “Evidence-linked IIS purple-team lab: tenant authorization, request-to-process attribution, Sigma/SQLite detections and remediation checks. Portable preview.”
 

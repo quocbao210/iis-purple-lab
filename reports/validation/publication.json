@@ -1,0 +1,41 @@
+{
+  "validation_date": "2026-09-19",
+  "repository": "https://github.com/quocbao210/iis-purple-lab",
+  "visibility": "public",
+  "branch": "main",
+  "owner_publication_authorization": "Explicit user request to create public quocbao210/iis-purple-lab and push the project.",
+  "validated_source_commit": "e7e3cf2dd929c89007e6148e7411811525bc3bcf",
+  "local_and_remote_commit_matched": true,
+  "hosted_ci": {
+    "url": "https://github.com/quocbao210/iis-purple-lab/actions/runs/35430608975",
+    "status": "completed",
+    "conclusion": "success",
+    "completed_observed_at": "2026-09-19T07:56:51Z",
+    "jobs": [
+      {"name": "replay (ubuntu-latest)", "conclusion": "success"},
+      {"name": "replay (windows-latest)", "conclusion": "success"},
+      {"name": "replay (macos-latest)", "conclusion": "success"},
+      {"name": "application", "conclusion": "success"},
+      {"name": "powershell-static", "conclusion": "success"}
+    ]
+  },
+  "anonymous_public_clone": {
+    "passed": true,
+    "credential_helpers_and_prompts_disabled": true,
+    "imported_analysis_source_confirmed_in_clone": true,
+    "python_tests_passed": 63,
+    "python_subtests_passed": 7,
+    "demo_events": 70,
+    "demo_alerts": 16,
+    "fixture_hashes_verified": 6,
+    "bundle_hashes_verified": 15,
+    "rule_hashes_verified": 3,
+    "source_fingerprints_verified": 63
+  },
+  "publication_exclusions": [
+    "Credentials, local runtime state and build output",
+    "Private workstation preflight and raw development test reports",
+    "Native endpoint logs and non-reviewed private datasets"
+  ],
+  "scope_note": "This records the tested source commit. Subsequent documentation-only commits can describe this observed result; the live Actions badge reports the latest branch run. Native IIS/Sysmon scenario execution and capture remain unvalidated."
+}
