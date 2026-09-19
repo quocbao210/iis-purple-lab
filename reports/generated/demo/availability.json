@@ -1,0 +1,117 @@
+{
+  "IPL-001": {
+    "available": true,
+    "eligible_records_by_stage": [
+      8
+    ],
+    "incomplete_records_by_stage": [
+      0
+    ],
+    "missing_fields_by_stage": [
+      []
+    ],
+    "missing_sources": [],
+    "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation.",
+    "required_sources": [
+      "application"
+    ]
+  },
+  "IPL-002": {
+    "available": true,
+    "eligible_records_by_stage": [
+      21
+    ],
+    "incomplete_records_by_stage": [
+      0
+    ],
+    "missing_fields_by_stage": [
+      []
+    ],
+    "missing_sources": [],
+    "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation.",
+    "required_sources": [
+      "sysmon"
+    ]
+  },
+  "IPL-003": {
+    "available": true,
+    "eligible_records_by_stage": [
+      21
+    ],
+    "incomplete_records_by_stage": [
+      0
+    ],
+    "missing_fields_by_stage": [
+      []
+    ],
+    "missing_sources": [],
+    "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation.",
+    "required_sources": [
+      "sysmon"
+    ]
+  },
+  "IPL-004": {
+    "available": true,
+    "eligible_records_by_stage": [
+      21,
+      2
+    ],
+    "incomplete_records_by_stage": [
+      0,
+      0
+    ],
+    "missing_fields_by_stage": [
+      [],
+      []
+    ],
+    "missing_sources": [],
+    "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation.",
+    "required_sources": [
+      "sysmon"
+    ]
+  },
+  "IPL-005": {
+    "available": true,
+    "eligible_records_by_stage": [
+      21,
+      2
+    ],
+    "incomplete_records_by_stage": [
+      0,
+      0
+    ],
+    "missing_fields_by_stage": [
+      [],
+      []
+    ],
+    "missing_sources": [],
+    "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation.",
+    "required_sources": [
+      "sysmon"
+    ]
+  },
+  "IPL-006": {
+    "available": true,
+    "eligible_records_by_stage": [
+      21,
+      9,
+      9
+    ],
+    "incomplete_records_by_stage": [
+      0,
+      0,
+      0
+    ],
+    "missing_fields_by_stage": [
+      [],
+      [],
+      []
+    ],
+    "missing_sources": [],
+    "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation.",
+    "required_sources": [
+      "application",
+      "sysmon"
+    ]
+  }
+}

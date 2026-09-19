@@ -1,0 +1,91 @@
+{
+  "validation_date": "2026-09-19",
+  "release": "portable-preview",
+  "native_windows_integration_passed": false,
+  "portable_checks": [
+    {
+      "command": "python -m pytest tests scenarios/test_harness.py -q --junitxml=reports/validation/pytest.xml",
+      "result": "passed",
+      "tests": 63,
+      "subtests": 7,
+      "failures": 0,
+      "reported_seconds": 3.00,
+      "scope": "Parser, correlation, real Sigma-to-SQL query matches, detections, evidence/report safety, source-ablation evaluation, label independence and harness boundaries.",
+      "evidence": "fresh-checkout.json and source tests; raw local JUnit is gitignored to avoid publishing development identifiers."
+    },
+    {
+      "command": "dotnet test app/IisPurpleLab.Tests/IisPurpleLab.Tests.csproj --no-restore",
+      "result": "passed",
+      "tests": 22,
+      "failures": 0,
+      "skipped": 0,
+      "scope": "ASP.NET in-process HTTP behavior and mocked process-launch boundary; NOT native process execution.",
+      "evidence": "fresh-checkout.json and app/IisPurpleLab.Tests/ApplicationTests.cs; original local application.trx is gitignored."
+    },
+    {
+      "command": "python scenarios/portable_check.py",
+      "result": "passed",
+      "checks": 14,
+      "scope": "Actual loopback Kestrel login, cross-tenant access and remediation, legitimate sharing/admin/same-tenant access, repeated requests and managed export.",
+      "host_payloads_executed": false,
+      "evidence": "portable-http.json"
+    },
+    {
+      "command": "powershell.exe -NoProfile -NonInteractive -File lab/windows/Test-Scripts.ps1",
+      "result": "passed",
+      "scripts_parsed": 13,
+      "scope": "Native Windows PowerShell 5.1 syntax/static validation, audit interop compilation without policy invocation, Sysmon XML configuration, handcrafted ProcessGuid selector isolation, four unsafe-path rejections and two negative capture-evidence gates.",
+      "host_configuration_changed": false
+    },
+    {
+      "result": "passed",
+      "scope": "Actual Chromium report rendering on desktop, mobile and dark mode; filters, evidence expansion, no page-level horizontal overflow or JavaScript errors.",
+      "views": 3,
+      "evidence": "browser.json",
+      "origin": "rendered-handcrafted-fixture-report"
+    }
+  ],
+  "fixture_replay": {
+    "origin": "handcrafted-fixture",
+    "normalized_events": 70,
+    "alerts_including_components": 16,
+    "high_confidence_process_links": 11,
+    "unattributed_process_links": 10,
+    "ambiguous_process_links": 0,
+    "note": "Ambiguity is tested in targeted adversarial tests; this held-out fixture has unique instrumented launches. Background worker roots remain unattributed.",
+    "evidence": "../generated/demo/bundle-manifest.json"
+  },
+  "heldout_evaluation": {
+    "unit": "scenario-run",
+    "cases": 19,
+    "malicious_labels": 7,
+    "benign_labels": 12,
+    "combined": {"tp": 6, "fp": 1, "fn": 1, "tn": 11},
+    "evidence": "../generated/evaluation/evaluation.json",
+    "native_or_external_validity_claimed": false
+  },
+  "independent_fresh_copy": {"passed": true, "evidence": "fresh-checkout.json"},
+  "final_review_audit": {
+    "local_file_and_html_evidence_links_checked": 658,
+    "fragment_links_checked": 374,
+    "broken_links": 0,
+    "bundle_hashes_verified": 15,
+    "fresh_copy_tested_source_hashes_matching_current_files": 63,
+    "workflow_yaml_parsed": true,
+    "workflow_jobs": 3,
+    "workflow_execution_claimed": false,
+    "git_remotes": 1,
+    "private_preflight_and_raw_test_reports_gitignored": true
+  },
+  "not_executed": [
+    "Native IIS installation/topology and low-privilege execution verification",
+    "Sysmon/audit configuration and authentic scenario event collection",
+    "Native B/C process execution, staged artifact/receiver hash validation",
+    "Native request-to-process correlation and hardened same-request host retests",
+    "Native containment, rollback and recoverable cleanup integration",
+    "GitHub Actions execution and macOS/Windows Python replay matrix"
+  ],
+  "blocker": "No disposable configured/elevated Windows IIS/.NET10/Sysmon VM was available. The accessible workstation was used for read-only preflight and static validation only.",
+  "remaining_commands": "../../docs/windows-runbook.md",
+  "limitations": "Portable behavior and handcrafted evidence tests do not substitute for authentic Windows telemetry. No analyst timing, live latency, collection CPU or business-savings measurement is claimed."
+}

@@ -1,0 +1,8 @@
+{
+  "approved_destinations": [],
+  "notes": "Normal report helpers have no network requirement. Native deployments at another root must supply an audited policy using --policy. A connection alert does not prove exfiltration.",
+  "protected_roots": [
+    "C:\\IISPurpleLab\\data"
+  ],
+  "schema_version": 1
+}

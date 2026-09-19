@@ -1,0 +1,21 @@
+#Software: IIS Purple Lab handcrafted fixture
+#Fields: date time s-computername cs-method cs-uri-stem cs-uri-query sc-status c-ip time-taken
+2026-08-11 10:00:10 web-48.lab GET /api/tickets/ticket-2843 - 200 127.0.0.1 5
+2026-08-11 10:00:30 web-47.lab GET /api/tickets/ticket-5536 - 200 127.0.0.1 5
+2026-08-11 10:00:50 web-33.lab GET /api/tickets/ticket-4770 - 200 127.0.0.1 5
+2026-08-11 10:01:10 web-35.lab GET /api/tickets/ticket-5243 - 200 127.0.0.1 5
+2026-08-11 10:01:30 web-73.lab GET /api/tickets/ticket-2385 - 200 127.0.0.1 5
+2026-08-11 10:01:50 web-64.lab GET /api/tickets/ticket-8972 - 200 127.0.0.1 5
+2026-08-11 10:02:10 web-71.lab POST /api/reports - 200 127.0.0.1 5
+2026-08-11 10:02:30 web-78.lab POST /api/reports - 200 127.0.0.1 5
+2026-08-11 10:02:50 web-76.lab POST /api/reports - 200 127.0.0.1 5
+2026-08-11 10:03:10 web-38.lab POST /api/reports - 200 127.0.0.1 5
+2026-08-11 10:03:30 web-40.lab POST /api/reports - 200 127.0.0.1 5
+2026-08-11 10:03:50 web-27.lab POST /api/reports - 200 127.0.0.1 5
+2026-08-11 10:03:50 web-27.lab POST /api/reports - 200 127.0.0.1 5
+2026-08-11 10:04:30 web-55.lab POST /api/reports - 200 127.0.0.1 5
+2026-08-11 10:04:50 web-31.lab POST /api/reports - 200 127.0.0.1 5
+2026-08-11 10:05:10 web-54.lab GET /api/tickets/ticket-7249 - 200 127.0.0.1 5
+2026-08-11 10:05:30 web-27.lab GET /api/tickets/ticket-3846 - 200 127.0.0.1 5
+2026-08-11 10:05:50 web-21.lab POST /api/reports - 200 127.0.0.1 5
+2026-08-11 10:06:10 web-58.lab GET /api/tickets/ticket-4026 - 200 127.0.0.1 5

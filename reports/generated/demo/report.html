@@ -1,0 +1,1713 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<title>IIS Purple Lab · Evidence investigation</title><style>
+:root{color-scheme:light dark;--bg:#f7f6fc;--panel:#fff;--ink:#24213a;--sub:#625c78;--line:#d9d3eb;--accent:#6339ad}
+@media(prefers-color-scheme:dark){:root{--bg:#14111d;--panel:#211c2c;--ink:#f0edf6;--sub:#b6afc8;--line:#443952;--accent:#bd9bed}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,sans-serif}main{max-width:1220px;margin:auto;padding:36px 24px}h1{font-size:clamp(2rem,5vw,3.8rem);letter-spacing:-.04em;line-height:1.1}h2{margin-top:40px}a{color:var(--accent);overflow-wrap:anywhere}.eyebrow{color:var(--accent);font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.muted{color:var(--sub)}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}.card,.alert,.record{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:18px}.card b{display:block;font-size:2rem}.alert{margin:14px 0}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:.88rem}th,td{text-align:left;vertical-align:top;padding:11px;border-bottom:1px solid var(--line)}th{color:var(--sub)}pre{overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font-size:.8rem}summary{cursor:pointer;font-weight:600;overflow-wrap:anywhere}.record{margin:10px 0}.record:target{outline:2px solid var(--accent)}.evidence-link{display:inline-block;font-family:monospace;font-size:.75rem;margin-right:8px}select{padding:8px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink)}nav{display:flex;gap:18px;flex-wrap:wrap}footer{margin-top:36px;color:var(--sub);font-size:.85rem}
+</style></head><body><main><header><p class="eyebrow">Portable investigation · Quoc Bao Huynh</p><h1>Requests, processes,<br>and the evidence between.</h1><p class="muted">handcrafted-fixture</p><nav><a href="#findings">Findings</a><a href="#timeline">Timeline</a><a href="#attribution">Attribution</a><a href="#evidence">Evidence</a><a href="bundle-manifest.json">Integrity manifest</a></nav></header>
+<p>This report describes supplied records. Fixture results are not proof of native Windows execution. Missing telemetry is unknown, and absence of an alert does not prove absence of exploitation.</p>
+<div class="cards"><div class="card"><b>70</b>normalized records</div><div class="card"><b>16</b>alerts, including components</div><div class="card"><b>11</b>high confidence process links</div><div class="card"><b>0</b>ambiguous process links</div></div>
+<h2 id="findings">Observed findings</h2><article class="alert"><p class="eyebrow">high · policy-violation</p><h3>IPL-001</h3><p>Successful access violates tenant, sharing and administrator policy.</p><p>Request: ab8de87b-99be-dd9d-a4cb-b94d56088687</p><a class="evidence-link" href="#e-c81d582516c96afacff0e20e">e-c81d582516c96afacff0e20e</a></article><article class="alert"><p class="eyebrow">high · policy-violation</p><h3>IPL-001</h3><p>Successful access violates tenant, sharing and administrator policy.</p><p>Request: 41ca66b1-c20a-c475-4b13-4213dd9c4550</p><a class="evidence-link" href="#e-1a99c365bc06037f51882aef">e-1a99c365bc06037f51882aef</a></article><article class="alert"><p class="eyebrow">medium · hunting-lead</p><h3>IPL-002</h3><p>An IIS worker launched an interpreter. Legitimate legacy exports remain an alternative.</p><p>Request: 880f9d36-26da-a95b-2566-8eed8ec92668</p><a class="evidence-link" href="#e-db60ba62c67ba3bc399bbafb">e-db60ba62c67ba3bc399bbafb</a></article><article class="alert"><p class="eyebrow">medium · hunting-lead</p><h3>IPL-002</h3><p>An IIS worker launched an interpreter. Legitimate legacy exports remain an alternative.</p><p>Request: 0a89b575-4d5e-79c0-3859-ebe20e2e57bc</p><a class="evidence-link" href="#e-a9dda72ad80a573c2d9eb5db">e-a9dda72ad80a573c2d9eb5db</a></article><article class="alert"><p class="eyebrow">medium · hunting-lead</p><h3>IPL-002</h3><p>An IIS worker launched an interpreter. Legitimate legacy exports remain an alternative.</p><p>Request: ed9d5314-ef7c-1580-4d35-e4a591fe3ecf</p><a class="evidence-link" href="#e-6bd3dc9d03a346ea4f9686c6">e-6bd3dc9d03a346ea4f9686c6</a></article><article class="alert"><p class="eyebrow">medium · hunting-lead</p><h3>IPL-002</h3><p>An IIS worker launched an interpreter. Legitimate legacy exports remain an alternative.</p><p>Request: 411e0779-e65d-a5ce-85b3-978b5466b825</p><a class="evidence-link" href="#e-5f301bf3435f8cc37f8cee2c">e-5f301bf3435f8cc37f8cee2c</a></article><article class="alert"><p class="eyebrow">medium · hunting-lead</p><h3>IPL-002</h3><p>An IIS worker launched an interpreter. Legitimate legacy exports remain an alternative.</p><p>Request: not attributed</p><a class="evidence-link" href="#e-c74ce06592427b10b577b77f">e-c74ce06592427b10b577b77f</a></article><article class="alert"><p class="eyebrow">medium · hunting-lead</p><h3>IPL-003</h3><p>Observed ProcessGuid ancestry connects identity/host discovery to IIS; intent is inferred.</p><p>Request: ed9d5314-ef7c-1580-4d35-e4a591fe3ecf</p><a class="evidence-link" href="#e-0050ae31c1536edf2521d3b8">e-0050ae31c1536edf2521d3b8</a> <a class="evidence-link" href="#e-6bd3dc9d03a346ea4f9686c6">e-6bd3dc9d03a346ea4f9686c6</a> <a class="evidence-link" href="#e-834fe0244e021a3ddf4e414a">e-834fe0244e021a3ddf4e414a</a></article><article class="alert"><p class="eyebrow">medium · hunting-lead</p><h3>IPL-003</h3><p>Observed ProcessGuid ancestry connects identity/host discovery to IIS; intent is inferred.</p><p>Request: 880f9d36-26da-a95b-2566-8eed8ec92668</p><a class="evidence-link" href="#e-44c6350abc3a5c895571f05d">e-44c6350abc3a5c895571f05d</a> <a class="evidence-link" href="#e-7cc941d7f2a9908b0ebabd3f">e-7cc941d7f2a9908b0ebabd3f</a> <a class="evidence-link" href="#e-db60ba62c67ba3bc399bbafb">e-db60ba62c67ba3bc399bbafb</a></article><article class="alert"><p class="eyebrow">medium · hunting-lead</p><h3>IPL-004</h3><p>An interpreter descendant wrote under a protected application data root; no read is established.</p><p>Request: 880f9d36-26da-a95b-2566-8eed8ec92668</p><a class="evidence-link" href="#e-0f648897a75aefa4f1b25f32">e-0f648897a75aefa4f1b25f32</a> <a class="evidence-link" href="#e-44c6350abc3a5c895571f05d">e-44c6350abc3a5c895571f05d</a> <a class="evidence-link" href="#e-db60ba62c67ba3bc399bbafb">e-db60ba62c67ba3bc399bbafb</a></article><article class="alert"><p class="eyebrow">medium · hunting-lead</p><h3>IPL-004</h3><p>An interpreter descendant wrote under a protected application data root; no read is established.</p><p>Request: ed9d5314-ef7c-1580-4d35-e4a591fe3ecf</p><a class="evidence-link" href="#e-0050ae31c1536edf2521d3b8">e-0050ae31c1536edf2521d3b8</a> <a class="evidence-link" href="#e-34f6707f04d6e8b98397694f">e-34f6707f04d6e8b98397694f</a> <a class="evidence-link" href="#e-6bd3dc9d03a346ea4f9686c6">e-6bd3dc9d03a346ea4f9686c6</a></article><article class="alert"><p class="eyebrow">medium · hunting-lead</p><h3>IPL-005</h3><p>Connection outside the configured report destination policy; connection alone does not establish transfer.</p><p>Request: 880f9d36-26da-a95b-2566-8eed8ec92668</p><a class="evidence-link" href="#e-44c6350abc3a5c895571f05d">e-44c6350abc3a5c895571f05d</a> <a class="evidence-link" href="#e-686c868170dd18e201c7e252">e-686c868170dd18e201c7e252</a> <a class="evidence-link" href="#e-db60ba62c67ba3bc399bbafb">e-db60ba62c67ba3bc399bbafb</a></article><article class="alert"><p class="eyebrow">medium · hunting-lead</p><h3>IPL-005</h3><p>Connection outside the configured report destination policy; connection alone does not establish transfer.</p><p>Request: ed9d5314-ef7c-1580-4d35-e4a591fe3ecf</p><a class="evidence-link" href="#e-0050ae31c1536edf2521d3b8">e-0050ae31c1536edf2521d3b8</a> <a class="evidence-link" href="#e-6bd3dc9d03a346ea4f9686c6">e-6bd3dc9d03a346ea4f9686c6</a> <a class="evidence-link" href="#e-77641da7be8f52fff0b3b730">e-77641da7be8f52fff0b3b730</a></article><article class="alert"><p class="eyebrow">high · correlated-incident</p><h3>IPL-006</h3><p>Shell-control syntax in an accepted report request and independently observed endpoint execution share a high-confidence launch link.</p><p>Request: 880f9d36-26da-a95b-2566-8eed8ec92668</p><a class="evidence-link" href="#e-0f648897a75aefa4f1b25f32">e-0f648897a75aefa4f1b25f32</a> <a class="evidence-link" href="#e-44c6350abc3a5c895571f05d">e-44c6350abc3a5c895571f05d</a> <a class="evidence-link" href="#e-686c868170dd18e201c7e252">e-686c868170dd18e201c7e252</a> <a class="evidence-link" href="#e-73632973018b03632f84775d">e-73632973018b03632f84775d</a> <a class="evidence-link" href="#e-7cc941d7f2a9908b0ebabd3f">e-7cc941d7f2a9908b0ebabd3f</a> <a class="evidence-link" href="#e-9e25cbbc5c09f242ea2fce79">e-9e25cbbc5c09f242ea2fce79</a> <a class="evidence-link" href="#e-db60ba62c67ba3bc399bbafb">e-db60ba62c67ba3bc399bbafb</a></article><article class="alert"><p class="eyebrow">high · correlated-incident</p><h3>IPL-006</h3><p>Shell-control syntax in an accepted report request and independently observed endpoint execution share a high-confidence launch link.</p><p>Request: 0a89b575-4d5e-79c0-3859-ebe20e2e57bc</p><a class="evidence-link" href="#e-5a071b4a17a06082bee6d42a">e-5a071b4a17a06082bee6d42a</a> <a class="evidence-link" href="#e-a9dda72ad80a573c2d9eb5db">e-a9dda72ad80a573c2d9eb5db</a> <a class="evidence-link" href="#e-d80ff433f8159581ada2f1a8">e-d80ff433f8159581ada2f1a8</a> <a class="evidence-link" href="#e-edfbccc54f67737793b39083">e-edfbccc54f67737793b39083</a></article><article class="alert"><p class="eyebrow">high · correlated-incident</p><h3>IPL-006</h3><p>Shell-control syntax in an accepted report request and independently observed endpoint execution share a high-confidence launch link.</p><p>Request: ed9d5314-ef7c-1580-4d35-e4a591fe3ecf</p><a class="evidence-link" href="#e-0050ae31c1536edf2521d3b8">e-0050ae31c1536edf2521d3b8</a> <a class="evidence-link" href="#e-34f6707f04d6e8b98397694f">e-34f6707f04d6e8b98397694f</a> <a class="evidence-link" href="#e-6bd3dc9d03a346ea4f9686c6">e-6bd3dc9d03a346ea4f9686c6</a> <a class="evidence-link" href="#e-77641da7be8f52fff0b3b730">e-77641da7be8f52fff0b3b730</a> <a class="evidence-link" href="#e-7d161008b6034f5a503d3c9a">e-7d161008b6034f5a503d3c9a</a> <a class="evidence-link" href="#e-834fe0244e021a3ddf4e414a">e-834fe0244e021a3ddf4e414a</a> <a class="evidence-link" href="#e-c487aab91defb92d16a9369e">e-c487aab91defb92d16a9369e</a></article>
+<details><summary>Rule prerequisite availability</summary><pre>{
+  &quot;IPL-001&quot;: {
+    &quot;available&quot;: true,
+    &quot;eligible_records_by_stage&quot;: [
+      8
+    ],
+    &quot;incomplete_records_by_stage&quot;: [
+      0
+    ],
+    &quot;missing_fields_by_stage&quot;: [
+      []
+    ],
+    &quot;missing_sources&quot;: [],
+    &quot;note&quot;: &quot;Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation.&quot;,
+    &quot;required_sources&quot;: [
+      &quot;application&quot;
+    ]
+  },
+  &quot;IPL-002&quot;: {
+    &quot;available&quot;: true,
+    &quot;eligible_records_by_stage&quot;: [
+      21
+    ],
+    &quot;incomplete_records_by_stage&quot;: [
+      0
+    ],
+    &quot;missing_fields_by_stage&quot;: [
+      []
+    ],
+    &quot;missing_sources&quot;: [],
+    &quot;note&quot;: &quot;Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation.&quot;,
+    &quot;required_sources&quot;: [
+      &quot;sysmon&quot;
+    ]
+  },
+  &quot;IPL-003&quot;: {
+    &quot;available&quot;: true,
+    &quot;eligible_records_by_stage&quot;: [
+      21
+    ],
+    &quot;incomplete_records_by_stage&quot;: [
+      0
+    ],
+    &quot;missing_fields_by_stage&quot;: [
+      []
+    ],
+    &quot;missing_sources&quot;: [],
+    &quot;note&quot;: &quot;Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation.&quot;,
+    &quot;required_sources&quot;: [
+      &quot;sysmon&quot;
+    ]
+  },
+  &quot;IPL-004&quot;: {
+    &quot;available&quot;: true,
+    &quot;eligible_records_by_stage&quot;: [
+      21,
+      2
+    ],
+    &quot;incomplete_records_by_stage&quot;: [
+      0,
+      0
+    ],
+    &quot;missing_fields_by_stage&quot;: [
+      [],
+      []
+    ],
+    &quot;missing_sources&quot;: [],
+    &quot;note&quot;: &quot;Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation.&quot;,
+    &quot;required_sources&quot;: [
+      &quot;sysmon&quot;
+    ]
+  },
+  &quot;IPL-005&quot;: {
+    &quot;available&quot;: true,
+    &quot;eligible_records_by_stage&quot;: [
+      21,
+      2
+    ],
+    &quot;incomplete_records_by_stage&quot;: [
+      0,
+      0
+    ],
+    &quot;missing_fields_by_stage&quot;: [
+      [],
+      []
+    ],
+    &quot;missing_sources&quot;: [],
+    &quot;note&quot;: &quot;Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation.&quot;,
+    &quot;required_sources&quot;: [
+      &quot;sysmon&quot;
+    ]
+  },
+  &quot;IPL-006&quot;: {
+    &quot;available&quot;: true,
+    &quot;eligible_records_by_stage&quot;: [
+      21,
+      9,
+      9
+    ],
+    &quot;incomplete_records_by_stage&quot;: [
+      0,
+      0,
+      0
+    ],
+    &quot;missing_fields_by_stage&quot;: [
+      [],
+      [],
+      []
+    ],
+    &quot;missing_sources&quot;: [],
+    &quot;note&quot;: &quot;Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation.&quot;,
+    &quot;required_sources&quot;: [
+      &quot;application&quot;,
+      &quot;sysmon&quot;
+    ]
+  }
+}
+</pre></details>
+<h2>Scope and analyst decisions</h2><p>Listed identities and resources are observed in the supplied dataset; they are not all confirmed affected assets. Each finding has its own supporting records. A process association is an inference with the stated confidence. File creation is not file-read evidence; a connection is not proof of data transfer.</p><details><summary>Observed identities and resources</summary><pre>{
+  &quot;actor&quot;: [
+    &quot;user-131&quot;,
+    &quot;user-158&quot;,
+    &quot;user-210&quot;,
+    &quot;user-236&quot;,
+    &quot;user-316&quot;,
+    &quot;user-355&quot;,
+    &quot;user-410&quot;,
+    &quot;user-485&quot;,
+    &quot;user-594&quot;,
+    &quot;user-678&quot;,
+    &quot;user-794&quot;,
+    &quot;user-851&quot;,
+    &quot;user-890&quot;,
+    &quot;user-909&quot;,
+    &quot;user-923&quot;,
+    &quot;user-957&quot;,
+    &quot;user-977&quot;
+  ],
+  &quot;actor_tenant&quot;: [
+    &quot;tenant-20&quot;,
+    &quot;tenant-22&quot;,
+    &quot;tenant-23&quot;,
+    &quot;tenant-26&quot;,
+    &quot;tenant-28&quot;,
+    &quot;tenant-29&quot;,
+    &quot;tenant-32&quot;,
+    &quot;tenant-33&quot;,
+    &quot;tenant-35&quot;,
+    &quot;tenant-36&quot;,
+    &quot;tenant-39&quot;
+  ],
+  &quot;process_guid&quot;: [
+    &quot;{09199679-15cd-a432-e22e-0200962fdeb8}&quot;,
+    &quot;{0c453832-04db-a6a9-5cd9-1a0833483697}&quot;,
+    &quot;{26a4fd3e-8c08-7e12-d20f-f7f04c7c69cb}&quot;,
+    &quot;{2f3ea65a-76e8-7551-e5c0-427659c29833}&quot;,
+    &quot;{335d029b-c09c-eb4d-b937-938f4ffa0e95}&quot;,
+    &quot;{3e0455f5-669a-2e0d-e00f-fbbd861af995}&quot;,
+    &quot;{463653af-76dd-4205-2452-c2c7d2080712}&quot;,
+    &quot;{4d6b6814-5e06-10f4-758e-c48e20763a0c}&quot;,
+    &quot;{56303d90-2acb-a141-ce8d-1861d70278b1}&quot;,
+    &quot;{59802d7d-e425-a7f2-c761-62580654fefa}&quot;,
+    &quot;{632e3462-77df-c725-530e-bf66458603e1}&quot;,
+    &quot;{70f118b6-4f74-9584-0b23-8e7ed6205010}&quot;,
+    &quot;{7540f420-b27e-620c-ce45-58e9f4f65222}&quot;,
+    &quot;{8829f297-ed1a-6565-d7d6-4ae391ec10e7}&quot;,
+    &quot;{8f5751cb-78e0-520f-9566-cbf3154e2f4b}&quot;,
+    &quot;{9197b6dc-bc50-cae2-1000-2fe0c4a62fc3}&quot;,
+    &quot;{947b812e-b152-47c1-11d8-53ebe3a6c1d3}&quot;,
+    &quot;{a04779b9-b299-f219-a53f-28dbb0a0bf09}&quot;,
+    &quot;{ac654ad6-9207-7b0e-e4ff-60845b51aa92}&quot;,
+    &quot;{dc23aac9-1532-0030-c4cb-e918b4210474}&quot;,
+    &quot;{f2477408-ba9e-aea5-27fb-643d648eecb6}&quot;
+  ],
+  &quot;resource_id&quot;: [
+    &quot;ticket-2200&quot;,
+    &quot;ticket-2316&quot;,
+    &quot;ticket-2762&quot;,
+    &quot;ticket-2807&quot;,
+    &quot;ticket-3243&quot;,
+    &quot;ticket-3714&quot;,
+    &quot;ticket-5101&quot;,
+    &quot;ticket-6154&quot;
+  ],
+  &quot;resource_tenant&quot;: [
+    &quot;tenant-23&quot;,
+    &quot;tenant-26&quot;,
+    &quot;tenant-39&quot;,
+    &quot;tenant-63&quot;,
+    &quot;tenant-72&quot;,
+    &quot;tenant-73&quot;,
+    &quot;tenant-76&quot;
+  ]
+}
+</pre></details>
+<p>Preserve original events and relevant application artefacts before cleanup. Check legitimate export or maintenance explanations against the documented policy. Confirm the affected request and process before considering the dedicated lab application-pool containment action; containment is not performed by this report. Review the scenario case reports for remediation and retest evidence.</p>
+<h2 id="timeline">UTC event timeline</h2><label for="source-filter">Source </label><select id="source-filter"><option value="">All available sources</option><option value="application">application</option><option value="iis">iis</option><option value="sysmon">sysmon</option></select><div class="table-wrap"><table id="timeline-table"><thead><tr><th>Event time (UTC)</th><th>Source</th><th>Observation</th><th>Evidence</th></tr></thead><tbody><tr data-source="sysmon"><td>2026-08-21T10:00:04.000000Z</td><td>sysmon</td><td>C:\Windows\System32\inetsrv\w3wp.exe</td><td><a class="evidence-link" href="#e-185eb09de78a344c4fff46d6">e-185eb09de78a344c4fff46d6</a></td></tr><tr data-source="application"><td>2026-08-21T10:00:10.000000Z</td><td>application</td><td>report_request</td><td><a class="evidence-link" href="#e-1f404b39e40db826b49f4f91">e-1f404b39e40db826b49f4f91</a></td></tr><tr data-source="iis"><td>2026-08-21T10:00:10.000000Z</td><td>iis</td><td>/api/reports</td><td><a class="evidence-link" href="#e-4c8f18055006d27781ebf329">e-4c8f18055006d27781ebf329</a></td></tr><tr data-source="sysmon"><td>2026-08-21T10:00:10.020000Z</td><td>sysmon</td><td>C:\IISPurpleLab\app\IisPurpleLab.exe</td><td><a class="evidence-link" href="#e-35e0eee8115d291314aabc22">e-35e0eee8115d291314aabc22</a></td></tr><tr data-source="application"><td>2026-08-21T10:00:10.080000Z</td><td>application</td><td>process_launch</td><td><a class="evidence-link" href="#e-42b620654875aa4d4505e92b">e-42b620654875aa4d4505e92b</a></td></tr><tr data-source="sysmon"><td>2026-08-21T10:00:26.000000Z</td><td>sysmon</td><td>C:\Windows\System32\inetsrv\w3wp.exe</td><td><a class="evidence-link" href="#e-eec27cb386cec4c90aebd6bc">e-eec27cb386cec4c90aebd6bc</a></td></tr><tr data-source="iis"><td>2026-08-21T10:00:30.000000Z</td><td>iis</td><td>/api/reports</td><td><a class="evidence-link" href="#e-07e4724f0f3a830b0d635c4a">e-07e4724f0f3a830b0d635c4a</a></td></tr><tr data-source="application"><td>2026-08-21T10:00:30.000000Z</td><td>application</td><td>report_request</td><td><a class="evidence-link" href="#e-0a2a122e7f916bd1617df463">e-0a2a122e7f916bd1617df463</a></td></tr><tr data-source="iis"><td>2026-08-21T10:00:30.000000Z</td><td>iis</td><td>/api/reports</td><td><a class="evidence-link" href="#e-9a77404fb53857e308fe9783">e-9a77404fb53857e308fe9783</a></td></tr><tr data-source="application"><td>2026-08-21T10:00:30.000000Z</td><td>application</td><td>report_request</td><td><a class="evidence-link" href="#e-f01465b9baeddde13c3bd2f2">e-f01465b9baeddde13c3bd2f2</a></td></tr><tr data-source="sysmon"><td>2026-08-21T10:00:30.020000Z</td><td>sysmon</td><td>C:\IISPurpleLab\app\IisPurpleLab.exe</td><td><a class="evidence-link" href="#e-6cd4fcb0c6387f3b467b1761">e-6cd4fcb0c6387f3b467b1761</a></td></tr><tr data-source="sysmon"><td>2026-08-21T10:00:30.020000Z</td><td>sysmon</td><td>C:\IISPurpleLab\app\IisPurpleLab.exe</td><td><a class="evidence-link" href="#e-9f2d769923dfa34d325facb4">e-9f2d769923dfa34d325facb4</a></td></tr><tr data-source="application"><td>2026-08-21T10:00:30.080000Z</td><td>application</td><td>process_launch</td><td><a class="evidence-link" href="#e-8a333ccd5d8c6647046ccac8">e-8a333ccd5d8c6647046ccac8</a></td></tr><tr data-source="application"><td>2026-08-21T10:00:30.080000Z</td><td>application</td><td>process_launch</td><td><a class="evidence-link" href="#e-ff73efda0acec908a41a17b7">e-ff73efda0acec908a41a17b7</a></td></tr><tr data-source="iis"><td>2026-08-21T10:00:50.000000Z</td><td>iis</td><td>/api/tickets/ticket-2762</td><td><a class="evidence-link" href="#e-5176c6a62a69bb9f1b56b759">e-5176c6a62a69bb9f1b56b759</a></td></tr><tr data-source="application"><td>2026-08-21T10:00:50.000000Z</td><td>application</td><td>ticket_access</td><td><a class="evidence-link" href="#e-b7ff1ce1ef060e38f5f50f1e">e-b7ff1ce1ef060e38f5f50f1e</a></td></tr><tr data-source="application"><td>2026-08-21T10:01:10.000000Z</td><td>application</td><td>ticket_access</td><td><a class="evidence-link" href="#e-b85af6cd5c6a13f1841fdff7">e-b85af6cd5c6a13f1841fdff7</a></td></tr><tr data-source="iis"><td>2026-08-21T10:01:10.000000Z</td><td>iis</td><td>/api/tickets/ticket-5101</td><td><a class="evidence-link" href="#e-d7fd477bb97d5673b1088326">e-d7fd477bb97d5673b1088326</a></td></tr><tr data-source="sysmon"><td>2026-08-21T10:01:24.000000Z</td><td>sysmon</td><td>C:\Windows\System32\inetsrv\w3wp.exe</td><td><a class="evidence-link" href="#e-cc3b87cc43839ebd40c433db">e-cc3b87cc43839ebd40c433db</a></td></tr><tr data-source="application"><td>2026-08-21T10:01:30.000000Z</td><td>application</td><td>report_request</td><td><a class="evidence-link" href="#e-416b98f188e9e4bdc1bb16e1">e-416b98f188e9e4bdc1bb16e1</a></td></tr><tr data-source="iis"><td>2026-08-21T10:01:30.000000Z</td><td>iis</td><td>/api/reports</td><td><a class="evidence-link" href="#e-56a04d90b786a37eaf45dac7">e-56a04d90b786a37eaf45dac7</a></td></tr><tr data-source="sysmon"><td>2026-08-21T10:01:30.020000Z</td><td>sysmon</td><td>C:\Windows\System32\cmd.exe</td><td><a class="evidence-link" href="#e-5f301bf3435f8cc37f8cee2c">e-5f301bf3435f8cc37f8cee2c</a></td></tr><tr data-source="application"><td>2026-08-21T10:01:30.080000Z</td><td>application</td><td>process_launch</td><td><a class="evidence-link" href="#e-14793a1aa7fcdf7e45f0686c">e-14793a1aa7fcdf7e45f0686c</a></td></tr><tr data-source="sysmon"><td>2026-08-21T10:02:03.000000Z</td><td>sysmon</td><td>C:\Windows\System32\inetsrv\w3wp.exe</td><td><a class="evidence-link" href="#e-44c6350abc3a5c895571f05d">e-44c6350abc3a5c895571f05d</a></td></tr><tr data-source="application"><td>2026-08-21T10:02:10.000000Z</td><td>application</td><td>report_request</td><td><a class="evidence-link" href="#e-73632973018b03632f84775d">e-73632973018b03632f84775d</a></td></tr><tr data-source="iis"><td>2026-08-21T10:02:10.000000Z</td><td>iis</td><td>/api/reports</td><td><a class="evidence-link" href="#e-9c811d24f1d388492e1afd09">e-9c811d24f1d388492e1afd09</a></td></tr><tr data-source="sysmon"><td>2026-08-21T10:02:10.020000Z</td><td>sysmon</td><td>C:\Windows\System32\cmd.exe</td><td><a class="evidence-link" href="#e-db60ba62c67ba3bc399bbafb">e-db60ba62c67ba3bc399bbafb</a></td></tr><tr data-source="application"><td>2026-08-21T10:02:10.080000Z</td><td>application</td><td>process_launch</td><td><a class="evidence-link" href="#e-9e25cbbc5c09f242ea2fce79">e-9e25cbbc5c09f242ea2fce79</a></td></tr><tr data-source="sysmon"><td>2026-08-21T10:02:10.300000Z</td><td>sysmon</td><td>C:\Windows\System32\whoami.exe</td><td><a class="evidence-link" href="#e-7cc941d7f2a9908b0ebabd3f">e-7cc941d7f2a9908b0ebabd3f</a></td></tr><tr data-source="sysmon"><td>2026-08-21T10:02:10.400000Z</td><td>sysmon</td><td>C:\Windows\System32\cmd.exe</td><td><a class="evidence-link" href="#e-0f648897a75aefa4f1b25f32">e-0f648897a75aefa4f1b25f32</a></td></tr><tr data-source="sysmon"><td>2026-08-21T10:02:10.500000Z</td><td>sysmon</td><td>C:\Windows\System32\cmd.exe</td><td><a class="evidence-link" href="#e-686c868170dd18e201c7e252">e-686c868170dd18e201c7e252</a></td></tr><tr data-source="application"><td>2026-08-21T10:02:30.000000Z</td><td>application</td><td>attachment_access</td><td><a class="evidence-link" href="#e-1a99c365bc06037f51882aef">e-1a99c365bc06037f51882aef</a></td></tr><tr data-source="iis"><td>2026-08-21T10:02:30.000000Z</td><td>iis</td><td>/api/tickets/ticket-6154</td><td><a class="evidence-link" href="#e-f40b1c5df71e6a8a2742e89e">e-f40b1c5df71e6a8a2742e89e</a></td></tr><tr data-source="iis"><td>2026-08-21T10:02:50.000000Z</td><td>iis</td><td>/api/tickets/ticket-2200</td><td><a class="evidence-link" href="#e-1dd611d56ac82158b161a50b">e-1dd611d56ac82158b161a50b</a></td></tr><tr data-source="application"><td>2026-08-21T10:02:50.000000Z</td><td>application</td><td>ticket_access</td><td><a class="evidence-link" href="#e-c81d582516c96afacff0e20e">e-c81d582516c96afacff0e20e</a></td></tr><tr data-source="iis"><td>2026-08-21T10:03:10.000000Z</td><td>iis</td><td>/api/tickets/ticket-3243</td><td><a class="evidence-link" href="#e-c4a6baa53e98af70a39a1424">e-c4a6baa53e98af70a39a1424</a></td></tr><tr data-source="application"><td>2026-08-21T10:03:10.000000Z</td><td>application</td><td>ticket_access</td><td><a class="evidence-link" href="#e-d0339aa429d7baabaeb729b6">e-d0339aa429d7baabaeb729b6</a></td></tr><tr data-source="sysmon"><td>2026-08-21T10:03:27.000000Z</td><td>sysmon</td><td>C:\Windows\System32\inetsrv\w3wp.exe</td><td><a class="evidence-link" href="#e-74b72b2d34528b1833daf021">e-74b72b2d34528b1833daf021</a></td></tr><tr data-source="application"><td>2026-08-21T10:03:30.000000Z</td><td>application</td><td>report_request</td><td><a class="evidence-link" href="#e-6d7d297fb8b6132fa37974db">e-6d7d297fb8b6132fa37974db</a></td></tr><tr data-source="iis"><td>2026-08-21T10:03:30.000000Z</td><td>iis</td><td>/api/reports</td><td><a class="evidence-link" href="#e-90cbc301329c271fbb5c8c88">e-90cbc301329c271fbb5c8c88</a></td></tr><tr data-source="sysmon"><td>2026-08-21T10:03:30.020000Z</td><td>sysmon</td><td>C:\IISPurpleLab\app\IisPurpleLab.exe</td><td><a class="evidence-link" href="#e-eacae92f57e42be7251de81e">e-eacae92f57e42be7251de81e</a></td></tr><tr data-source="application"><td>2026-08-21T10:03:30.080000Z</td><td>application</td><td>process_launch</td><td><a class="evidence-link" href="#e-63d0fa5936c98eb5ab5f7dac">e-63d0fa5936c98eb5ab5f7dac</a></td></tr><tr data-source="sysmon"><td>2026-08-21T10:03:42.000000Z</td><td>sysmon</td><td>C:\Windows\System32\inetsrv\w3wp.exe</td><td><a class="evidence-link" href="#e-3957f8d0de39a5358bda165c">e-3957f8d0de39a5358bda165c</a></td></tr><tr data-source="iis"><td>2026-08-21T10:03:50.000000Z</td><td>iis</td><td>/api/reports</td><td><a class="evidence-link" href="#e-32cbd13744b19acb1013e73a">e-32cbd13744b19acb1013e73a</a></td></tr><tr data-source="application"><td>2026-08-21T10:03:50.000000Z</td><td>application</td><td>report_request</td><td><a class="evidence-link" href="#e-d2a6a42f62ae8a7efae5223e">e-d2a6a42f62ae8a7efae5223e</a></td></tr><tr data-source="sysmon"><td>2026-08-21T10:03:50.020000Z</td><td>sysmon</td><td>C:\IISPurpleLab\app\IisPurpleLab.exe</td><td><a class="evidence-link" href="#e-58d588efa579923ed36c1108">e-58d588efa579923ed36c1108</a></td></tr><tr data-source="application"><td>2026-08-21T10:03:50.080000Z</td><td>application</td><td>process_launch</td><td><a class="evidence-link" href="#e-7f85ba75f653c7bc7e309c12">e-7f85ba75f653c7bc7e309c12</a></td></tr><tr data-source="application"><td>2026-08-21T10:04:10.000000Z</td><td>application</td><td>ticket_access</td><td><a class="evidence-link" href="#e-07312c649b862e74bb319855">e-07312c649b862e74bb319855</a></td></tr><tr data-source="iis"><td>2026-08-21T10:04:10.000000Z</td><td>iis</td><td>/api/tickets/ticket-2807</td><td><a class="evidence-link" href="#e-be4d7de383eae0942c4bc64b">e-be4d7de383eae0942c4bc64b</a></td></tr><tr data-source="sysmon"><td>2026-08-21T10:04:24.000000Z</td><td>sysmon</td><td>C:\Windows\System32\inetsrv\w3wp.exe</td><td><a class="evidence-link" href="#e-7e9c681ebf813d891b3ccf25">e-7e9c681ebf813d891b3ccf25</a></td></tr><tr data-source="iis"><td>2026-08-21T10:04:30.000000Z</td><td>iis</td><td>/api/reports</td><td><a class="evidence-link" href="#e-b0ea07b3504f7dd4ac8b0f26">e-b0ea07b3504f7dd4ac8b0f26</a></td></tr><tr data-source="sysmon"><td>2026-08-21T10:04:30.020000Z</td><td>sysmon</td><td>C:\Windows\System32\cmd.exe</td><td><a class="evidence-link" href="#e-c74ce06592427b10b577b77f">e-c74ce06592427b10b577b77f</a></td></tr><tr data-source="iis"><td>2026-08-21T10:04:50.000000Z</td><td>iis</td><td>/api/tickets/ticket-6210</td><td><a class="evidence-link" href="#e-d911910d33e8cd6c7bc2996a">e-d911910d33e8cd6c7bc2996a</a></td></tr><tr data-source="application"><td>2026-08-21T10:05:10.000000Z</td><td>application</td><td>ticket_access</td><td><a class="evidence-link" href="#e-2cf26d907fd1a6d5fbb41d04">e-2cf26d907fd1a6d5fbb41d04</a></td></tr><tr data-source="iis"><td>2026-08-21T10:05:10.000000Z</td><td>iis</td><td>/api/tickets/ticket-3714</td><td><a class="evidence-link" href="#e-3cd9e5855489883a083be612">e-3cd9e5855489883a083be612</a></td></tr><tr data-source="sysmon"><td>2026-08-21T10:05:23.000000Z</td><td>sysmon</td><td>C:\Windows\System32\inetsrv\w3wp.exe</td><td><a class="evidence-link" href="#e-edfbccc54f67737793b39083">e-edfbccc54f67737793b39083</a></td></tr><tr data-source="application"><td>2026-08-21T10:05:30.000000Z</td><td>application</td><td>report_request</td><td><a class="evidence-link" href="#e-d80ff433f8159581ada2f1a8">e-d80ff433f8159581ada2f1a8</a></td></tr><tr data-source="iis"><td>2026-08-21T10:05:30.000000Z</td><td>iis</td><td>/api/reports</td><td><a class="evidence-link" href="#e-f465f851ec292994aeb82ed0">e-f465f851ec292994aeb82ed0</a></td></tr><tr data-source="sysmon"><td>2026-08-21T10:05:30.020000Z</td><td>sysmon</td><td>C:\Windows\System32\cmd.exe</td><td><a class="evidence-link" href="#e-a9dda72ad80a573c2d9eb5db">e-a9dda72ad80a573c2d9eb5db</a></td></tr><tr data-source="application"><td>2026-08-21T10:05:30.080000Z</td><td>application</td><td>process_launch</td><td><a class="evidence-link" href="#e-5a071b4a17a06082bee6d42a">e-5a071b4a17a06082bee6d42a</a></td></tr><tr data-source="iis"><td>2026-08-21T10:05:50.000000Z</td><td>iis</td><td>/api/tickets/ticket-2316</td><td><a class="evidence-link" href="#e-6f54b7edfb6abb6c11a278e8">e-6f54b7edfb6abb6c11a278e8</a></td></tr><tr data-source="application"><td>2026-08-21T10:05:50.000000Z</td><td>application</td><td>ticket_access</td><td><a class="evidence-link" href="#e-9bf82b7f6c901b277deeed20">e-9bf82b7f6c901b277deeed20</a></td></tr><tr data-source="sysmon"><td>2026-08-21T10:06:07.000000Z</td><td>sysmon</td><td>C:\Windows\System32\inetsrv\w3wp.exe</td><td><a class="evidence-link" href="#e-0050ae31c1536edf2521d3b8">e-0050ae31c1536edf2521d3b8</a></td></tr><tr data-source="iis"><td>2026-08-21T10:06:10.000000Z</td><td>iis</td><td>/api/reports</td><td><a class="evidence-link" href="#e-b9fc8023f14876e2204e0e73">e-b9fc8023f14876e2204e0e73</a></td></tr><tr data-source="application"><td>2026-08-21T10:06:10.000000Z</td><td>application</td><td>report_request</td><td><a class="evidence-link" href="#e-c487aab91defb92d16a9369e">e-c487aab91defb92d16a9369e</a></td></tr><tr data-source="sysmon"><td>2026-08-21T10:06:10.020000Z</td><td>sysmon</td><td>C:\Windows\System32\cmd.exe</td><td><a class="evidence-link" href="#e-6bd3dc9d03a346ea4f9686c6">e-6bd3dc9d03a346ea4f9686c6</a></td></tr><tr data-source="application"><td>2026-08-21T10:06:10.080000Z</td><td>application</td><td>process_launch</td><td><a class="evidence-link" href="#e-7d161008b6034f5a503d3c9a">e-7d161008b6034f5a503d3c9a</a></td></tr><tr data-source="sysmon"><td>2026-08-21T10:06:10.300000Z</td><td>sysmon</td><td>C:\Windows\System32\whoami.exe</td><td><a class="evidence-link" href="#e-834fe0244e021a3ddf4e414a">e-834fe0244e021a3ddf4e414a</a></td></tr><tr data-source="sysmon"><td>2026-08-21T10:06:10.400000Z</td><td>sysmon</td><td>C:\Windows\System32\cmd.exe</td><td><a class="evidence-link" href="#e-34f6707f04d6e8b98397694f">e-34f6707f04d6e8b98397694f</a></td></tr><tr data-source="sysmon"><td>2026-08-21T10:06:10.500000Z</td><td>sysmon</td><td>C:\Windows\System32\cmd.exe</td><td><a class="evidence-link" href="#e-77641da7be8f52fff0b3b730">e-77641da7be8f52fff0b3b730</a></td></tr></tbody></table></div>
+<h2 id="attribution">Request-to-process confidence</h2><div class="table-wrap"><table><thead><tr><th>ProcessGuid</th><th>Request</th><th>Confidence</th><th>Basis / limitation</th></tr></thead><tbody><tr><td>{09199679-15cd-a432-e22e-0200962fdeb8}</td><td>1d156054-7f3c-d3f9-37b4-70c687b8d267</td><td>high</td><td>Unique host, child/parent PIDs and bounded launch match; observed parent ProcessGuid and start agree<br><a class="evidence-link" href="#e-3957f8d0de39a5358bda165c">e-3957f8d0de39a5358bda165c</a> <a class="evidence-link" href="#e-58d588efa579923ed36c1108">e-58d588efa579923ed36c1108</a> <a class="evidence-link" href="#e-7f85ba75f653c7bc7e309c12">e-7f85ba75f653c7bc7e309c12</a></td></tr><tr><td>{0c453832-04db-a6a9-5cd9-1a0833483697}</td><td>05399d5c-e978-9f35-71f4-598d688742b1</td><td>high</td><td>Unique host, child/parent PIDs and bounded launch match; observed parent ProcessGuid and start agree<br><a class="evidence-link" href="#e-63d0fa5936c98eb5ab5f7dac">e-63d0fa5936c98eb5ab5f7dac</a> <a class="evidence-link" href="#e-74b72b2d34528b1833daf021">e-74b72b2d34528b1833daf021</a> <a class="evidence-link" href="#e-eacae92f57e42be7251de81e">e-eacae92f57e42be7251de81e</a></td></tr><tr><td>{26a4fd3e-8c08-7e12-d20f-f7f04c7c69cb}</td><td>not attributed</td><td>unattributed</td><td>No unique instrumented request link; process remains independently observable<br><a class="evidence-link" href="#e-3957f8d0de39a5358bda165c">e-3957f8d0de39a5358bda165c</a></td></tr><tr><td>{632e3462-77df-c725-530e-bf66458603e1}</td><td>not attributed</td><td>unattributed</td><td>No unique instrumented request link; process remains independently observable<br><a class="evidence-link" href="#e-74b72b2d34528b1833daf021">e-74b72b2d34528b1833daf021</a></td></tr><tr><td>{335d029b-c09c-eb4d-b937-938f4ffa0e95}</td><td>8e21e066-b789-c6b9-55ad-2e50c1a54c7f</td><td>high</td><td>Unique host, child/parent PIDs and bounded launch match; observed parent ProcessGuid and start agree<br><a class="evidence-link" href="#e-6cd4fcb0c6387f3b467b1761">e-6cd4fcb0c6387f3b467b1761</a> <a class="evidence-link" href="#e-8a333ccd5d8c6647046ccac8">e-8a333ccd5d8c6647046ccac8</a> <a class="evidence-link" href="#e-eec27cb386cec4c90aebd6bc">e-eec27cb386cec4c90aebd6bc</a></td></tr><tr><td>{4d6b6814-5e06-10f4-758e-c48e20763a0c}</td><td>not attributed</td><td>unattributed</td><td>No unique instrumented request link; process remains independently observable<br><a class="evidence-link" href="#e-eec27cb386cec4c90aebd6bc">e-eec27cb386cec4c90aebd6bc</a></td></tr><tr><td>{8f5751cb-78e0-520f-9566-cbf3154e2f4b}</td><td>0164fe15-3fe8-504a-7685-06c7961ca4f9</td><td>high</td><td>Unique host, child/parent PIDs and bounded launch match; observed parent ProcessGuid and start agree<br><a class="evidence-link" href="#e-9f2d769923dfa34d325facb4">e-9f2d769923dfa34d325facb4</a> <a class="evidence-link" href="#e-eec27cb386cec4c90aebd6bc">e-eec27cb386cec4c90aebd6bc</a> <a class="evidence-link" href="#e-ff73efda0acec908a41a17b7">e-ff73efda0acec908a41a17b7</a></td></tr><tr><td>{947b812e-b152-47c1-11d8-53ebe3a6c1d3}</td><td>not attributed</td><td>unattributed</td><td>No unique instrumented request link; process remains independently observable<br><a class="evidence-link" href="#e-44c6350abc3a5c895571f05d">e-44c6350abc3a5c895571f05d</a></td></tr><tr><td>{a04779b9-b299-f219-a53f-28dbb0a0bf09}</td><td>880f9d36-26da-a95b-2566-8eed8ec92668</td><td>high</td><td>Observed ParentProcessGuid chain; Unique host, child/parent PIDs and bounded launch match; observed parent ProcessGuid and start agree<br><a class="evidence-link" href="#e-44c6350abc3a5c895571f05d">e-44c6350abc3a5c895571f05d</a> <a class="evidence-link" href="#e-7cc941d7f2a9908b0ebabd3f">e-7cc941d7f2a9908b0ebabd3f</a> <a class="evidence-link" href="#e-9e25cbbc5c09f242ea2fce79">e-9e25cbbc5c09f242ea2fce79</a> <a class="evidence-link" href="#e-db60ba62c67ba3bc399bbafb">e-db60ba62c67ba3bc399bbafb</a></td></tr><tr><td>{f2477408-ba9e-aea5-27fb-643d648eecb6}</td><td>880f9d36-26da-a95b-2566-8eed8ec92668</td><td>high</td><td>Unique host, child/parent PIDs and bounded launch match; observed parent ProcessGuid and start agree<br><a class="evidence-link" href="#e-0f648897a75aefa4f1b25f32">e-0f648897a75aefa4f1b25f32</a> <a class="evidence-link" href="#e-44c6350abc3a5c895571f05d">e-44c6350abc3a5c895571f05d</a> <a class="evidence-link" href="#e-686c868170dd18e201c7e252">e-686c868170dd18e201c7e252</a> <a class="evidence-link" href="#e-9e25cbbc5c09f242ea2fce79">e-9e25cbbc5c09f242ea2fce79</a> <a class="evidence-link" href="#e-db60ba62c67ba3bc399bbafb">e-db60ba62c67ba3bc399bbafb</a></td></tr><tr><td>{7540f420-b27e-620c-ce45-58e9f4f65222}</td><td>ed9d5314-ef7c-1580-4d35-e4a591fe3ecf</td><td>high</td><td>Unique host, child/parent PIDs and bounded launch match; observed parent ProcessGuid and start agree<br><a class="evidence-link" href="#e-0050ae31c1536edf2521d3b8">e-0050ae31c1536edf2521d3b8</a> <a class="evidence-link" href="#e-34f6707f04d6e8b98397694f">e-34f6707f04d6e8b98397694f</a> <a class="evidence-link" href="#e-6bd3dc9d03a346ea4f9686c6">e-6bd3dc9d03a346ea4f9686c6</a> <a class="evidence-link" href="#e-77641da7be8f52fff0b3b730">e-77641da7be8f52fff0b3b730</a> <a class="evidence-link" href="#e-7d161008b6034f5a503d3c9a">e-7d161008b6034f5a503d3c9a</a></td></tr><tr><td>{8829f297-ed1a-6565-d7d6-4ae391ec10e7}</td><td>ed9d5314-ef7c-1580-4d35-e4a591fe3ecf</td><td>high</td><td>Observed ParentProcessGuid chain; Unique host, child/parent PIDs and bounded launch match; observed parent ProcessGuid and start agree<br><a class="evidence-link" href="#e-0050ae31c1536edf2521d3b8">e-0050ae31c1536edf2521d3b8</a> <a class="evidence-link" href="#e-6bd3dc9d03a346ea4f9686c6">e-6bd3dc9d03a346ea4f9686c6</a> <a class="evidence-link" href="#e-7d161008b6034f5a503d3c9a">e-7d161008b6034f5a503d3c9a</a> <a class="evidence-link" href="#e-834fe0244e021a3ddf4e414a">e-834fe0244e021a3ddf4e414a</a></td></tr><tr><td>{dc23aac9-1532-0030-c4cb-e918b4210474}</td><td>not attributed</td><td>unattributed</td><td>No unique instrumented request link; process remains independently observable<br><a class="evidence-link" href="#e-0050ae31c1536edf2521d3b8">e-0050ae31c1536edf2521d3b8</a></td></tr><tr><td>{56303d90-2acb-a141-ce8d-1861d70278b1}</td><td>not attributed</td><td>unattributed</td><td>No unique instrumented request link; process remains independently observable<br><a class="evidence-link" href="#e-cc3b87cc43839ebd40c433db">e-cc3b87cc43839ebd40c433db</a></td></tr><tr><td>{9197b6dc-bc50-cae2-1000-2fe0c4a62fc3}</td><td>411e0779-e65d-a5ce-85b3-978b5466b825</td><td>high</td><td>Unique host, child/parent PIDs and bounded launch match; observed parent ProcessGuid and start agree<br><a class="evidence-link" href="#e-14793a1aa7fcdf7e45f0686c">e-14793a1aa7fcdf7e45f0686c</a> <a class="evidence-link" href="#e-5f301bf3435f8cc37f8cee2c">e-5f301bf3435f8cc37f8cee2c</a> <a class="evidence-link" href="#e-cc3b87cc43839ebd40c433db">e-cc3b87cc43839ebd40c433db</a></td></tr><tr><td>{3e0455f5-669a-2e0d-e00f-fbbd861af995}</td><td>0a89b575-4d5e-79c0-3859-ebe20e2e57bc</td><td>high</td><td>Unique host, child/parent PIDs and bounded launch match; observed parent ProcessGuid and start agree<br><a class="evidence-link" href="#e-5a071b4a17a06082bee6d42a">e-5a071b4a17a06082bee6d42a</a> <a class="evidence-link" href="#e-a9dda72ad80a573c2d9eb5db">e-a9dda72ad80a573c2d9eb5db</a> <a class="evidence-link" href="#e-edfbccc54f67737793b39083">e-edfbccc54f67737793b39083</a></td></tr><tr><td>{59802d7d-e425-a7f2-c761-62580654fefa}</td><td>not attributed</td><td>unattributed</td><td>No unique instrumented request link; process remains independently observable<br><a class="evidence-link" href="#e-edfbccc54f67737793b39083">e-edfbccc54f67737793b39083</a></td></tr><tr><td>{70f118b6-4f74-9584-0b23-8e7ed6205010}</td><td>not attributed</td><td>unattributed</td><td>No unique instrumented request link; process remains independently observable<br><a class="evidence-link" href="#e-7e9c681ebf813d891b3ccf25">e-7e9c681ebf813d891b3ccf25</a></td></tr><tr><td>{ac654ad6-9207-7b0e-e4ff-60845b51aa92}</td><td>not attributed</td><td>unattributed</td><td>No unique instrumented request link; process remains independently observable<br><a class="evidence-link" href="#e-c74ce06592427b10b577b77f">e-c74ce06592427b10b577b77f</a></td></tr><tr><td>{2f3ea65a-76e8-7551-e5c0-427659c29833}</td><td>not attributed</td><td>unattributed</td><td>No unique instrumented request link; process remains independently observable<br><a class="evidence-link" href="#e-185eb09de78a344c4fff46d6">e-185eb09de78a344c4fff46d6</a></td></tr><tr><td>{463653af-76dd-4205-2452-c2c7d2080712}</td><td>939eff19-9d42-676c-47d4-d5b9040ff020</td><td>high</td><td>Unique host, child/parent PIDs and bounded launch match; observed parent ProcessGuid and start agree<br><a class="evidence-link" href="#e-185eb09de78a344c4fff46d6">e-185eb09de78a344c4fff46d6</a> <a class="evidence-link" href="#e-35e0eee8115d291314aabc22">e-35e0eee8115d291314aabc22</a> <a class="evidence-link" href="#e-42b620654875aa4d4505e92b">e-42b620654875aa4d4505e92b</a></td></tr></tbody></table></div>
+<h2>Observed process ancestry</h2><p>Edges below are recorded GUID relationships. Missing parents are not invented.</p><div class="table-wrap"><table><thead><tr><th>Host</th><th>ParentProcessGuid</th><th>ProcessGuid</th><th>Image</th><th>Evidence</th></tr></thead><tbody><tr><td>web-89.lab</td><td>{cb5cbd72-6bce-f45a-91d6-ea0f57ef4125}</td><td>{2f3ea65a-76e8-7551-e5c0-427659c29833}</td><td>C:\Windows\System32\inetsrv\w3wp.exe</td><td><a class="evidence-link" href="#e-185eb09de78a344c4fff46d6">e-185eb09de78a344c4fff46d6</a></td></tr><tr><td>web-89.lab</td><td>{2f3ea65a-76e8-7551-e5c0-427659c29833}</td><td>{463653af-76dd-4205-2452-c2c7d2080712}</td><td>C:\IISPurpleLab\app\IisPurpleLab.exe</td><td><a class="evidence-link" href="#e-35e0eee8115d291314aabc22">e-35e0eee8115d291314aabc22</a></td></tr><tr><td>web-59.lab</td><td>{8f30560a-1f11-1a8e-49f3-023f6c75c808}</td><td>{4d6b6814-5e06-10f4-758e-c48e20763a0c}</td><td>C:\Windows\System32\inetsrv\w3wp.exe</td><td><a class="evidence-link" href="#e-eec27cb386cec4c90aebd6bc">e-eec27cb386cec4c90aebd6bc</a></td></tr><tr><td>web-59.lab</td><td>{4d6b6814-5e06-10f4-758e-c48e20763a0c}</td><td>{335d029b-c09c-eb4d-b937-938f4ffa0e95}</td><td>C:\IISPurpleLab\app\IisPurpleLab.exe</td><td><a class="evidence-link" href="#e-6cd4fcb0c6387f3b467b1761">e-6cd4fcb0c6387f3b467b1761</a></td></tr><tr><td>web-59.lab</td><td>{4d6b6814-5e06-10f4-758e-c48e20763a0c}</td><td>{8f5751cb-78e0-520f-9566-cbf3154e2f4b}</td><td>C:\IISPurpleLab\app\IisPurpleLab.exe</td><td><a class="evidence-link" href="#e-9f2d769923dfa34d325facb4">e-9f2d769923dfa34d325facb4</a></td></tr><tr><td>web-75.lab</td><td>{8a567618-e061-406d-e881-3bc846dd03df}</td><td>{56303d90-2acb-a141-ce8d-1861d70278b1}</td><td>C:\Windows\System32\inetsrv\w3wp.exe</td><td><a class="evidence-link" href="#e-cc3b87cc43839ebd40c433db">e-cc3b87cc43839ebd40c433db</a></td></tr><tr><td>web-75.lab</td><td>{56303d90-2acb-a141-ce8d-1861d70278b1}</td><td>{9197b6dc-bc50-cae2-1000-2fe0c4a62fc3}</td><td>C:\Windows\System32\cmd.exe</td><td><a class="evidence-link" href="#e-5f301bf3435f8cc37f8cee2c">e-5f301bf3435f8cc37f8cee2c</a></td></tr><tr><td>web-67.lab</td><td>{89eba7f5-288d-4d69-954c-30dc734d484f}</td><td>{947b812e-b152-47c1-11d8-53ebe3a6c1d3}</td><td>C:\Windows\System32\inetsrv\w3wp.exe</td><td><a class="evidence-link" href="#e-44c6350abc3a5c895571f05d">e-44c6350abc3a5c895571f05d</a></td></tr><tr><td>web-67.lab</td><td>{947b812e-b152-47c1-11d8-53ebe3a6c1d3}</td><td>{f2477408-ba9e-aea5-27fb-643d648eecb6}</td><td>C:\Windows\System32\cmd.exe</td><td><a class="evidence-link" href="#e-db60ba62c67ba3bc399bbafb">e-db60ba62c67ba3bc399bbafb</a></td></tr><tr><td>web-67.lab</td><td>{f2477408-ba9e-aea5-27fb-643d648eecb6}</td><td>{a04779b9-b299-f219-a53f-28dbb0a0bf09}</td><td>C:\Windows\System32\whoami.exe</td><td><a class="evidence-link" href="#e-7cc941d7f2a9908b0ebabd3f">e-7cc941d7f2a9908b0ebabd3f</a></td></tr><tr><td>web-30.lab</td><td>{58bec455-8d25-246a-6d78-21b07b51cd61}</td><td>{632e3462-77df-c725-530e-bf66458603e1}</td><td>C:\Windows\System32\inetsrv\w3wp.exe</td><td><a class="evidence-link" href="#e-74b72b2d34528b1833daf021">e-74b72b2d34528b1833daf021</a></td></tr><tr><td>web-30.lab</td><td>{632e3462-77df-c725-530e-bf66458603e1}</td><td>{0c453832-04db-a6a9-5cd9-1a0833483697}</td><td>C:\IISPurpleLab\app\IisPurpleLab.exe</td><td><a class="evidence-link" href="#e-eacae92f57e42be7251de81e">e-eacae92f57e42be7251de81e</a></td></tr><tr><td>web-30.lab</td><td>{bbed81fb-f097-c69c-0082-c02ee4b729de}</td><td>{26a4fd3e-8c08-7e12-d20f-f7f04c7c69cb}</td><td>C:\Windows\System32\inetsrv\w3wp.exe</td><td><a class="evidence-link" href="#e-3957f8d0de39a5358bda165c">e-3957f8d0de39a5358bda165c</a></td></tr><tr><td>web-30.lab</td><td>{26a4fd3e-8c08-7e12-d20f-f7f04c7c69cb}</td><td>{09199679-15cd-a432-e22e-0200962fdeb8}</td><td>C:\IISPurpleLab\app\IisPurpleLab.exe</td><td><a class="evidence-link" href="#e-58d588efa579923ed36c1108">e-58d588efa579923ed36c1108</a></td></tr><tr><td>web-77.lab</td><td>{3e8a21be-8bfd-3c1a-e02c-43df74fa5114}</td><td>{70f118b6-4f74-9584-0b23-8e7ed6205010}</td><td>C:\Windows\System32\inetsrv\w3wp.exe</td><td><a class="evidence-link" href="#e-7e9c681ebf813d891b3ccf25">e-7e9c681ebf813d891b3ccf25</a></td></tr><tr><td>web-77.lab</td><td>{70f118b6-4f74-9584-0b23-8e7ed6205010}</td><td>{ac654ad6-9207-7b0e-e4ff-60845b51aa92}</td><td>C:\Windows\System32\cmd.exe</td><td><a class="evidence-link" href="#e-c74ce06592427b10b577b77f">e-c74ce06592427b10b577b77f</a></td></tr><tr><td>web-76.lab</td><td>{c435ea86-a112-1bbc-b488-7a772ba43ae7}</td><td>{59802d7d-e425-a7f2-c761-62580654fefa}</td><td>C:\Windows\System32\inetsrv\w3wp.exe</td><td><a class="evidence-link" href="#e-edfbccc54f67737793b39083">e-edfbccc54f67737793b39083</a></td></tr><tr><td>web-76.lab</td><td>{59802d7d-e425-a7f2-c761-62580654fefa}</td><td>{3e0455f5-669a-2e0d-e00f-fbbd861af995}</td><td>C:\Windows\System32\cmd.exe</td><td><a class="evidence-link" href="#e-a9dda72ad80a573c2d9eb5db">e-a9dda72ad80a573c2d9eb5db</a></td></tr><tr><td>web-70.lab</td><td>{f0fd2f29-a59e-28d2-d1d6-3465c5b74abf}</td><td>{dc23aac9-1532-0030-c4cb-e918b4210474}</td><td>C:\Windows\System32\inetsrv\w3wp.exe</td><td><a class="evidence-link" href="#e-0050ae31c1536edf2521d3b8">e-0050ae31c1536edf2521d3b8</a></td></tr><tr><td>web-70.lab</td><td>{dc23aac9-1532-0030-c4cb-e918b4210474}</td><td>{7540f420-b27e-620c-ce45-58e9f4f65222}</td><td>C:\Windows\System32\cmd.exe</td><td><a class="evidence-link" href="#e-6bd3dc9d03a346ea4f9686c6">e-6bd3dc9d03a346ea4f9686c6</a></td></tr><tr><td>web-70.lab</td><td>{7540f420-b27e-620c-ce45-58e9f4f65222}</td><td>{8829f297-ed1a-6565-d7d6-4ae391ec10e7}</td><td>C:\Windows\System32\whoami.exe</td><td><a class="evidence-link" href="#e-834fe0244e021a3ddf4e414a">e-834fe0244e021a3ddf4e414a</a></td></tr></tbody></table></div>
+<h2 id="evidence">Evidence records and original sources</h2><details class="record" id="e-185eb09de78a344c4fff46d6"><summary>e-185eb09de78a344c4fff46d6 · sysmon · C:\Windows\System32\inetsrv\w3wp.exe</summary><p><a href="original/sysmon.xml">original: sysmon.xml · record 1</a></p><pre>{
+  &quot;channel&quot;: &quot;Microsoft-Windows-Sysmon/Operational&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;event_id&quot;: 1,
+  &quot;event_version&quot;: 5,
+  &quot;evidence_id&quot;: &quot;e-185eb09de78a344c4fff46d6&quot;,
+  &quot;host&quot;: &quot;web-89.lab&quot;,
+  &quot;image&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;parent_image&quot;: &quot;C:\\Windows\\System32\\svchost.exe&quot;,
+  &quot;parent_pid&quot;: 720,
+  &quot;parent_process_guid&quot;: &quot;{cb5cbd72-6bce-f45a-91d6-ea0f57ef4125}&quot;,
+  &quot;pid&quot;: 3036,
+  &quot;process_guid&quot;: &quot;{2f3ea65a-76e8-7551-e5c0-427659c29833}&quot;,
+  &quot;provider&quot;: &quot;Microsoft-Windows-Sysmon&quot;,
+  &quot;record_id&quot;: 12001,
+  &quot;source&quot;: &quot;sysmon&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;sysmon.xml&quot;,
+    &quot;record&quot;: 1,
+    &quot;sha256&quot;: &quot;8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114&quot;
+  },
+  &quot;system_timestamp&quot;: &quot;2026-08-21T10:00:04.000000Z&quot;,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:00:04.000000Z&quot;
+}
+</pre></details><details class="record" id="e-1f404b39e40db826b49f4f91"><summary>e-1f404b39e40db826b49f4f91 · application · report_request</summary><p><a href="original/application.jsonl">original: application.jsonl · record 1</a></p><pre>{
+  &quot;action&quot;: &quot;report_request&quot;,
+  &quot;actor&quot;: &quot;user-485&quot;,
+  &quot;actor_tenant&quot;: &quot;tenant-32&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-1f404b39e40db826b49f4f91&quot;,
+  &quot;host&quot;: &quot;web-89.lab&quot;,
+  &quot;job_id&quot;: &quot;c5ff2f09-d78e-5bd6-d656-26807b438745&quot;,
+  &quot;outcome&quot;: &quot;allowed&quot;,
+  &quot;report_title&quot;: &quot;Monthly support report&quot;,
+  &quot;request_id&quot;: &quot;939eff19-9d42-676c-47d4-d5b9040ff020&quot;,
+  &quot;source&quot;: &quot;application&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;application.jsonl&quot;,
+    &quot;record&quot;: 1,
+    &quot;sha256&quot;: &quot;3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-08-21T10:00:10.000000Z&quot;
+}
+</pre></details><details class="record" id="e-4c8f18055006d27781ebf329"><summary>e-4c8f18055006d27781ebf329 · iis · /api/reports</summary><p><a href="original/iis.log">original: iis.log · record 3</a></p><pre>{
+  &quot;client_ip&quot;: &quot;127.0.0.1&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-4c8f18055006d27781ebf329&quot;,
+  &quot;host&quot;: &quot;web-89.lab&quot;,
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;source&quot;: &quot;iis&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;iis.log&quot;,
+    &quot;record&quot;: 3,
+    &quot;sha256&quot;: &quot;4472e466b779e4ea5903eea9e7f556c0a2e08863d610034295e239b7b5d693a9&quot;
+  },
+  &quot;status&quot;: 200,
+  &quot;time_taken&quot;: 5,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:00:10.000000Z&quot;,
+  &quot;uri_stem&quot;: &quot;/api/reports&quot;
+}
+</pre></details><details class="record" id="e-35e0eee8115d291314aabc22"><summary>e-35e0eee8115d291314aabc22 · sysmon · C:\IISPurpleLab\app\IisPurpleLab.exe</summary><p><a href="original/sysmon.xml">original: sysmon.xml · record 2</a></p><pre>{
+  &quot;channel&quot;: &quot;Microsoft-Windows-Sysmon/Operational&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\IISPurpleLab\\app\\IisPurpleLab.exe Monthly support report&quot;,
+  &quot;event_id&quot;: 1,
+  &quot;event_version&quot;: 5,
+  &quot;evidence_id&quot;: &quot;e-35e0eee8115d291314aabc22&quot;,
+  &quot;host&quot;: &quot;web-89.lab&quot;,
+  &quot;image&quot;: &quot;C:\\IISPurpleLab\\app\\IisPurpleLab.exe&quot;,
+  &quot;parent_image&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;parent_pid&quot;: 3036,
+  &quot;parent_process_guid&quot;: &quot;{2f3ea65a-76e8-7551-e5c0-427659c29833}&quot;,
+  &quot;pid&quot;: 5348,
+  &quot;process_guid&quot;: &quot;{463653af-76dd-4205-2452-c2c7d2080712}&quot;,
+  &quot;provider&quot;: &quot;Microsoft-Windows-Sysmon&quot;,
+  &quot;record_id&quot;: 12002,
+  &quot;source&quot;: &quot;sysmon&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;sysmon.xml&quot;,
+    &quot;record&quot;: 2,
+    &quot;sha256&quot;: &quot;8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114&quot;
+  },
+  &quot;system_timestamp&quot;: &quot;2026-08-21T10:00:10.020000Z&quot;,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:00:10.020000Z&quot;
+}
+</pre></details><details class="record" id="e-42b620654875aa4d4505e92b"><summary>e-42b620654875aa4d4505e92b · application · process_launch</summary><p><a href="original/application.jsonl">original: application.jsonl · record 2</a></p><pre>{
+  &quot;action&quot;: &quot;process_launch&quot;,
+  &quot;child_pid&quot;: 5348,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\IISPurpleLab\\app\\IisPurpleLab.exe Monthly support report&quot;,
+  &quot;evidence_id&quot;: &quot;e-42b620654875aa4d4505e92b&quot;,
+  &quot;host&quot;: &quot;web-89.lab&quot;,
+  &quot;image&quot;: &quot;C:\\IISPurpleLab\\app\\IisPurpleLab.exe&quot;,
+  &quot;job_id&quot;: &quot;c5ff2f09-d78e-5bd6-d656-26807b438745&quot;,
+  &quot;launch_end&quot;: &quot;2026-08-21T10:00:10.100000Z&quot;,
+  &quot;launch_start&quot;: &quot;2026-08-21T10:00:10.000000Z&quot;,
+  &quot;outcome&quot;: &quot;started&quot;,
+  &quot;parent_pid&quot;: 3036,
+  &quot;parent_start&quot;: &quot;2026-08-21T10:00:04.000000Z&quot;,
+  &quot;request_id&quot;: &quot;939eff19-9d42-676c-47d4-d5b9040ff020&quot;,
+  &quot;source&quot;: &quot;application&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;application.jsonl&quot;,
+    &quot;record&quot;: 2,
+    &quot;sha256&quot;: &quot;3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-08-21T10:00:10.080000Z&quot;
+}
+</pre></details><details class="record" id="e-eec27cb386cec4c90aebd6bc"><summary>e-eec27cb386cec4c90aebd6bc · sysmon · C:\Windows\System32\inetsrv\w3wp.exe</summary><p><a href="original/sysmon.xml">original: sysmon.xml · record 3</a></p><pre>{
+  &quot;channel&quot;: &quot;Microsoft-Windows-Sysmon/Operational&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;event_id&quot;: 1,
+  &quot;event_version&quot;: 5,
+  &quot;evidence_id&quot;: &quot;e-eec27cb386cec4c90aebd6bc&quot;,
+  &quot;host&quot;: &quot;web-59.lab&quot;,
+  &quot;image&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;parent_image&quot;: &quot;C:\\Windows\\System32\\svchost.exe&quot;,
+  &quot;parent_pid&quot;: 720,
+  &quot;parent_process_guid&quot;: &quot;{8f30560a-1f11-1a8e-49f3-023f6c75c808}&quot;,
+  &quot;pid&quot;: 3877,
+  &quot;process_guid&quot;: &quot;{4d6b6814-5e06-10f4-758e-c48e20763a0c}&quot;,
+  &quot;provider&quot;: &quot;Microsoft-Windows-Sysmon&quot;,
+  &quot;record_id&quot;: 12003,
+  &quot;source&quot;: &quot;sysmon&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;sysmon.xml&quot;,
+    &quot;record&quot;: 3,
+    &quot;sha256&quot;: &quot;8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114&quot;
+  },
+  &quot;system_timestamp&quot;: &quot;2026-08-21T10:00:26.000000Z&quot;,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:00:26.000000Z&quot;
+}
+</pre></details><details class="record" id="e-07e4724f0f3a830b0d635c4a"><summary>e-07e4724f0f3a830b0d635c4a · iis · /api/reports</summary><p><a href="original/iis.log">original: iis.log · record 8</a></p><pre>{
+  &quot;client_ip&quot;: &quot;127.0.0.1&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-07e4724f0f3a830b0d635c4a&quot;,
+  &quot;host&quot;: &quot;web-59.lab&quot;,
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;source&quot;: &quot;iis&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;iis.log&quot;,
+    &quot;record&quot;: 8,
+    &quot;sha256&quot;: &quot;4472e466b779e4ea5903eea9e7f556c0a2e08863d610034295e239b7b5d693a9&quot;
+  },
+  &quot;status&quot;: 200,
+  &quot;time_taken&quot;: 5,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:00:30.000000Z&quot;,
+  &quot;uri_stem&quot;: &quot;/api/reports&quot;
+}
+</pre></details><details class="record" id="e-0a2a122e7f916bd1617df463"><summary>e-0a2a122e7f916bd1617df463 · application · report_request</summary><p><a href="original/application.jsonl">original: application.jsonl · record 9</a></p><pre>{
+  &quot;action&quot;: &quot;report_request&quot;,
+  &quot;actor&quot;: &quot;user-236&quot;,
+  &quot;actor_tenant&quot;: &quot;tenant-28&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-0a2a122e7f916bd1617df463&quot;,
+  &quot;host&quot;: &quot;web-59.lab&quot;,
+  &quot;job_id&quot;: &quot;06124400-36ef-cd89-b77d-257bf950cb03&quot;,
+  &quot;outcome&quot;: &quot;allowed&quot;,
+  &quot;report_title&quot;: &quot;Monthly support report&quot;,
+  &quot;request_id&quot;: &quot;0164fe15-3fe8-504a-7685-06c7961ca4f9&quot;,
+  &quot;source&quot;: &quot;application&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;application.jsonl&quot;,
+    &quot;record&quot;: 9,
+    &quot;sha256&quot;: &quot;3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-08-21T10:00:30.000000Z&quot;
+}
+</pre></details><details class="record" id="e-9a77404fb53857e308fe9783"><summary>e-9a77404fb53857e308fe9783 · iis · /api/reports</summary><p><a href="original/iis.log">original: iis.log · record 4</a></p><pre>{
+  &quot;client_ip&quot;: &quot;127.0.0.1&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-9a77404fb53857e308fe9783&quot;,
+  &quot;host&quot;: &quot;web-59.lab&quot;,
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;source&quot;: &quot;iis&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;iis.log&quot;,
+    &quot;record&quot;: 4,
+    &quot;sha256&quot;: &quot;4472e466b779e4ea5903eea9e7f556c0a2e08863d610034295e239b7b5d693a9&quot;
+  },
+  &quot;status&quot;: 200,
+  &quot;time_taken&quot;: 5,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:00:30.000000Z&quot;,
+  &quot;uri_stem&quot;: &quot;/api/reports&quot;
+}
+</pre></details><details class="record" id="e-f01465b9baeddde13c3bd2f2"><summary>e-f01465b9baeddde13c3bd2f2 · application · report_request</summary><p><a href="original/application.jsonl">original: application.jsonl · record 3</a></p><pre>{
+  &quot;action&quot;: &quot;report_request&quot;,
+  &quot;actor&quot;: &quot;user-678&quot;,
+  &quot;actor_tenant&quot;: &quot;tenant-23&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-f01465b9baeddde13c3bd2f2&quot;,
+  &quot;host&quot;: &quot;web-59.lab&quot;,
+  &quot;job_id&quot;: &quot;f77101e2-0caa-c903-e76e-510d1b74bc96&quot;,
+  &quot;outcome&quot;: &quot;allowed&quot;,
+  &quot;report_title&quot;: &quot;Monthly support report&quot;,
+  &quot;request_id&quot;: &quot;8e21e066-b789-c6b9-55ad-2e50c1a54c7f&quot;,
+  &quot;source&quot;: &quot;application&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;application.jsonl&quot;,
+    &quot;record&quot;: 3,
+    &quot;sha256&quot;: &quot;3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-08-21T10:00:30.000000Z&quot;
+}
+</pre></details><details class="record" id="e-6cd4fcb0c6387f3b467b1761"><summary>e-6cd4fcb0c6387f3b467b1761 · sysmon · C:\IISPurpleLab\app\IisPurpleLab.exe</summary><p><a href="original/sysmon.xml">original: sysmon.xml · record 4</a></p><pre>{
+  &quot;channel&quot;: &quot;Microsoft-Windows-Sysmon/Operational&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\IISPurpleLab\\app\\IisPurpleLab.exe Monthly support report&quot;,
+  &quot;event_id&quot;: 1,
+  &quot;event_version&quot;: 5,
+  &quot;evidence_id&quot;: &quot;e-6cd4fcb0c6387f3b467b1761&quot;,
+  &quot;host&quot;: &quot;web-59.lab&quot;,
+  &quot;image&quot;: &quot;C:\\IISPurpleLab\\app\\IisPurpleLab.exe&quot;,
+  &quot;parent_image&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;parent_pid&quot;: 3877,
+  &quot;parent_process_guid&quot;: &quot;{4d6b6814-5e06-10f4-758e-c48e20763a0c}&quot;,
+  &quot;pid&quot;: 8587,
+  &quot;process_guid&quot;: &quot;{335d029b-c09c-eb4d-b937-938f4ffa0e95}&quot;,
+  &quot;provider&quot;: &quot;Microsoft-Windows-Sysmon&quot;,
+  &quot;record_id&quot;: 12004,
+  &quot;source&quot;: &quot;sysmon&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;sysmon.xml&quot;,
+    &quot;record&quot;: 4,
+    &quot;sha256&quot;: &quot;8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114&quot;
+  },
+  &quot;system_timestamp&quot;: &quot;2026-08-21T10:00:30.020000Z&quot;,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:00:30.020000Z&quot;
+}
+</pre></details><details class="record" id="e-9f2d769923dfa34d325facb4"><summary>e-9f2d769923dfa34d325facb4 · sysmon · C:\IISPurpleLab\app\IisPurpleLab.exe</summary><p><a href="original/sysmon.xml">original: sysmon.xml · record 7</a></p><pre>{
+  &quot;channel&quot;: &quot;Microsoft-Windows-Sysmon/Operational&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\IISPurpleLab\\app\\IisPurpleLab.exe Monthly support report&quot;,
+  &quot;event_id&quot;: 1,
+  &quot;event_version&quot;: 5,
+  &quot;evidence_id&quot;: &quot;e-9f2d769923dfa34d325facb4&quot;,
+  &quot;host&quot;: &quot;web-59.lab&quot;,
+  &quot;image&quot;: &quot;C:\\IISPurpleLab\\app\\IisPurpleLab.exe&quot;,
+  &quot;parent_image&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;parent_pid&quot;: 3877,
+  &quot;parent_process_guid&quot;: &quot;{4d6b6814-5e06-10f4-758e-c48e20763a0c}&quot;,
+  &quot;pid&quot;: 8545,
+  &quot;process_guid&quot;: &quot;{8f5751cb-78e0-520f-9566-cbf3154e2f4b}&quot;,
+  &quot;provider&quot;: &quot;Microsoft-Windows-Sysmon&quot;,
+  &quot;record_id&quot;: 12007,
+  &quot;source&quot;: &quot;sysmon&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;sysmon.xml&quot;,
+    &quot;record&quot;: 7,
+    &quot;sha256&quot;: &quot;8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114&quot;
+  },
+  &quot;system_timestamp&quot;: &quot;2026-08-21T10:00:30.020000Z&quot;,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:00:30.020000Z&quot;
+}
+</pre></details><details class="record" id="e-8a333ccd5d8c6647046ccac8"><summary>e-8a333ccd5d8c6647046ccac8 · application · process_launch</summary><p><a href="original/application.jsonl">original: application.jsonl · record 4</a></p><pre>{
+  &quot;action&quot;: &quot;process_launch&quot;,
+  &quot;child_pid&quot;: 8587,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\IISPurpleLab\\app\\IisPurpleLab.exe Monthly support report&quot;,
+  &quot;evidence_id&quot;: &quot;e-8a333ccd5d8c6647046ccac8&quot;,
+  &quot;host&quot;: &quot;web-59.lab&quot;,
+  &quot;image&quot;: &quot;C:\\IISPurpleLab\\app\\IisPurpleLab.exe&quot;,
+  &quot;job_id&quot;: &quot;f77101e2-0caa-c903-e76e-510d1b74bc96&quot;,
+  &quot;launch_end&quot;: &quot;2026-08-21T10:00:30.100000Z&quot;,
+  &quot;launch_start&quot;: &quot;2026-08-21T10:00:30.000000Z&quot;,
+  &quot;outcome&quot;: &quot;started&quot;,
+  &quot;parent_pid&quot;: 3877,
+  &quot;parent_start&quot;: &quot;2026-08-21T10:00:26.000000Z&quot;,
+  &quot;request_id&quot;: &quot;8e21e066-b789-c6b9-55ad-2e50c1a54c7f&quot;,
+  &quot;source&quot;: &quot;application&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;application.jsonl&quot;,
+    &quot;record&quot;: 4,
+    &quot;sha256&quot;: &quot;3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-08-21T10:00:30.080000Z&quot;
+}
+</pre></details><details class="record" id="e-ff73efda0acec908a41a17b7"><summary>e-ff73efda0acec908a41a17b7 · application · process_launch</summary><p><a href="original/application.jsonl">original: application.jsonl · record 10</a></p><pre>{
+  &quot;action&quot;: &quot;process_launch&quot;,
+  &quot;child_pid&quot;: 8545,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\IISPurpleLab\\app\\IisPurpleLab.exe Monthly support report&quot;,
+  &quot;evidence_id&quot;: &quot;e-ff73efda0acec908a41a17b7&quot;,
+  &quot;host&quot;: &quot;web-59.lab&quot;,
+  &quot;image&quot;: &quot;C:\\IISPurpleLab\\app\\IisPurpleLab.exe&quot;,
+  &quot;job_id&quot;: &quot;06124400-36ef-cd89-b77d-257bf950cb03&quot;,
+  &quot;launch_end&quot;: &quot;2026-08-21T10:00:30.100000Z&quot;,
+  &quot;launch_start&quot;: &quot;2026-08-21T10:00:30.000000Z&quot;,
+  &quot;outcome&quot;: &quot;started&quot;,
+  &quot;parent_pid&quot;: 3877,
+  &quot;parent_start&quot;: &quot;2026-08-21T10:00:26.000000Z&quot;,
+  &quot;request_id&quot;: &quot;0164fe15-3fe8-504a-7685-06c7961ca4f9&quot;,
+  &quot;source&quot;: &quot;application&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;application.jsonl&quot;,
+    &quot;record&quot;: 10,
+    &quot;sha256&quot;: &quot;3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-08-21T10:00:30.080000Z&quot;
+}
+</pre></details><details class="record" id="e-5176c6a62a69bb9f1b56b759"><summary>e-5176c6a62a69bb9f1b56b759 · iis · /api/tickets/ticket-2762</summary><p><a href="original/iis.log">original: iis.log · record 5</a></p><pre>{
+  &quot;client_ip&quot;: &quot;127.0.0.1&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-5176c6a62a69bb9f1b56b759&quot;,
+  &quot;host&quot;: &quot;web-88.lab&quot;,
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;source&quot;: &quot;iis&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;iis.log&quot;,
+    &quot;record&quot;: 5,
+    &quot;sha256&quot;: &quot;4472e466b779e4ea5903eea9e7f556c0a2e08863d610034295e239b7b5d693a9&quot;
+  },
+  &quot;status&quot;: 200,
+  &quot;time_taken&quot;: 5,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:00:50.000000Z&quot;,
+  &quot;uri_stem&quot;: &quot;/api/tickets/ticket-2762&quot;
+}
+</pre></details><details class="record" id="e-b7ff1ce1ef060e38f5f50f1e"><summary>e-b7ff1ce1ef060e38f5f50f1e · application · ticket_access</summary><p><a href="original/application.jsonl">original: application.jsonl · record 5</a></p><pre>{
+  &quot;action&quot;: &quot;ticket_access&quot;,
+  &quot;actor&quot;: &quot;user-923&quot;,
+  &quot;actor_tenant&quot;: &quot;tenant-39&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-b7ff1ce1ef060e38f5f50f1e&quot;,
+  &quot;host&quot;: &quot;web-88.lab&quot;,
+  &quot;outcome&quot;: &quot;allowed&quot;,
+  &quot;policy_allowed&quot;: true,
+  &quot;request_id&quot;: &quot;704ec66f-9659-be39-6468-5a8d4d915e16&quot;,
+  &quot;resource_id&quot;: &quot;ticket-2762&quot;,
+  &quot;resource_tenant&quot;: &quot;tenant-39&quot;,
+  &quot;role&quot;: &quot;user&quot;,
+  &quot;shared_with&quot;: [],
+  &quot;source&quot;: &quot;application&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;application.jsonl&quot;,
+    &quot;record&quot;: 5,
+    &quot;sha256&quot;: &quot;3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-08-21T10:00:50.000000Z&quot;
+}
+</pre></details><details class="record" id="e-b85af6cd5c6a13f1841fdff7"><summary>e-b85af6cd5c6a13f1841fdff7 · application · ticket_access</summary><p><a href="original/application.jsonl">original: application.jsonl · record 6</a></p><pre>{
+  &quot;action&quot;: &quot;ticket_access&quot;,
+  &quot;actor&quot;: &quot;user-410&quot;,
+  &quot;actor_tenant&quot;: &quot;tenant-20&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-b85af6cd5c6a13f1841fdff7&quot;,
+  &quot;host&quot;: &quot;web-43.lab&quot;,
+  &quot;outcome&quot;: &quot;allowed&quot;,
+  &quot;policy_allowed&quot;: true,
+  &quot;request_id&quot;: &quot;e9ec7462-17ca-616c-5442-57653625b06e&quot;,
+  &quot;resource_id&quot;: &quot;ticket-5101&quot;,
+  &quot;resource_tenant&quot;: &quot;tenant-63&quot;,
+  &quot;role&quot;: &quot;user&quot;,
+  &quot;shared_with&quot;: [
+    &quot;tenant-20&quot;
+  ],
+  &quot;source&quot;: &quot;application&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;application.jsonl&quot;,
+    &quot;record&quot;: 6,
+    &quot;sha256&quot;: &quot;3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-08-21T10:01:10.000000Z&quot;
+}
+</pre></details><details class="record" id="e-d7fd477bb97d5673b1088326"><summary>e-d7fd477bb97d5673b1088326 · iis · /api/tickets/ticket-5101</summary><p><a href="original/iis.log">original: iis.log · record 6</a></p><pre>{
+  &quot;client_ip&quot;: &quot;127.0.0.1&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-d7fd477bb97d5673b1088326&quot;,
+  &quot;host&quot;: &quot;web-43.lab&quot;,
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;source&quot;: &quot;iis&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;iis.log&quot;,
+    &quot;record&quot;: 6,
+    &quot;sha256&quot;: &quot;4472e466b779e4ea5903eea9e7f556c0a2e08863d610034295e239b7b5d693a9&quot;
+  },
+  &quot;status&quot;: 200,
+  &quot;time_taken&quot;: 5,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:01:10.000000Z&quot;,
+  &quot;uri_stem&quot;: &quot;/api/tickets/ticket-5101&quot;
+}
+</pre></details><details class="record" id="e-cc3b87cc43839ebd40c433db"><summary>e-cc3b87cc43839ebd40c433db · sysmon · C:\Windows\System32\inetsrv\w3wp.exe</summary><p><a href="original/sysmon.xml">original: sysmon.xml · record 5</a></p><pre>{
+  &quot;channel&quot;: &quot;Microsoft-Windows-Sysmon/Operational&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;event_id&quot;: 1,
+  &quot;event_version&quot;: 5,
+  &quot;evidence_id&quot;: &quot;e-cc3b87cc43839ebd40c433db&quot;,
+  &quot;host&quot;: &quot;web-75.lab&quot;,
+  &quot;image&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;parent_image&quot;: &quot;C:\\Windows\\System32\\svchost.exe&quot;,
+  &quot;parent_pid&quot;: 720,
+  &quot;parent_process_guid&quot;: &quot;{8a567618-e061-406d-e881-3bc846dd03df}&quot;,
+  &quot;pid&quot;: 2305,
+  &quot;process_guid&quot;: &quot;{56303d90-2acb-a141-ce8d-1861d70278b1}&quot;,
+  &quot;provider&quot;: &quot;Microsoft-Windows-Sysmon&quot;,
+  &quot;record_id&quot;: 12005,
+  &quot;source&quot;: &quot;sysmon&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;sysmon.xml&quot;,
+    &quot;record&quot;: 5,
+    &quot;sha256&quot;: &quot;8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114&quot;
+  },
+  &quot;system_timestamp&quot;: &quot;2026-08-21T10:01:24.000000Z&quot;,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:01:24.000000Z&quot;
+}
+</pre></details><details class="record" id="e-416b98f188e9e4bdc1bb16e1"><summary>e-416b98f188e9e4bdc1bb16e1 · application · report_request</summary><p><a href="original/application.jsonl">original: application.jsonl · record 7</a></p><pre>{
+  &quot;action&quot;: &quot;report_request&quot;,
+  &quot;actor&quot;: &quot;user-851&quot;,
+  &quot;actor_tenant&quot;: &quot;tenant-39&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-416b98f188e9e4bdc1bb16e1&quot;,
+  &quot;host&quot;: &quot;web-75.lab&quot;,
+  &quot;job_id&quot;: &quot;c09a38b8-4d91-030c-6aa4-0bd4e9e08321&quot;,
+  &quot;outcome&quot;: &quot;allowed&quot;,
+  &quot;report_title&quot;: &quot;Monthly support report&quot;,
+  &quot;request_id&quot;: &quot;411e0779-e65d-a5ce-85b3-978b5466b825&quot;,
+  &quot;source&quot;: &quot;application&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;application.jsonl&quot;,
+    &quot;record&quot;: 7,
+    &quot;sha256&quot;: &quot;3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-08-21T10:01:30.000000Z&quot;
+}
+</pre></details><details class="record" id="e-56a04d90b786a37eaf45dac7"><summary>e-56a04d90b786a37eaf45dac7 · iis · /api/reports</summary><p><a href="original/iis.log">original: iis.log · record 7</a></p><pre>{
+  &quot;client_ip&quot;: &quot;127.0.0.1&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-56a04d90b786a37eaf45dac7&quot;,
+  &quot;host&quot;: &quot;web-75.lab&quot;,
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;source&quot;: &quot;iis&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;iis.log&quot;,
+    &quot;record&quot;: 7,
+    &quot;sha256&quot;: &quot;4472e466b779e4ea5903eea9e7f556c0a2e08863d610034295e239b7b5d693a9&quot;
+  },
+  &quot;status&quot;: 200,
+  &quot;time_taken&quot;: 5,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:01:30.000000Z&quot;,
+  &quot;uri_stem&quot;: &quot;/api/reports&quot;
+}
+</pre></details><details class="record" id="e-5f301bf3435f8cc37f8cee2c"><summary>e-5f301bf3435f8cc37f8cee2c · sysmon · C:\Windows\System32\cmd.exe</summary><p><a href="original/sysmon.xml">original: sysmon.xml · record 6</a></p><pre>{
+  &quot;channel&quot;: &quot;Microsoft-Windows-Sysmon/Operational&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\Windows\\System32\\cmd.exe Monthly support report&quot;,
+  &quot;event_id&quot;: 1,
+  &quot;event_version&quot;: 5,
+  &quot;evidence_id&quot;: &quot;e-5f301bf3435f8cc37f8cee2c&quot;,
+  &quot;host&quot;: &quot;web-75.lab&quot;,
+  &quot;image&quot;: &quot;C:\\Windows\\System32\\cmd.exe&quot;,
+  &quot;parent_image&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;parent_pid&quot;: 2305,
+  &quot;parent_process_guid&quot;: &quot;{56303d90-2acb-a141-ce8d-1861d70278b1}&quot;,
+  &quot;pid&quot;: 6618,
+  &quot;process_guid&quot;: &quot;{9197b6dc-bc50-cae2-1000-2fe0c4a62fc3}&quot;,
+  &quot;provider&quot;: &quot;Microsoft-Windows-Sysmon&quot;,
+  &quot;record_id&quot;: 12006,
+  &quot;source&quot;: &quot;sysmon&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;sysmon.xml&quot;,
+    &quot;record&quot;: 6,
+    &quot;sha256&quot;: &quot;8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114&quot;
+  },
+  &quot;system_timestamp&quot;: &quot;2026-08-21T10:01:30.020000Z&quot;,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:01:30.020000Z&quot;
+}
+</pre></details><details class="record" id="e-14793a1aa7fcdf7e45f0686c"><summary>e-14793a1aa7fcdf7e45f0686c · application · process_launch</summary><p><a href="original/application.jsonl">original: application.jsonl · record 8</a></p><pre>{
+  &quot;action&quot;: &quot;process_launch&quot;,
+  &quot;child_pid&quot;: 6618,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\Windows\\System32\\cmd.exe Monthly support report&quot;,
+  &quot;evidence_id&quot;: &quot;e-14793a1aa7fcdf7e45f0686c&quot;,
+  &quot;host&quot;: &quot;web-75.lab&quot;,
+  &quot;image&quot;: &quot;C:\\Windows\\System32\\cmd.exe&quot;,
+  &quot;job_id&quot;: &quot;c09a38b8-4d91-030c-6aa4-0bd4e9e08321&quot;,
+  &quot;launch_end&quot;: &quot;2026-08-21T10:01:30.100000Z&quot;,
+  &quot;launch_start&quot;: &quot;2026-08-21T10:01:30.000000Z&quot;,
+  &quot;outcome&quot;: &quot;started&quot;,
+  &quot;parent_pid&quot;: 2305,
+  &quot;parent_start&quot;: &quot;2026-08-21T10:01:24.000000Z&quot;,
+  &quot;request_id&quot;: &quot;411e0779-e65d-a5ce-85b3-978b5466b825&quot;,
+  &quot;source&quot;: &quot;application&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;application.jsonl&quot;,
+    &quot;record&quot;: 8,
+    &quot;sha256&quot;: &quot;3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-08-21T10:01:30.080000Z&quot;
+}
+</pre></details><details class="record" id="e-44c6350abc3a5c895571f05d"><summary>e-44c6350abc3a5c895571f05d · sysmon · C:\Windows\System32\inetsrv\w3wp.exe</summary><p><a href="original/sysmon.xml">original: sysmon.xml · record 8</a></p><pre>{
+  &quot;channel&quot;: &quot;Microsoft-Windows-Sysmon/Operational&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;event_id&quot;: 1,
+  &quot;event_version&quot;: 5,
+  &quot;evidence_id&quot;: &quot;e-44c6350abc3a5c895571f05d&quot;,
+  &quot;host&quot;: &quot;web-67.lab&quot;,
+  &quot;image&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;parent_image&quot;: &quot;C:\\Windows\\System32\\svchost.exe&quot;,
+  &quot;parent_pid&quot;: 720,
+  &quot;parent_process_guid&quot;: &quot;{89eba7f5-288d-4d69-954c-30dc734d484f}&quot;,
+  &quot;pid&quot;: 4565,
+  &quot;process_guid&quot;: &quot;{947b812e-b152-47c1-11d8-53ebe3a6c1d3}&quot;,
+  &quot;provider&quot;: &quot;Microsoft-Windows-Sysmon&quot;,
+  &quot;record_id&quot;: 12008,
+  &quot;source&quot;: &quot;sysmon&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;sysmon.xml&quot;,
+    &quot;record&quot;: 8,
+    &quot;sha256&quot;: &quot;8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114&quot;
+  },
+  &quot;system_timestamp&quot;: &quot;2026-08-21T10:02:03.000000Z&quot;,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:02:03.000000Z&quot;
+}
+</pre></details><details class="record" id="e-73632973018b03632f84775d"><summary>e-73632973018b03632f84775d · application · report_request</summary><p><a href="original/application.jsonl">original: application.jsonl · record 11</a></p><pre>{
+  &quot;action&quot;: &quot;report_request&quot;,
+  &quot;actor&quot;: &quot;user-355&quot;,
+  &quot;actor_tenant&quot;: &quot;tenant-28&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-73632973018b03632f84775d&quot;,
+  &quot;host&quot;: &quot;web-67.lab&quot;,
+  &quot;job_id&quot;: &quot;6f2d499f-8aff-9ad1-41ef-9fd735ca8916&quot;,
+  &quot;outcome&quot;: &quot;allowed&quot;,
+  &quot;report_title&quot;: &quot;Monthly support report &amp; whoami&quot;,
+  &quot;request_id&quot;: &quot;880f9d36-26da-a95b-2566-8eed8ec92668&quot;,
+  &quot;source&quot;: &quot;application&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;application.jsonl&quot;,
+    &quot;record&quot;: 11,
+    &quot;sha256&quot;: &quot;3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-08-21T10:02:10.000000Z&quot;
+}
+</pre></details><details class="record" id="e-9c811d24f1d388492e1afd09"><summary>e-9c811d24f1d388492e1afd09 · iis · /api/reports</summary><p><a href="original/iis.log">original: iis.log · record 9</a></p><pre>{
+  &quot;client_ip&quot;: &quot;127.0.0.1&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-9c811d24f1d388492e1afd09&quot;,
+  &quot;host&quot;: &quot;web-67.lab&quot;,
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;source&quot;: &quot;iis&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;iis.log&quot;,
+    &quot;record&quot;: 9,
+    &quot;sha256&quot;: &quot;4472e466b779e4ea5903eea9e7f556c0a2e08863d610034295e239b7b5d693a9&quot;
+  },
+  &quot;status&quot;: 200,
+  &quot;time_taken&quot;: 5,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:02:10.000000Z&quot;,
+  &quot;uri_stem&quot;: &quot;/api/reports&quot;
+}
+</pre></details><details class="record" id="e-db60ba62c67ba3bc399bbafb"><summary>e-db60ba62c67ba3bc399bbafb · sysmon · C:\Windows\System32\cmd.exe</summary><p><a href="original/sysmon.xml">original: sysmon.xml · record 9</a></p><pre>{
+  &quot;channel&quot;: &quot;Microsoft-Windows-Sysmon/Operational&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\Windows\\System32\\cmd.exe Monthly support report &amp; whoami&quot;,
+  &quot;event_id&quot;: 1,
+  &quot;event_version&quot;: 5,
+  &quot;evidence_id&quot;: &quot;e-db60ba62c67ba3bc399bbafb&quot;,
+  &quot;host&quot;: &quot;web-67.lab&quot;,
+  &quot;image&quot;: &quot;C:\\Windows\\System32\\cmd.exe&quot;,
+  &quot;parent_image&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;parent_pid&quot;: 4565,
+  &quot;parent_process_guid&quot;: &quot;{947b812e-b152-47c1-11d8-53ebe3a6c1d3}&quot;,
+  &quot;pid&quot;: 6865,
+  &quot;process_guid&quot;: &quot;{f2477408-ba9e-aea5-27fb-643d648eecb6}&quot;,
+  &quot;provider&quot;: &quot;Microsoft-Windows-Sysmon&quot;,
+  &quot;record_id&quot;: 12009,
+  &quot;source&quot;: &quot;sysmon&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;sysmon.xml&quot;,
+    &quot;record&quot;: 9,
+    &quot;sha256&quot;: &quot;8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114&quot;
+  },
+  &quot;system_timestamp&quot;: &quot;2026-08-21T10:02:10.020000Z&quot;,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:02:10.020000Z&quot;
+}
+</pre></details><details class="record" id="e-9e25cbbc5c09f242ea2fce79"><summary>e-9e25cbbc5c09f242ea2fce79 · application · process_launch</summary><p><a href="original/application.jsonl">original: application.jsonl · record 12</a></p><pre>{
+  &quot;action&quot;: &quot;process_launch&quot;,
+  &quot;child_pid&quot;: 6865,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\Windows\\System32\\cmd.exe Monthly support report &amp; whoami&quot;,
+  &quot;evidence_id&quot;: &quot;e-9e25cbbc5c09f242ea2fce79&quot;,
+  &quot;host&quot;: &quot;web-67.lab&quot;,
+  &quot;image&quot;: &quot;C:\\Windows\\System32\\cmd.exe&quot;,
+  &quot;job_id&quot;: &quot;6f2d499f-8aff-9ad1-41ef-9fd735ca8916&quot;,
+  &quot;launch_end&quot;: &quot;2026-08-21T10:02:10.100000Z&quot;,
+  &quot;launch_start&quot;: &quot;2026-08-21T10:02:10.000000Z&quot;,
+  &quot;outcome&quot;: &quot;started&quot;,
+  &quot;parent_pid&quot;: 4565,
+  &quot;parent_start&quot;: &quot;2026-08-21T10:02:03.000000Z&quot;,
+  &quot;request_id&quot;: &quot;880f9d36-26da-a95b-2566-8eed8ec92668&quot;,
+  &quot;source&quot;: &quot;application&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;application.jsonl&quot;,
+    &quot;record&quot;: 12,
+    &quot;sha256&quot;: &quot;3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-08-21T10:02:10.080000Z&quot;
+}
+</pre></details><details class="record" id="e-7cc941d7f2a9908b0ebabd3f"><summary>e-7cc941d7f2a9908b0ebabd3f · sysmon · C:\Windows\System32\whoami.exe</summary><p><a href="original/sysmon.xml">original: sysmon.xml · record 10</a></p><pre>{
+  &quot;channel&quot;: &quot;Microsoft-Windows-Sysmon/Operational&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;whoami&quot;,
+  &quot;event_id&quot;: 1,
+  &quot;event_version&quot;: 5,
+  &quot;evidence_id&quot;: &quot;e-7cc941d7f2a9908b0ebabd3f&quot;,
+  &quot;host&quot;: &quot;web-67.lab&quot;,
+  &quot;image&quot;: &quot;C:\\Windows\\System32\\whoami.exe&quot;,
+  &quot;parent_image&quot;: &quot;C:\\Windows\\System32\\cmd.exe&quot;,
+  &quot;parent_pid&quot;: 6865,
+  &quot;parent_process_guid&quot;: &quot;{f2477408-ba9e-aea5-27fb-643d648eecb6}&quot;,
+  &quot;pid&quot;: 6869,
+  &quot;process_guid&quot;: &quot;{a04779b9-b299-f219-a53f-28dbb0a0bf09}&quot;,
+  &quot;provider&quot;: &quot;Microsoft-Windows-Sysmon&quot;,
+  &quot;record_id&quot;: 12010,
+  &quot;source&quot;: &quot;sysmon&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;sysmon.xml&quot;,
+    &quot;record&quot;: 10,
+    &quot;sha256&quot;: &quot;8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114&quot;
+  },
+  &quot;system_timestamp&quot;: &quot;2026-08-21T10:02:10.300000Z&quot;,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:02:10.300000Z&quot;
+}
+</pre></details><details class="record" id="e-0f648897a75aefa4f1b25f32"><summary>e-0f648897a75aefa4f1b25f32 · sysmon · C:\Windows\System32\cmd.exe</summary><p><a href="original/sysmon.xml">original: sysmon.xml · record 11</a></p><pre>{
+  &quot;channel&quot;: &quot;Microsoft-Windows-Sysmon/Operational&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;event_id&quot;: 11,
+  &quot;event_version&quot;: 3,
+  &quot;evidence_id&quot;: &quot;e-0f648897a75aefa4f1b25f32&quot;,
+  &quot;host&quot;: &quot;web-67.lab&quot;,
+  &quot;image&quot;: &quot;C:\\Windows\\System32\\cmd.exe&quot;,
+  &quot;pid&quot;: 6865,
+  &quot;process_guid&quot;: &quot;{f2477408-ba9e-aea5-27fb-643d648eecb6}&quot;,
+  &quot;provider&quot;: &quot;Microsoft-Windows-Sysmon&quot;,
+  &quot;record_id&quot;: 12011,
+  &quot;source&quot;: &quot;sysmon&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;sysmon.xml&quot;,
+    &quot;record&quot;: 11,
+    &quot;sha256&quot;: &quot;8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114&quot;
+  },
+  &quot;system_timestamp&quot;: &quot;2026-08-21T10:02:10.400000Z&quot;,
+  &quot;target_filename&quot;: &quot;C:\\IISPurpleLab\\data\\work\\6f2d499f-8aff-9ad1-41ef-9fd735ca8916\\stage.txt&quot;,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:02:10.400000Z&quot;
+}
+</pre></details><details class="record" id="e-686c868170dd18e201c7e252"><summary>e-686c868170dd18e201c7e252 · sysmon · C:\Windows\System32\cmd.exe</summary><p><a href="original/sysmon.xml">original: sysmon.xml · record 12</a></p><pre>{
+  &quot;channel&quot;: &quot;Microsoft-Windows-Sysmon/Operational&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;destination_ip&quot;: &quot;127.0.0.1&quot;,
+  &quot;destination_port&quot;: 5091,
+  &quot;event_id&quot;: 3,
+  &quot;event_version&quot;: 3,
+  &quot;evidence_id&quot;: &quot;e-686c868170dd18e201c7e252&quot;,
+  &quot;host&quot;: &quot;web-67.lab&quot;,
+  &quot;image&quot;: &quot;C:\\Windows\\System32\\cmd.exe&quot;,
+  &quot;initiated&quot;: &quot;true&quot;,
+  &quot;pid&quot;: 6865,
+  &quot;process_guid&quot;: &quot;{f2477408-ba9e-aea5-27fb-643d648eecb6}&quot;,
+  &quot;protocol&quot;: &quot;tcp&quot;,
+  &quot;provider&quot;: &quot;Microsoft-Windows-Sysmon&quot;,
+  &quot;record_id&quot;: 12012,
+  &quot;source&quot;: &quot;sysmon&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;sysmon.xml&quot;,
+    &quot;record&quot;: 12,
+    &quot;sha256&quot;: &quot;8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114&quot;
+  },
+  &quot;system_timestamp&quot;: &quot;2026-08-21T10:02:10.500000Z&quot;,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:02:10.500000Z&quot;
+}
+</pre></details><details class="record" id="e-1a99c365bc06037f51882aef"><summary>e-1a99c365bc06037f51882aef · application · attachment_access</summary><p><a href="original/application.jsonl">original: application.jsonl · record 13</a></p><pre>{
+  &quot;action&quot;: &quot;attachment_access&quot;,
+  &quot;actor&quot;: &quot;user-594&quot;,
+  &quot;actor_tenant&quot;: &quot;tenant-39&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-1a99c365bc06037f51882aef&quot;,
+  &quot;host&quot;: &quot;web-73.lab&quot;,
+  &quot;outcome&quot;: &quot;allowed&quot;,
+  &quot;policy_allowed&quot;: false,
+  &quot;request_id&quot;: &quot;41ca66b1-c20a-c475-4b13-4213dd9c4550&quot;,
+  &quot;resource_id&quot;: &quot;ticket-6154&quot;,
+  &quot;resource_tenant&quot;: &quot;tenant-72&quot;,
+  &quot;role&quot;: &quot;user&quot;,
+  &quot;shared_with&quot;: [],
+  &quot;source&quot;: &quot;application&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;application.jsonl&quot;,
+    &quot;record&quot;: 13,
+    &quot;sha256&quot;: &quot;3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-08-21T10:02:30.000000Z&quot;
+}
+</pre></details><details class="record" id="e-f40b1c5df71e6a8a2742e89e"><summary>e-f40b1c5df71e6a8a2742e89e · iis · /api/tickets/ticket-6154</summary><p><a href="original/iis.log">original: iis.log · record 10</a></p><pre>{
+  &quot;client_ip&quot;: &quot;127.0.0.1&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-f40b1c5df71e6a8a2742e89e&quot;,
+  &quot;host&quot;: &quot;web-73.lab&quot;,
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;source&quot;: &quot;iis&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;iis.log&quot;,
+    &quot;record&quot;: 10,
+    &quot;sha256&quot;: &quot;4472e466b779e4ea5903eea9e7f556c0a2e08863d610034295e239b7b5d693a9&quot;
+  },
+  &quot;status&quot;: 200,
+  &quot;time_taken&quot;: 5,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:02:30.000000Z&quot;,
+  &quot;uri_stem&quot;: &quot;/api/tickets/ticket-6154&quot;
+}
+</pre></details><details class="record" id="e-1dd611d56ac82158b161a50b"><summary>e-1dd611d56ac82158b161a50b · iis · /api/tickets/ticket-2200</summary><p><a href="original/iis.log">original: iis.log · record 11</a></p><pre>{
+  &quot;client_ip&quot;: &quot;127.0.0.1&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-1dd611d56ac82158b161a50b&quot;,
+  &quot;host&quot;: &quot;web-43.lab&quot;,
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;source&quot;: &quot;iis&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;iis.log&quot;,
+    &quot;record&quot;: 11,
+    &quot;sha256&quot;: &quot;4472e466b779e4ea5903eea9e7f556c0a2e08863d610034295e239b7b5d693a9&quot;
+  },
+  &quot;status&quot;: 200,
+  &quot;time_taken&quot;: 5,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:02:50.000000Z&quot;,
+  &quot;uri_stem&quot;: &quot;/api/tickets/ticket-2200&quot;
+}
+</pre></details><details class="record" id="e-c81d582516c96afacff0e20e"><summary>e-c81d582516c96afacff0e20e · application · ticket_access</summary><p><a href="original/application.jsonl">original: application.jsonl · record 14</a></p><pre>{
+  &quot;action&quot;: &quot;ticket_access&quot;,
+  &quot;actor&quot;: &quot;user-957&quot;,
+  &quot;actor_tenant&quot;: &quot;tenant-29&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-c81d582516c96afacff0e20e&quot;,
+  &quot;host&quot;: &quot;web-43.lab&quot;,
+  &quot;outcome&quot;: &quot;allowed&quot;,
+  &quot;policy_allowed&quot;: false,
+  &quot;request_id&quot;: &quot;ab8de87b-99be-dd9d-a4cb-b94d56088687&quot;,
+  &quot;resource_id&quot;: &quot;ticket-2200&quot;,
+  &quot;resource_tenant&quot;: &quot;tenant-63&quot;,
+  &quot;role&quot;: &quot;user&quot;,
+  &quot;shared_with&quot;: [],
+  &quot;source&quot;: &quot;application&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;application.jsonl&quot;,
+    &quot;record&quot;: 14,
+    &quot;sha256&quot;: &quot;3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-08-21T10:02:50.000000Z&quot;
+}
+</pre></details><details class="record" id="e-c4a6baa53e98af70a39a1424"><summary>e-c4a6baa53e98af70a39a1424 · iis · /api/tickets/ticket-3243</summary><p><a href="original/iis.log">original: iis.log · record 12</a></p><pre>{
+  &quot;client_ip&quot;: &quot;127.0.0.1&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-c4a6baa53e98af70a39a1424&quot;,
+  &quot;host&quot;: &quot;web-43.lab&quot;,
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;source&quot;: &quot;iis&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;iis.log&quot;,
+    &quot;record&quot;: 12,
+    &quot;sha256&quot;: &quot;4472e466b779e4ea5903eea9e7f556c0a2e08863d610034295e239b7b5d693a9&quot;
+  },
+  &quot;status&quot;: 200,
+  &quot;time_taken&quot;: 5,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:03:10.000000Z&quot;,
+  &quot;uri_stem&quot;: &quot;/api/tickets/ticket-3243&quot;
+}
+</pre></details><details class="record" id="e-d0339aa429d7baabaeb729b6"><summary>e-d0339aa429d7baabaeb729b6 · application · ticket_access</summary><p><a href="original/application.jsonl">original: application.jsonl · record 15</a></p><pre>{
+  &quot;action&quot;: &quot;ticket_access&quot;,
+  &quot;actor&quot;: &quot;user-316&quot;,
+  &quot;actor_tenant&quot;: &quot;tenant-26&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-d0339aa429d7baabaeb729b6&quot;,
+  &quot;host&quot;: &quot;web-43.lab&quot;,
+  &quot;outcome&quot;: &quot;allowed&quot;,
+  &quot;policy_allowed&quot;: true,
+  &quot;request_id&quot;: &quot;00d0184e-bdc5-4e57-4e52-d0de07481174&quot;,
+  &quot;resource_id&quot;: &quot;ticket-3243&quot;,
+  &quot;resource_tenant&quot;: &quot;tenant-26&quot;,
+  &quot;role&quot;: &quot;user&quot;,
+  &quot;shared_with&quot;: [],
+  &quot;source&quot;: &quot;application&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;application.jsonl&quot;,
+    &quot;record&quot;: 15,
+    &quot;sha256&quot;: &quot;3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-08-21T10:03:10.000000Z&quot;
+}
+</pre></details><details class="record" id="e-74b72b2d34528b1833daf021"><summary>e-74b72b2d34528b1833daf021 · sysmon · C:\Windows\System32\inetsrv\w3wp.exe</summary><p><a href="original/sysmon.xml">original: sysmon.xml · record 13</a></p><pre>{
+  &quot;channel&quot;: &quot;Microsoft-Windows-Sysmon/Operational&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;event_id&quot;: 1,
+  &quot;event_version&quot;: 5,
+  &quot;evidence_id&quot;: &quot;e-74b72b2d34528b1833daf021&quot;,
+  &quot;host&quot;: &quot;web-30.lab&quot;,
+  &quot;image&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;parent_image&quot;: &quot;C:\\Windows\\System32\\svchost.exe&quot;,
+  &quot;parent_pid&quot;: 720,
+  &quot;parent_process_guid&quot;: &quot;{58bec455-8d25-246a-6d78-21b07b51cd61}&quot;,
+  &quot;pid&quot;: 3878,
+  &quot;process_guid&quot;: &quot;{632e3462-77df-c725-530e-bf66458603e1}&quot;,
+  &quot;provider&quot;: &quot;Microsoft-Windows-Sysmon&quot;,
+  &quot;record_id&quot;: 12013,
+  &quot;source&quot;: &quot;sysmon&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;sysmon.xml&quot;,
+    &quot;record&quot;: 13,
+    &quot;sha256&quot;: &quot;8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114&quot;
+  },
+  &quot;system_timestamp&quot;: &quot;2026-08-21T10:03:27.000000Z&quot;,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:03:27.000000Z&quot;
+}
+</pre></details><details class="record" id="e-6d7d297fb8b6132fa37974db"><summary>e-6d7d297fb8b6132fa37974db · application · report_request</summary><p><a href="original/application.jsonl">original: application.jsonl · record 16</a></p><pre>{
+  &quot;action&quot;: &quot;report_request&quot;,
+  &quot;actor&quot;: &quot;user-131&quot;,
+  &quot;actor_tenant&quot;: &quot;tenant-23&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-6d7d297fb8b6132fa37974db&quot;,
+  &quot;host&quot;: &quot;web-30.lab&quot;,
+  &quot;job_id&quot;: &quot;2f1a66b2-a03e-b8ef-ee22-4b0826ae717a&quot;,
+  &quot;outcome&quot;: &quot;allowed&quot;,
+  &quot;report_title&quot;: &quot;Monthly support report&quot;,
+  &quot;request_id&quot;: &quot;05399d5c-e978-9f35-71f4-598d688742b1&quot;,
+  &quot;source&quot;: &quot;application&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;application.jsonl&quot;,
+    &quot;record&quot;: 16,
+    &quot;sha256&quot;: &quot;3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-08-21T10:03:30.000000Z&quot;
+}
+</pre></details><details class="record" id="e-90cbc301329c271fbb5c8c88"><summary>e-90cbc301329c271fbb5c8c88 · iis · /api/reports</summary><p><a href="original/iis.log">original: iis.log · record 13</a></p><pre>{
+  &quot;client_ip&quot;: &quot;127.0.0.1&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-90cbc301329c271fbb5c8c88&quot;,
+  &quot;host&quot;: &quot;web-30.lab&quot;,
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;source&quot;: &quot;iis&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;iis.log&quot;,
+    &quot;record&quot;: 13,
+    &quot;sha256&quot;: &quot;4472e466b779e4ea5903eea9e7f556c0a2e08863d610034295e239b7b5d693a9&quot;
+  },
+  &quot;status&quot;: 200,
+  &quot;time_taken&quot;: 5,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:03:30.000000Z&quot;,
+  &quot;uri_stem&quot;: &quot;/api/reports&quot;
+}
+</pre></details><details class="record" id="e-eacae92f57e42be7251de81e"><summary>e-eacae92f57e42be7251de81e · sysmon · C:\IISPurpleLab\app\IisPurpleLab.exe</summary><p><a href="original/sysmon.xml">original: sysmon.xml · record 14</a></p><pre>{
+  &quot;channel&quot;: &quot;Microsoft-Windows-Sysmon/Operational&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\IISPurpleLab\\app\\IisPurpleLab.exe Monthly support report&quot;,
+  &quot;event_id&quot;: 1,
+  &quot;event_version&quot;: 5,
+  &quot;evidence_id&quot;: &quot;e-eacae92f57e42be7251de81e&quot;,
+  &quot;host&quot;: &quot;web-30.lab&quot;,
+  &quot;image&quot;: &quot;C:\\IISPurpleLab\\app\\IisPurpleLab.exe&quot;,
+  &quot;parent_image&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;parent_pid&quot;: 3878,
+  &quot;parent_process_guid&quot;: &quot;{632e3462-77df-c725-530e-bf66458603e1}&quot;,
+  &quot;pid&quot;: 8552,
+  &quot;process_guid&quot;: &quot;{0c453832-04db-a6a9-5cd9-1a0833483697}&quot;,
+  &quot;provider&quot;: &quot;Microsoft-Windows-Sysmon&quot;,
+  &quot;record_id&quot;: 12014,
+  &quot;source&quot;: &quot;sysmon&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;sysmon.xml&quot;,
+    &quot;record&quot;: 14,
+    &quot;sha256&quot;: &quot;8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114&quot;
+  },
+  &quot;system_timestamp&quot;: &quot;2026-08-21T10:03:30.020000Z&quot;,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:03:30.020000Z&quot;
+}
+</pre></details><details class="record" id="e-63d0fa5936c98eb5ab5f7dac"><summary>e-63d0fa5936c98eb5ab5f7dac · application · process_launch</summary><p><a href="original/application.jsonl">original: application.jsonl · record 17</a></p><pre>{
+  &quot;action&quot;: &quot;process_launch&quot;,
+  &quot;child_pid&quot;: 8552,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\IISPurpleLab\\app\\IisPurpleLab.exe Monthly support report&quot;,
+  &quot;evidence_id&quot;: &quot;e-63d0fa5936c98eb5ab5f7dac&quot;,
+  &quot;host&quot;: &quot;web-30.lab&quot;,
+  &quot;image&quot;: &quot;C:\\IISPurpleLab\\app\\IisPurpleLab.exe&quot;,
+  &quot;job_id&quot;: &quot;2f1a66b2-a03e-b8ef-ee22-4b0826ae717a&quot;,
+  &quot;launch_end&quot;: &quot;2026-08-21T10:03:30.100000Z&quot;,
+  &quot;launch_start&quot;: &quot;2026-08-21T10:03:30.000000Z&quot;,
+  &quot;outcome&quot;: &quot;started&quot;,
+  &quot;parent_pid&quot;: 3878,
+  &quot;parent_start&quot;: &quot;2026-08-21T10:03:27.000000Z&quot;,
+  &quot;request_id&quot;: &quot;05399d5c-e978-9f35-71f4-598d688742b1&quot;,
+  &quot;source&quot;: &quot;application&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;application.jsonl&quot;,
+    &quot;record&quot;: 17,
+    &quot;sha256&quot;: &quot;3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-08-21T10:03:30.080000Z&quot;
+}
+</pre></details><details class="record" id="e-3957f8d0de39a5358bda165c"><summary>e-3957f8d0de39a5358bda165c · sysmon · C:\Windows\System32\inetsrv\w3wp.exe</summary><p><a href="original/sysmon.xml">original: sysmon.xml · record 15</a></p><pre>{
+  &quot;channel&quot;: &quot;Microsoft-Windows-Sysmon/Operational&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;event_id&quot;: 1,
+  &quot;event_version&quot;: 5,
+  &quot;evidence_id&quot;: &quot;e-3957f8d0de39a5358bda165c&quot;,
+  &quot;host&quot;: &quot;web-30.lab&quot;,
+  &quot;image&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;parent_image&quot;: &quot;C:\\Windows\\System32\\svchost.exe&quot;,
+  &quot;parent_pid&quot;: 720,
+  &quot;parent_process_guid&quot;: &quot;{bbed81fb-f097-c69c-0082-c02ee4b729de}&quot;,
+  &quot;pid&quot;: 4851,
+  &quot;process_guid&quot;: &quot;{26a4fd3e-8c08-7e12-d20f-f7f04c7c69cb}&quot;,
+  &quot;provider&quot;: &quot;Microsoft-Windows-Sysmon&quot;,
+  &quot;record_id&quot;: 12015,
+  &quot;source&quot;: &quot;sysmon&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;sysmon.xml&quot;,
+    &quot;record&quot;: 15,
+    &quot;sha256&quot;: &quot;8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114&quot;
+  },
+  &quot;system_timestamp&quot;: &quot;2026-08-21T10:03:42.000000Z&quot;,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:03:42.000000Z&quot;
+}
+</pre></details><details class="record" id="e-32cbd13744b19acb1013e73a"><summary>e-32cbd13744b19acb1013e73a · iis · /api/reports</summary><p><a href="original/iis.log">original: iis.log · record 14</a></p><pre>{
+  &quot;client_ip&quot;: &quot;127.0.0.1&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-32cbd13744b19acb1013e73a&quot;,
+  &quot;host&quot;: &quot;web-30.lab&quot;,
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;source&quot;: &quot;iis&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;iis.log&quot;,
+    &quot;record&quot;: 14,
+    &quot;sha256&quot;: &quot;4472e466b779e4ea5903eea9e7f556c0a2e08863d610034295e239b7b5d693a9&quot;
+  },
+  &quot;status&quot;: 200,
+  &quot;time_taken&quot;: 5,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:03:50.000000Z&quot;,
+  &quot;uri_stem&quot;: &quot;/api/reports&quot;
+}
+</pre></details><details class="record" id="e-d2a6a42f62ae8a7efae5223e"><summary>e-d2a6a42f62ae8a7efae5223e · application · report_request</summary><p><a href="original/application.jsonl">original: application.jsonl · record 18</a></p><pre>{
+  &quot;action&quot;: &quot;report_request&quot;,
+  &quot;actor&quot;: &quot;user-210&quot;,
+  &quot;actor_tenant&quot;: &quot;tenant-36&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-d2a6a42f62ae8a7efae5223e&quot;,
+  &quot;host&quot;: &quot;web-30.lab&quot;,
+  &quot;job_id&quot;: &quot;1cf99091-b5e0-5d11-2920-9a04f7207d82&quot;,
+  &quot;outcome&quot;: &quot;allowed&quot;,
+  &quot;report_title&quot;: &quot;Monthly support report&quot;,
+  &quot;request_id&quot;: &quot;1d156054-7f3c-d3f9-37b4-70c687b8d267&quot;,
+  &quot;source&quot;: &quot;application&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;application.jsonl&quot;,
+    &quot;record&quot;: 18,
+    &quot;sha256&quot;: &quot;3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-08-21T10:03:50.000000Z&quot;
+}
+</pre></details><details class="record" id="e-58d588efa579923ed36c1108"><summary>e-58d588efa579923ed36c1108 · sysmon · C:\IISPurpleLab\app\IisPurpleLab.exe</summary><p><a href="original/sysmon.xml">original: sysmon.xml · record 16</a></p><pre>{
+  &quot;channel&quot;: &quot;Microsoft-Windows-Sysmon/Operational&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\IISPurpleLab\\app\\IisPurpleLab.exe Monthly support report&quot;,
+  &quot;event_id&quot;: 1,
+  &quot;event_version&quot;: 5,
+  &quot;evidence_id&quot;: &quot;e-58d588efa579923ed36c1108&quot;,
+  &quot;host&quot;: &quot;web-30.lab&quot;,
+  &quot;image&quot;: &quot;C:\\IISPurpleLab\\app\\IisPurpleLab.exe&quot;,
+  &quot;parent_image&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;parent_pid&quot;: 4851,
+  &quot;parent_process_guid&quot;: &quot;{26a4fd3e-8c08-7e12-d20f-f7f04c7c69cb}&quot;,
+  &quot;pid&quot;: 7319,
+  &quot;process_guid&quot;: &quot;{09199679-15cd-a432-e22e-0200962fdeb8}&quot;,
+  &quot;provider&quot;: &quot;Microsoft-Windows-Sysmon&quot;,
+  &quot;record_id&quot;: 12016,
+  &quot;source&quot;: &quot;sysmon&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;sysmon.xml&quot;,
+    &quot;record&quot;: 16,
+    &quot;sha256&quot;: &quot;8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114&quot;
+  },
+  &quot;system_timestamp&quot;: &quot;2026-08-21T10:03:50.020000Z&quot;,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:03:50.020000Z&quot;
+}
+</pre></details><details class="record" id="e-7f85ba75f653c7bc7e309c12"><summary>e-7f85ba75f653c7bc7e309c12 · application · process_launch</summary><p><a href="original/application.jsonl">original: application.jsonl · record 19</a></p><pre>{
+  &quot;action&quot;: &quot;process_launch&quot;,
+  &quot;child_pid&quot;: 7319,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\IISPurpleLab\\app\\IisPurpleLab.exe Monthly support report&quot;,
+  &quot;evidence_id&quot;: &quot;e-7f85ba75f653c7bc7e309c12&quot;,
+  &quot;host&quot;: &quot;web-30.lab&quot;,
+  &quot;image&quot;: &quot;C:\\IISPurpleLab\\app\\IisPurpleLab.exe&quot;,
+  &quot;job_id&quot;: &quot;1cf99091-b5e0-5d11-2920-9a04f7207d82&quot;,
+  &quot;launch_end&quot;: &quot;2026-08-21T10:03:50.100000Z&quot;,
+  &quot;launch_start&quot;: &quot;2026-08-21T10:03:50.000000Z&quot;,
+  &quot;outcome&quot;: &quot;started&quot;,
+  &quot;parent_pid&quot;: 4851,
+  &quot;parent_start&quot;: &quot;2026-08-21T10:03:42.000000Z&quot;,
+  &quot;request_id&quot;: &quot;1d156054-7f3c-d3f9-37b4-70c687b8d267&quot;,
+  &quot;source&quot;: &quot;application&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;application.jsonl&quot;,
+    &quot;record&quot;: 19,
+    &quot;sha256&quot;: &quot;3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-08-21T10:03:50.080000Z&quot;
+}
+</pre></details><details class="record" id="e-07312c649b862e74bb319855"><summary>e-07312c649b862e74bb319855 · application · ticket_access</summary><p><a href="original/application.jsonl">original: application.jsonl · record 20</a></p><pre>{
+  &quot;action&quot;: &quot;ticket_access&quot;,
+  &quot;actor&quot;: &quot;user-794&quot;,
+  &quot;actor_tenant&quot;: &quot;tenant-23&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-07312c649b862e74bb319855&quot;,
+  &quot;host&quot;: &quot;web-51.lab&quot;,
+  &quot;outcome&quot;: &quot;allowed&quot;,
+  &quot;policy_allowed&quot;: true,
+  &quot;request_id&quot;: &quot;2ecb562e-fe1c-631b-7b5c-d1e0e63c2a94&quot;,
+  &quot;resource_id&quot;: &quot;ticket-2807&quot;,
+  &quot;resource_tenant&quot;: &quot;tenant-23&quot;,
+  &quot;role&quot;: &quot;user&quot;,
+  &quot;shared_with&quot;: [],
+  &quot;source&quot;: &quot;application&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;application.jsonl&quot;,
+    &quot;record&quot;: 20,
+    &quot;sha256&quot;: &quot;3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-08-21T10:04:10.000000Z&quot;
+}
+</pre></details><details class="record" id="e-be4d7de383eae0942c4bc64b"><summary>e-be4d7de383eae0942c4bc64b · iis · /api/tickets/ticket-2807</summary><p><a href="original/iis.log">original: iis.log · record 15</a></p><pre>{
+  &quot;client_ip&quot;: &quot;127.0.0.1&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-be4d7de383eae0942c4bc64b&quot;,
+  &quot;host&quot;: &quot;web-51.lab&quot;,
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;source&quot;: &quot;iis&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;iis.log&quot;,
+    &quot;record&quot;: 15,
+    &quot;sha256&quot;: &quot;4472e466b779e4ea5903eea9e7f556c0a2e08863d610034295e239b7b5d693a9&quot;
+  },
+  &quot;status&quot;: 200,
+  &quot;time_taken&quot;: 5,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:04:10.000000Z&quot;,
+  &quot;uri_stem&quot;: &quot;/api/tickets/ticket-2807&quot;
+}
+</pre></details><details class="record" id="e-7e9c681ebf813d891b3ccf25"><summary>e-7e9c681ebf813d891b3ccf25 · sysmon · C:\Windows\System32\inetsrv\w3wp.exe</summary><p><a href="original/sysmon.xml">original: sysmon.xml · record 17</a></p><pre>{
+  &quot;channel&quot;: &quot;Microsoft-Windows-Sysmon/Operational&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;event_id&quot;: 1,
+  &quot;event_version&quot;: 5,
+  &quot;evidence_id&quot;: &quot;e-7e9c681ebf813d891b3ccf25&quot;,
+  &quot;host&quot;: &quot;web-77.lab&quot;,
+  &quot;image&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;parent_image&quot;: &quot;C:\\Windows\\System32\\svchost.exe&quot;,
+  &quot;parent_pid&quot;: 720,
+  &quot;parent_process_guid&quot;: &quot;{3e8a21be-8bfd-3c1a-e02c-43df74fa5114}&quot;,
+  &quot;pid&quot;: 4560,
+  &quot;process_guid&quot;: &quot;{70f118b6-4f74-9584-0b23-8e7ed6205010}&quot;,
+  &quot;provider&quot;: &quot;Microsoft-Windows-Sysmon&quot;,
+  &quot;record_id&quot;: 12017,
+  &quot;source&quot;: &quot;sysmon&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;sysmon.xml&quot;,
+    &quot;record&quot;: 17,
+    &quot;sha256&quot;: &quot;8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114&quot;
+  },
+  &quot;system_timestamp&quot;: &quot;2026-08-21T10:04:24.000000Z&quot;,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:04:24.000000Z&quot;
+}
+</pre></details><details class="record" id="e-b0ea07b3504f7dd4ac8b0f26"><summary>e-b0ea07b3504f7dd4ac8b0f26 · iis · /api/reports</summary><p><a href="original/iis.log">original: iis.log · record 16</a></p><pre>{
+  &quot;client_ip&quot;: &quot;127.0.0.1&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-b0ea07b3504f7dd4ac8b0f26&quot;,
+  &quot;host&quot;: &quot;web-77.lab&quot;,
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;source&quot;: &quot;iis&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;iis.log&quot;,
+    &quot;record&quot;: 16,
+    &quot;sha256&quot;: &quot;4472e466b779e4ea5903eea9e7f556c0a2e08863d610034295e239b7b5d693a9&quot;
+  },
+  &quot;status&quot;: 200,
+  &quot;time_taken&quot;: 5,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:04:30.000000Z&quot;,
+  &quot;uri_stem&quot;: &quot;/api/reports&quot;
+}
+</pre></details><details class="record" id="e-c74ce06592427b10b577b77f"><summary>e-c74ce06592427b10b577b77f · sysmon · C:\Windows\System32\cmd.exe</summary><p><a href="original/sysmon.xml">original: sysmon.xml · record 18</a></p><pre>{
+  &quot;channel&quot;: &quot;Microsoft-Windows-Sysmon/Operational&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\Windows\\System32\\cmd.exe Monthly support report &amp; whoami&quot;,
+  &quot;event_id&quot;: 1,
+  &quot;event_version&quot;: 5,
+  &quot;evidence_id&quot;: &quot;e-c74ce06592427b10b577b77f&quot;,
+  &quot;host&quot;: &quot;web-77.lab&quot;,
+  &quot;image&quot;: &quot;C:\\Windows\\System32\\cmd.exe&quot;,
+  &quot;parent_image&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;parent_pid&quot;: 4560,
+  &quot;parent_process_guid&quot;: &quot;{70f118b6-4f74-9584-0b23-8e7ed6205010}&quot;,
+  &quot;pid&quot;: 6535,
+  &quot;process_guid&quot;: &quot;{ac654ad6-9207-7b0e-e4ff-60845b51aa92}&quot;,
+  &quot;provider&quot;: &quot;Microsoft-Windows-Sysmon&quot;,
+  &quot;record_id&quot;: 12018,
+  &quot;source&quot;: &quot;sysmon&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;sysmon.xml&quot;,
+    &quot;record&quot;: 18,
+    &quot;sha256&quot;: &quot;8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114&quot;
+  },
+  &quot;system_timestamp&quot;: &quot;2026-08-21T10:04:30.020000Z&quot;,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:04:30.020000Z&quot;
+}
+</pre></details><details class="record" id="e-d911910d33e8cd6c7bc2996a"><summary>e-d911910d33e8cd6c7bc2996a · iis · /api/tickets/ticket-6210</summary><p><a href="original/iis.log">original: iis.log · record 17</a></p><pre>{
+  &quot;client_ip&quot;: &quot;127.0.0.1&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-d911910d33e8cd6c7bc2996a&quot;,
+  &quot;host&quot;: &quot;web-48.lab&quot;,
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;source&quot;: &quot;iis&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;iis.log&quot;,
+    &quot;record&quot;: 17,
+    &quot;sha256&quot;: &quot;4472e466b779e4ea5903eea9e7f556c0a2e08863d610034295e239b7b5d693a9&quot;
+  },
+  &quot;status&quot;: 200,
+  &quot;time_taken&quot;: 5,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:04:50.000000Z&quot;,
+  &quot;uri_stem&quot;: &quot;/api/tickets/ticket-6210&quot;
+}
+</pre></details><details class="record" id="e-2cf26d907fd1a6d5fbb41d04"><summary>e-2cf26d907fd1a6d5fbb41d04 · application · ticket_access</summary><p><a href="original/application.jsonl">original: application.jsonl · record 21</a></p><pre>{
+  &quot;action&quot;: &quot;ticket_access&quot;,
+  &quot;actor&quot;: &quot;user-890&quot;,
+  &quot;actor_tenant&quot;: &quot;tenant-22&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-2cf26d907fd1a6d5fbb41d04&quot;,
+  &quot;host&quot;: &quot;web-41.lab&quot;,
+  &quot;outcome&quot;: &quot;denied&quot;,
+  &quot;policy_allowed&quot;: false,
+  &quot;request_id&quot;: &quot;788bbcf7-b935-2dd7-401c-d0e1faadc1df&quot;,
+  &quot;resource_id&quot;: &quot;ticket-3714&quot;,
+  &quot;resource_tenant&quot;: &quot;tenant-73&quot;,
+  &quot;role&quot;: &quot;user&quot;,
+  &quot;shared_with&quot;: [],
+  &quot;source&quot;: &quot;application&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;application.jsonl&quot;,
+    &quot;record&quot;: 21,
+    &quot;sha256&quot;: &quot;3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-08-21T10:05:10.000000Z&quot;
+}
+</pre></details><details class="record" id="e-3cd9e5855489883a083be612"><summary>e-3cd9e5855489883a083be612 · iis · /api/tickets/ticket-3714</summary><p><a href="original/iis.log">original: iis.log · record 18</a></p><pre>{
+  &quot;client_ip&quot;: &quot;127.0.0.1&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-3cd9e5855489883a083be612&quot;,
+  &quot;host&quot;: &quot;web-41.lab&quot;,
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;source&quot;: &quot;iis&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;iis.log&quot;,
+    &quot;record&quot;: 18,
+    &quot;sha256&quot;: &quot;4472e466b779e4ea5903eea9e7f556c0a2e08863d610034295e239b7b5d693a9&quot;
+  },
+  &quot;status&quot;: 200,
+  &quot;time_taken&quot;: 5,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:05:10.000000Z&quot;,
+  &quot;uri_stem&quot;: &quot;/api/tickets/ticket-3714&quot;
+}
+</pre></details><details class="record" id="e-edfbccc54f67737793b39083"><summary>e-edfbccc54f67737793b39083 · sysmon · C:\Windows\System32\inetsrv\w3wp.exe</summary><p><a href="original/sysmon.xml">original: sysmon.xml · record 19</a></p><pre>{
+  &quot;channel&quot;: &quot;Microsoft-Windows-Sysmon/Operational&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;event_id&quot;: 1,
+  &quot;event_version&quot;: 5,
+  &quot;evidence_id&quot;: &quot;e-edfbccc54f67737793b39083&quot;,
+  &quot;host&quot;: &quot;web-76.lab&quot;,
+  &quot;image&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;parent_image&quot;: &quot;C:\\Windows\\System32\\svchost.exe&quot;,
+  &quot;parent_pid&quot;: 720,
+  &quot;parent_process_guid&quot;: &quot;{c435ea86-a112-1bbc-b488-7a772ba43ae7}&quot;,
+  &quot;pid&quot;: 3286,
+  &quot;process_guid&quot;: &quot;{59802d7d-e425-a7f2-c761-62580654fefa}&quot;,
+  &quot;provider&quot;: &quot;Microsoft-Windows-Sysmon&quot;,
+  &quot;record_id&quot;: 12019,
+  &quot;source&quot;: &quot;sysmon&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;sysmon.xml&quot;,
+    &quot;record&quot;: 19,
+    &quot;sha256&quot;: &quot;8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114&quot;
+  },
+  &quot;system_timestamp&quot;: &quot;2026-08-21T10:05:23.000000Z&quot;,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:05:23.000000Z&quot;
+}
+</pre></details><details class="record" id="e-d80ff433f8159581ada2f1a8"><summary>e-d80ff433f8159581ada2f1a8 · application · report_request</summary><p><a href="original/application.jsonl">original: application.jsonl · record 22</a></p><pre>{
+  &quot;action&quot;: &quot;report_request&quot;,
+  &quot;actor&quot;: &quot;user-909&quot;,
+  &quot;actor_tenant&quot;: &quot;tenant-35&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-d80ff433f8159581ada2f1a8&quot;,
+  &quot;host&quot;: &quot;web-76.lab&quot;,
+  &quot;job_id&quot;: &quot;3ea79315-649a-6219-8c0e-b989a8dcd17c&quot;,
+  &quot;outcome&quot;: &quot;allowed&quot;,
+  &quot;report_title&quot;: &quot;Monthly support report &amp; whoami&quot;,
+  &quot;request_id&quot;: &quot;0a89b575-4d5e-79c0-3859-ebe20e2e57bc&quot;,
+  &quot;source&quot;: &quot;application&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;application.jsonl&quot;,
+    &quot;record&quot;: 22,
+    &quot;sha256&quot;: &quot;3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-08-21T10:05:30.000000Z&quot;
+}
+</pre></details><details class="record" id="e-f465f851ec292994aeb82ed0"><summary>e-f465f851ec292994aeb82ed0 · iis · /api/reports</summary><p><a href="original/iis.log">original: iis.log · record 19</a></p><pre>{
+  &quot;client_ip&quot;: &quot;127.0.0.1&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-f465f851ec292994aeb82ed0&quot;,
+  &quot;host&quot;: &quot;web-76.lab&quot;,
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;source&quot;: &quot;iis&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;iis.log&quot;,
+    &quot;record&quot;: 19,
+    &quot;sha256&quot;: &quot;4472e466b779e4ea5903eea9e7f556c0a2e08863d610034295e239b7b5d693a9&quot;
+  },
+  &quot;status&quot;: 200,
+  &quot;time_taken&quot;: 5,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:05:30.000000Z&quot;,
+  &quot;uri_stem&quot;: &quot;/api/reports&quot;
+}
+</pre></details><details class="record" id="e-a9dda72ad80a573c2d9eb5db"><summary>e-a9dda72ad80a573c2d9eb5db · sysmon · C:\Windows\System32\cmd.exe</summary><p><a href="original/sysmon.xml">original: sysmon.xml · record 20</a></p><pre>{
+  &quot;channel&quot;: &quot;Microsoft-Windows-Sysmon/Operational&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\Windows\\System32\\cmd.exe Monthly support report &amp; whoami&quot;,
+  &quot;event_id&quot;: 1,
+  &quot;event_version&quot;: 5,
+  &quot;evidence_id&quot;: &quot;e-a9dda72ad80a573c2d9eb5db&quot;,
+  &quot;host&quot;: &quot;web-76.lab&quot;,
+  &quot;image&quot;: &quot;C:\\Windows\\System32\\cmd.exe&quot;,
+  &quot;parent_image&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;parent_pid&quot;: 3286,
+  &quot;parent_process_guid&quot;: &quot;{59802d7d-e425-a7f2-c761-62580654fefa}&quot;,
+  &quot;pid&quot;: 7795,
+  &quot;process_guid&quot;: &quot;{3e0455f5-669a-2e0d-e00f-fbbd861af995}&quot;,
+  &quot;provider&quot;: &quot;Microsoft-Windows-Sysmon&quot;,
+  &quot;record_id&quot;: 12020,
+  &quot;source&quot;: &quot;sysmon&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;sysmon.xml&quot;,
+    &quot;record&quot;: 20,
+    &quot;sha256&quot;: &quot;8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114&quot;
+  },
+  &quot;system_timestamp&quot;: &quot;2026-08-21T10:05:30.020000Z&quot;,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:05:30.020000Z&quot;
+}
+</pre></details><details class="record" id="e-5a071b4a17a06082bee6d42a"><summary>e-5a071b4a17a06082bee6d42a · application · process_launch</summary><p><a href="original/application.jsonl">original: application.jsonl · record 23</a></p><pre>{
+  &quot;action&quot;: &quot;process_launch&quot;,
+  &quot;child_pid&quot;: 7795,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\Windows\\System32\\cmd.exe Monthly support report &amp; whoami&quot;,
+  &quot;evidence_id&quot;: &quot;e-5a071b4a17a06082bee6d42a&quot;,
+  &quot;host&quot;: &quot;web-76.lab&quot;,
+  &quot;image&quot;: &quot;C:\\Windows\\System32\\cmd.exe&quot;,
+  &quot;job_id&quot;: &quot;3ea79315-649a-6219-8c0e-b989a8dcd17c&quot;,
+  &quot;launch_end&quot;: &quot;2026-08-21T10:05:30.100000Z&quot;,
+  &quot;launch_start&quot;: &quot;2026-08-21T10:05:30.000000Z&quot;,
+  &quot;outcome&quot;: &quot;started&quot;,
+  &quot;parent_pid&quot;: 3286,
+  &quot;parent_start&quot;: &quot;2026-08-21T10:05:23.000000Z&quot;,
+  &quot;request_id&quot;: &quot;0a89b575-4d5e-79c0-3859-ebe20e2e57bc&quot;,
+  &quot;source&quot;: &quot;application&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;application.jsonl&quot;,
+    &quot;record&quot;: 23,
+    &quot;sha256&quot;: &quot;3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-08-21T10:05:30.080000Z&quot;
+}
+</pre></details><details class="record" id="e-6f54b7edfb6abb6c11a278e8"><summary>e-6f54b7edfb6abb6c11a278e8 · iis · /api/tickets/ticket-2316</summary><p><a href="original/iis.log">original: iis.log · record 20</a></p><pre>{
+  &quot;client_ip&quot;: &quot;127.0.0.1&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-6f54b7edfb6abb6c11a278e8&quot;,
+  &quot;host&quot;: &quot;web-89.lab&quot;,
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;source&quot;: &quot;iis&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;iis.log&quot;,
+    &quot;record&quot;: 20,
+    &quot;sha256&quot;: &quot;4472e466b779e4ea5903eea9e7f556c0a2e08863d610034295e239b7b5d693a9&quot;
+  },
+  &quot;status&quot;: 200,
+  &quot;time_taken&quot;: 5,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:05:50.000000Z&quot;,
+  &quot;uri_stem&quot;: &quot;/api/tickets/ticket-2316&quot;
+}
+</pre></details><details class="record" id="e-9bf82b7f6c901b277deeed20"><summary>e-9bf82b7f6c901b277deeed20 · application · ticket_access</summary><p><a href="original/application.jsonl">original: application.jsonl · record 24</a></p><pre>{
+  &quot;action&quot;: &quot;ticket_access&quot;,
+  &quot;actor&quot;: &quot;user-158&quot;,
+  &quot;actor_tenant&quot;: &quot;tenant-35&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-9bf82b7f6c901b277deeed20&quot;,
+  &quot;host&quot;: &quot;web-89.lab&quot;,
+  &quot;outcome&quot;: &quot;allowed&quot;,
+  &quot;policy_allowed&quot;: true,
+  &quot;request_id&quot;: &quot;36b655bf-53dc-def9-f582-c231e2e7a469&quot;,
+  &quot;resource_id&quot;: &quot;ticket-2316&quot;,
+  &quot;resource_tenant&quot;: &quot;tenant-76&quot;,
+  &quot;role&quot;: &quot;admin&quot;,
+  &quot;shared_with&quot;: [],
+  &quot;source&quot;: &quot;application&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;application.jsonl&quot;,
+    &quot;record&quot;: 24,
+    &quot;sha256&quot;: &quot;3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-08-21T10:05:50.000000Z&quot;
+}
+</pre></details><details class="record" id="e-0050ae31c1536edf2521d3b8"><summary>e-0050ae31c1536edf2521d3b8 · sysmon · C:\Windows\System32\inetsrv\w3wp.exe</summary><p><a href="original/sysmon.xml">original: sysmon.xml · record 21</a></p><pre>{
+  &quot;channel&quot;: &quot;Microsoft-Windows-Sysmon/Operational&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;event_id&quot;: 1,
+  &quot;event_version&quot;: 5,
+  &quot;evidence_id&quot;: &quot;e-0050ae31c1536edf2521d3b8&quot;,
+  &quot;host&quot;: &quot;web-70.lab&quot;,
+  &quot;image&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;parent_image&quot;: &quot;C:\\Windows\\System32\\svchost.exe&quot;,
+  &quot;parent_pid&quot;: 720,
+  &quot;parent_process_guid&quot;: &quot;{f0fd2f29-a59e-28d2-d1d6-3465c5b74abf}&quot;,
+  &quot;pid&quot;: 2269,
+  &quot;process_guid&quot;: &quot;{dc23aac9-1532-0030-c4cb-e918b4210474}&quot;,
+  &quot;provider&quot;: &quot;Microsoft-Windows-Sysmon&quot;,
+  &quot;record_id&quot;: 12021,
+  &quot;source&quot;: &quot;sysmon&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;sysmon.xml&quot;,
+    &quot;record&quot;: 21,
+    &quot;sha256&quot;: &quot;8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114&quot;
+  },
+  &quot;system_timestamp&quot;: &quot;2026-08-21T10:06:07.000000Z&quot;,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:06:07.000000Z&quot;
+}
+</pre></details><details class="record" id="e-b9fc8023f14876e2204e0e73"><summary>e-b9fc8023f14876e2204e0e73 · iis · /api/reports</summary><p><a href="original/iis.log">original: iis.log · record 21</a></p><pre>{
+  &quot;client_ip&quot;: &quot;127.0.0.1&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-b9fc8023f14876e2204e0e73&quot;,
+  &quot;host&quot;: &quot;web-70.lab&quot;,
+  &quot;method&quot;: &quot;POST&quot;,
+  &quot;source&quot;: &quot;iis&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;iis.log&quot;,
+    &quot;record&quot;: 21,
+    &quot;sha256&quot;: &quot;4472e466b779e4ea5903eea9e7f556c0a2e08863d610034295e239b7b5d693a9&quot;
+  },
+  &quot;status&quot;: 200,
+  &quot;time_taken&quot;: 5,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:06:10.000000Z&quot;,
+  &quot;uri_stem&quot;: &quot;/api/reports&quot;
+}
+</pre></details><details class="record" id="e-c487aab91defb92d16a9369e"><summary>e-c487aab91defb92d16a9369e · application · report_request</summary><p><a href="original/application.jsonl">original: application.jsonl · record 25</a></p><pre>{
+  &quot;action&quot;: &quot;report_request&quot;,
+  &quot;actor&quot;: &quot;user-977&quot;,
+  &quot;actor_tenant&quot;: &quot;tenant-33&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;evidence_id&quot;: &quot;e-c487aab91defb92d16a9369e&quot;,
+  &quot;host&quot;: &quot;web-70.lab&quot;,
+  &quot;job_id&quot;: &quot;38062db6-4938-89ff-2fb8-6fdb1977dc4d&quot;,
+  &quot;outcome&quot;: &quot;allowed&quot;,
+  &quot;report_title&quot;: &quot;Monthly support report &amp; whoami&quot;,
+  &quot;request_id&quot;: &quot;ed9d5314-ef7c-1580-4d35-e4a591fe3ecf&quot;,
+  &quot;source&quot;: &quot;application&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;application.jsonl&quot;,
+    &quot;record&quot;: 25,
+    &quot;sha256&quot;: &quot;3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-08-21T10:06:10.000000Z&quot;
+}
+</pre></details><details class="record" id="e-6bd3dc9d03a346ea4f9686c6"><summary>e-6bd3dc9d03a346ea4f9686c6 · sysmon · C:\Windows\System32\cmd.exe</summary><p><a href="original/sysmon.xml">original: sysmon.xml · record 22</a></p><pre>{
+  &quot;channel&quot;: &quot;Microsoft-Windows-Sysmon/Operational&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\Windows\\System32\\cmd.exe Monthly support report &amp; whoami&quot;,
+  &quot;event_id&quot;: 1,
+  &quot;event_version&quot;: 5,
+  &quot;evidence_id&quot;: &quot;e-6bd3dc9d03a346ea4f9686c6&quot;,
+  &quot;host&quot;: &quot;web-70.lab&quot;,
+  &quot;image&quot;: &quot;C:\\Windows\\System32\\cmd.exe&quot;,
+  &quot;parent_image&quot;: &quot;C:\\Windows\\System32\\inetsrv\\w3wp.exe&quot;,
+  &quot;parent_pid&quot;: 2269,
+  &quot;parent_process_guid&quot;: &quot;{dc23aac9-1532-0030-c4cb-e918b4210474}&quot;,
+  &quot;pid&quot;: 8762,
+  &quot;process_guid&quot;: &quot;{7540f420-b27e-620c-ce45-58e9f4f65222}&quot;,
+  &quot;provider&quot;: &quot;Microsoft-Windows-Sysmon&quot;,
+  &quot;record_id&quot;: 12022,
+  &quot;source&quot;: &quot;sysmon&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;sysmon.xml&quot;,
+    &quot;record&quot;: 22,
+    &quot;sha256&quot;: &quot;8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114&quot;
+  },
+  &quot;system_timestamp&quot;: &quot;2026-08-21T10:06:10.020000Z&quot;,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:06:10.020000Z&quot;
+}
+</pre></details><details class="record" id="e-7d161008b6034f5a503d3c9a"><summary>e-7d161008b6034f5a503d3c9a · application · process_launch</summary><p><a href="original/application.jsonl">original: application.jsonl · record 26</a></p><pre>{
+  &quot;action&quot;: &quot;process_launch&quot;,
+  &quot;child_pid&quot;: 8762,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;C:\\Windows\\System32\\cmd.exe Monthly support report &amp; whoami&quot;,
+  &quot;evidence_id&quot;: &quot;e-7d161008b6034f5a503d3c9a&quot;,
+  &quot;host&quot;: &quot;web-70.lab&quot;,
+  &quot;image&quot;: &quot;C:\\Windows\\System32\\cmd.exe&quot;,
+  &quot;job_id&quot;: &quot;38062db6-4938-89ff-2fb8-6fdb1977dc4d&quot;,
+  &quot;launch_end&quot;: &quot;2026-08-21T10:06:10.100000Z&quot;,
+  &quot;launch_start&quot;: &quot;2026-08-21T10:06:10.000000Z&quot;,
+  &quot;outcome&quot;: &quot;started&quot;,
+  &quot;parent_pid&quot;: 2269,
+  &quot;parent_start&quot;: &quot;2026-08-21T10:06:07.000000Z&quot;,
+  &quot;request_id&quot;: &quot;ed9d5314-ef7c-1580-4d35-e4a591fe3ecf&quot;,
+  &quot;source&quot;: &quot;application&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;application.jsonl&quot;,
+    &quot;record&quot;: 26,
+    &quot;sha256&quot;: &quot;3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e&quot;
+  },
+  &quot;timestamp&quot;: &quot;2026-08-21T10:06:10.080000Z&quot;
+}
+</pre></details><details class="record" id="e-834fe0244e021a3ddf4e414a"><summary>e-834fe0244e021a3ddf4e414a · sysmon · C:\Windows\System32\whoami.exe</summary><p><a href="original/sysmon.xml">original: sysmon.xml · record 23</a></p><pre>{
+  &quot;channel&quot;: &quot;Microsoft-Windows-Sysmon/Operational&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;command_line&quot;: &quot;whoami&quot;,
+  &quot;event_id&quot;: 1,
+  &quot;event_version&quot;: 5,
+  &quot;evidence_id&quot;: &quot;e-834fe0244e021a3ddf4e414a&quot;,
+  &quot;host&quot;: &quot;web-70.lab&quot;,
+  &quot;image&quot;: &quot;C:\\Windows\\System32\\whoami.exe&quot;,
+  &quot;parent_image&quot;: &quot;C:\\Windows\\System32\\cmd.exe&quot;,
+  &quot;parent_pid&quot;: 8762,
+  &quot;parent_process_guid&quot;: &quot;{7540f420-b27e-620c-ce45-58e9f4f65222}&quot;,
+  &quot;pid&quot;: 8766,
+  &quot;process_guid&quot;: &quot;{8829f297-ed1a-6565-d7d6-4ae391ec10e7}&quot;,
+  &quot;provider&quot;: &quot;Microsoft-Windows-Sysmon&quot;,
+  &quot;record_id&quot;: 12023,
+  &quot;source&quot;: &quot;sysmon&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;sysmon.xml&quot;,
+    &quot;record&quot;: 23,
+    &quot;sha256&quot;: &quot;8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114&quot;
+  },
+  &quot;system_timestamp&quot;: &quot;2026-08-21T10:06:10.300000Z&quot;,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:06:10.300000Z&quot;
+}
+</pre></details><details class="record" id="e-34f6707f04d6e8b98397694f"><summary>e-34f6707f04d6e8b98397694f · sysmon · C:\Windows\System32\cmd.exe</summary><p><a href="original/sysmon.xml">original: sysmon.xml · record 24</a></p><pre>{
+  &quot;channel&quot;: &quot;Microsoft-Windows-Sysmon/Operational&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;event_id&quot;: 11,
+  &quot;event_version&quot;: 3,
+  &quot;evidence_id&quot;: &quot;e-34f6707f04d6e8b98397694f&quot;,
+  &quot;host&quot;: &quot;web-70.lab&quot;,
+  &quot;image&quot;: &quot;C:\\Windows\\System32\\cmd.exe&quot;,
+  &quot;pid&quot;: 8762,
+  &quot;process_guid&quot;: &quot;{7540f420-b27e-620c-ce45-58e9f4f65222}&quot;,
+  &quot;provider&quot;: &quot;Microsoft-Windows-Sysmon&quot;,
+  &quot;record_id&quot;: 12024,
+  &quot;source&quot;: &quot;sysmon&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;sysmon.xml&quot;,
+    &quot;record&quot;: 24,
+    &quot;sha256&quot;: &quot;8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114&quot;
+  },
+  &quot;system_timestamp&quot;: &quot;2026-08-21T10:06:10.400000Z&quot;,
+  &quot;target_filename&quot;: &quot;C:\\IISPurpleLab\\data\\work\\38062db6-4938-89ff-2fb8-6fdb1977dc4d\\stage.txt&quot;,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:06:10.400000Z&quot;
+}
+</pre></details><details class="record" id="e-77641da7be8f52fff0b3b730"><summary>e-77641da7be8f52fff0b3b730 · sysmon · C:\Windows\System32\cmd.exe</summary><p><a href="original/sysmon.xml">original: sysmon.xml · record 25</a></p><pre>{
+  &quot;channel&quot;: &quot;Microsoft-Windows-Sysmon/Operational&quot;,
+  &quot;collected_at&quot;: &quot;2026-08-21T10:16:39.000000Z&quot;,
+  &quot;destination_ip&quot;: &quot;127.0.0.1&quot;,
+  &quot;destination_port&quot;: 5091,
+  &quot;event_id&quot;: 3,
+  &quot;event_version&quot;: 3,
+  &quot;evidence_id&quot;: &quot;e-77641da7be8f52fff0b3b730&quot;,
+  &quot;host&quot;: &quot;web-70.lab&quot;,
+  &quot;image&quot;: &quot;C:\\Windows\\System32\\cmd.exe&quot;,
+  &quot;initiated&quot;: &quot;true&quot;,
+  &quot;pid&quot;: 8762,
+  &quot;process_guid&quot;: &quot;{7540f420-b27e-620c-ce45-58e9f4f65222}&quot;,
+  &quot;protocol&quot;: &quot;tcp&quot;,
+  &quot;provider&quot;: &quot;Microsoft-Windows-Sysmon&quot;,
+  &quot;record_id&quot;: 12025,
+  &quot;source&quot;: &quot;sysmon&quot;,
+  &quot;source_ref&quot;: {
+    &quot;path&quot;: &quot;sysmon.xml&quot;,
+    &quot;record&quot;: 25,
+    &quot;sha256&quot;: &quot;8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114&quot;
+  },
+  &quot;system_timestamp&quot;: &quot;2026-08-21T10:06:10.500000Z&quot;,
+  &quot;timestamp&quot;: &quot;2026-08-21T10:06:10.500000Z&quot;
+}
+</pre></details>
+<footer>Hashing detects later changes; it does not establish that a compromised host originally reported the truth. Collection time is retained separately from event time in each normalized record. No commands contained in event data are executed by this pipeline.</footer></main><script>
+document.getElementById('source-filter').addEventListener('change',function(){const source=this.value;document.querySelectorAll('#timeline-table tbody tr').forEach(row=>{row.hidden=!!source&&row.dataset.source!==source;});});
+function openEvidence(){const id=location.hash.slice(1);const node=document.getElementById(id);if(node&&node.tagName==='DETAILS')node.open=true;}window.addEventListener('hashchange',openEvidence);openEvidence();
+</script></body></html>

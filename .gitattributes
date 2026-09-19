@@ -1,0 +1,6 @@
+# Stable hashes for evidence/rule snapshots on Windows, macOS and Linux.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.pdf binary
+*.evtx binary

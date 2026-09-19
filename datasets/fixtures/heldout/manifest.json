@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "origin": "handcrafted-fixture",
+  "split": "heldout",
+  "description": "Synthetic parser/rule test data. NOT observed Windows activity. No tool generated native events.",
+  "collected_at": "2026-08-21T10:16:39.000Z",
+  "collection_conditions": "Not collected; deterministic fixture authoring timestamp",
+  "generator": "datasets/build_fixtures.py",
+  "generator_seed": 1909,
+  "tool_versions": {
+    "IIS": "not executed",
+    "Sysmon": "not executed",
+    "Windows": "not executed"
+  },
+  "sanitisation": "Generated synthetic values; no real customer or host records",
+  "files": [
+    {
+      "path": "application.jsonl",
+      "source": "application",
+      "format": "jsonl",
+      "sha256": "3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e"
+    },
+    {
+      "path": "iis.log",
+      "source": "iis",
+      "format": "w3c",
+      "sha256": "4472e466b779e4ea5903eea9e7f556c0a2e08863d610034295e239b7b5d693a9"
+    },
+    {
+      "path": "sysmon.xml",
+      "source": "sysmon",
+      "format": "event_xml",
+      "sha256": "8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114"
+    }
+  ]
+}

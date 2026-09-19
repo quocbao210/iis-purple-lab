@@ -1,0 +1,521 @@
+<Events xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" />
+      <EventID>1</EventID>
+      <Version>5</Version>
+      <EventRecordID>12001</EventRecordID>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>web-71.lab</Computer>
+      <TimeCreated SystemTime="2026-08-11T10:02:03.000Z" />
+    </System>
+    <EventData>
+      <Data Name="UtcTime">2026-08-11T10:02:03.000Z</Data>
+      <Data Name="ProcessGuid">{7b19639c-fc15-7f5b-6582-45abbb35bd1d}</Data>
+      <Data Name="ProcessId">2374</Data>
+      <Data Name="ParentProcessGuid">{b5a5aff2-b5b2-72a9-5ed8-4defbf432189}</Data>
+      <Data Name="ParentProcessId">720</Data>
+      <Data Name="Image">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+      <Data Name="ParentImage">C:\Windows\System32\svchost.exe</Data>
+      <Data Name="CommandLine">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+    </EventData>
+  </Event>
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" />
+      <EventID>1</EventID>
+      <Version>5</Version>
+      <EventRecordID>12002</EventRecordID>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>web-71.lab</Computer>
+      <TimeCreated SystemTime="2026-08-11T10:02:10.020Z" />
+    </System>
+    <EventData>
+      <Data Name="UtcTime">2026-08-11T10:02:10.020Z</Data>
+      <Data Name="ProcessGuid">{e93e7149-959f-86a0-3845-41182449a494}</Data>
+      <Data Name="ProcessId">6090</Data>
+      <Data Name="ParentProcessGuid">{7b19639c-fc15-7f5b-6582-45abbb35bd1d}</Data>
+      <Data Name="ParentProcessId">2374</Data>
+      <Data Name="Image">C:\Windows\System32\cmd.exe</Data>
+      <Data Name="ParentImage">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+      <Data Name="CommandLine">C:\Windows\System32\cmd.exe Monthly support report &amp; whoami</Data>
+    </EventData>
+  </Event>
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" />
+      <EventID>1</EventID>
+      <Version>5</Version>
+      <EventRecordID>12003</EventRecordID>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>web-78.lab</Computer>
+      <TimeCreated SystemTime="2026-08-11T10:02:22.000Z" />
+    </System>
+    <EventData>
+      <Data Name="UtcTime">2026-08-11T10:02:22.000Z</Data>
+      <Data Name="ProcessGuid">{75331f95-a8e2-754e-7091-0fdf6192ca59}</Data>
+      <Data Name="ProcessId">3911</Data>
+      <Data Name="ParentProcessGuid">{209080f0-c6ac-630e-17d2-a40fe3eb9ee2}</Data>
+      <Data Name="ParentProcessId">720</Data>
+      <Data Name="Image">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+      <Data Name="ParentImage">C:\Windows\System32\svchost.exe</Data>
+      <Data Name="CommandLine">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+    </EventData>
+  </Event>
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" />
+      <EventID>1</EventID>
+      <Version>5</Version>
+      <EventRecordID>12004</EventRecordID>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>web-78.lab</Computer>
+      <TimeCreated SystemTime="2026-08-11T10:02:30.020Z" />
+    </System>
+    <EventData>
+      <Data Name="UtcTime">2026-08-11T10:02:30.020Z</Data>
+      <Data Name="ProcessGuid">{149f12dd-19cf-9889-edc3-1088e2c6aac1}</Data>
+      <Data Name="ProcessId">6133</Data>
+      <Data Name="ParentProcessGuid">{75331f95-a8e2-754e-7091-0fdf6192ca59}</Data>
+      <Data Name="ParentProcessId">3911</Data>
+      <Data Name="Image">C:\Windows\System32\cmd.exe</Data>
+      <Data Name="ParentImage">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+      <Data Name="CommandLine">C:\Windows\System32\cmd.exe Monthly support report &amp; whoami</Data>
+    </EventData>
+  </Event>
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" />
+      <EventID>1</EventID>
+      <Version>5</Version>
+      <EventRecordID>12005</EventRecordID>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>web-78.lab</Computer>
+      <TimeCreated SystemTime="2026-08-11T10:02:30.300Z" />
+    </System>
+    <EventData>
+      <Data Name="UtcTime">2026-08-11T10:02:30.300Z</Data>
+      <Data Name="ProcessGuid">{1720b6dc-b96a-9bcc-568c-af4d63df1ffa}</Data>
+      <Data Name="ProcessId">6137</Data>
+      <Data Name="ParentProcessGuid">{149f12dd-19cf-9889-edc3-1088e2c6aac1}</Data>
+      <Data Name="ParentProcessId">6133</Data>
+      <Data Name="Image">C:\Windows\System32\whoami.exe</Data>
+      <Data Name="ParentImage">C:\Windows\System32\cmd.exe</Data>
+      <Data Name="CommandLine">whoami</Data>
+    </EventData>
+  </Event>
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" />
+      <EventID>11</EventID>
+      <Version>3</Version>
+      <EventRecordID>12006</EventRecordID>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>web-78.lab</Computer>
+      <TimeCreated SystemTime="2026-08-11T10:02:30.400Z" />
+    </System>
+    <EventData>
+      <Data Name="UtcTime">2026-08-11T10:02:30.400Z</Data>
+      <Data Name="ProcessGuid">{149f12dd-19cf-9889-edc3-1088e2c6aac1}</Data>
+      <Data Name="ProcessId">6133</Data>
+      <Data Name="Image">C:\Windows\System32\cmd.exe</Data>
+      <Data Name="TargetFilename">C:\IISPurpleLab\data\work\5a68bccd-4598-cf89-a9f7-6d11b8eb4969\stage.txt</Data>
+    </EventData>
+  </Event>
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" />
+      <EventID>3</EventID>
+      <Version>3</Version>
+      <EventRecordID>12007</EventRecordID>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>web-78.lab</Computer>
+      <TimeCreated SystemTime="2026-08-11T10:02:30.500Z" />
+    </System>
+    <EventData>
+      <Data Name="UtcTime">2026-08-11T10:02:30.500Z</Data>
+      <Data Name="ProcessGuid">{149f12dd-19cf-9889-edc3-1088e2c6aac1}</Data>
+      <Data Name="ProcessId">6133</Data>
+      <Data Name="Image">C:\Windows\System32\cmd.exe</Data>
+      <Data Name="DestinationIp">127.0.0.1</Data>
+      <Data Name="DestinationPort">5091</Data>
+      <Data Name="Protocol">tcp</Data>
+      <Data Name="Initiated">true</Data>
+    </EventData>
+  </Event>
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" />
+      <EventID>1</EventID>
+      <Version>5</Version>
+      <EventRecordID>12008</EventRecordID>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>web-76.lab</Computer>
+      <TimeCreated SystemTime="2026-08-11T10:02:45.000Z" />
+    </System>
+    <EventData>
+      <Data Name="UtcTime">2026-08-11T10:02:45.000Z</Data>
+      <Data Name="ProcessGuid">{4bfdac6f-1f61-f80c-a095-da4af50783e9}</Data>
+      <Data Name="ProcessId">1354</Data>
+      <Data Name="ParentProcessGuid">{511b9921-4d91-68c7-c5bd-4775bc7eea9f}</Data>
+      <Data Name="ParentProcessId">720</Data>
+      <Data Name="Image">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+      <Data Name="ParentImage">C:\Windows\System32\svchost.exe</Data>
+      <Data Name="CommandLine">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+    </EventData>
+  </Event>
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" />
+      <EventID>1</EventID>
+      <Version>5</Version>
+      <EventRecordID>12009</EventRecordID>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>web-76.lab</Computer>
+      <TimeCreated SystemTime="2026-08-11T10:02:50.020Z" />
+    </System>
+    <EventData>
+      <Data Name="UtcTime">2026-08-11T10:02:50.020Z</Data>
+      <Data Name="ProcessGuid">{bcbe866b-d067-89d6-3b77-f4abcb89510b}</Data>
+      <Data Name="ProcessId">6041</Data>
+      <Data Name="ParentProcessGuid">{4bfdac6f-1f61-f80c-a095-da4af50783e9}</Data>
+      <Data Name="ParentProcessId">1354</Data>
+      <Data Name="Image">C:\Windows\System32\cmd.exe</Data>
+      <Data Name="ParentImage">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+      <Data Name="CommandLine">C:\Windows\System32\cmd.exe Monthly support report &amp; whoami</Data>
+    </EventData>
+  </Event>
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" />
+      <EventID>1</EventID>
+      <Version>5</Version>
+      <EventRecordID>12010</EventRecordID>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>web-76.lab</Computer>
+      <TimeCreated SystemTime="2026-08-11T10:02:50.300Z" />
+    </System>
+    <EventData>
+      <Data Name="UtcTime">2026-08-11T10:02:50.300Z</Data>
+      <Data Name="ProcessGuid">{bfa802e9-4871-1fba-9ec5-201d6cca2dc6}</Data>
+      <Data Name="ProcessId">6045</Data>
+      <Data Name="ParentProcessGuid">{bcbe866b-d067-89d6-3b77-f4abcb89510b}</Data>
+      <Data Name="ParentProcessId">6041</Data>
+      <Data Name="Image">C:\Windows\System32\whoami.exe</Data>
+      <Data Name="ParentImage">C:\Windows\System32\cmd.exe</Data>
+      <Data Name="CommandLine">whoami</Data>
+    </EventData>
+  </Event>
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" />
+      <EventID>11</EventID>
+      <Version>3</Version>
+      <EventRecordID>12011</EventRecordID>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>web-76.lab</Computer>
+      <TimeCreated SystemTime="2026-08-11T10:02:50.400Z" />
+    </System>
+    <EventData>
+      <Data Name="UtcTime">2026-08-11T10:02:50.400Z</Data>
+      <Data Name="ProcessGuid">{bcbe866b-d067-89d6-3b77-f4abcb89510b}</Data>
+      <Data Name="ProcessId">6041</Data>
+      <Data Name="Image">C:\Windows\System32\cmd.exe</Data>
+      <Data Name="TargetFilename">C:\IISPurpleLab\data\work\41cd7b4d-1f84-9736-33c4-e80abffe03bb\stage.txt</Data>
+    </EventData>
+  </Event>
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" />
+      <EventID>3</EventID>
+      <Version>3</Version>
+      <EventRecordID>12012</EventRecordID>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>web-76.lab</Computer>
+      <TimeCreated SystemTime="2026-08-11T10:02:50.500Z" />
+    </System>
+    <EventData>
+      <Data Name="UtcTime">2026-08-11T10:02:50.500Z</Data>
+      <Data Name="ProcessGuid">{bcbe866b-d067-89d6-3b77-f4abcb89510b}</Data>
+      <Data Name="ProcessId">6041</Data>
+      <Data Name="Image">C:\Windows\System32\cmd.exe</Data>
+      <Data Name="DestinationIp">127.0.0.1</Data>
+      <Data Name="DestinationPort">5091</Data>
+      <Data Name="Protocol">tcp</Data>
+      <Data Name="Initiated">true</Data>
+    </EventData>
+  </Event>
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" />
+      <EventID>1</EventID>
+      <Version>5</Version>
+      <EventRecordID>12013</EventRecordID>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>web-38.lab</Computer>
+      <TimeCreated SystemTime="2026-08-11T10:03:05.000Z" />
+    </System>
+    <EventData>
+      <Data Name="UtcTime">2026-08-11T10:03:05.000Z</Data>
+      <Data Name="ProcessGuid">{ff363d2b-68ad-d20a-f89a-eff3deeb3d78}</Data>
+      <Data Name="ProcessId">4873</Data>
+      <Data Name="ParentProcessGuid">{cbe8d791-3d4a-70f8-7b47-03d54d2ca8a4}</Data>
+      <Data Name="ParentProcessId">720</Data>
+      <Data Name="Image">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+      <Data Name="ParentImage">C:\Windows\System32\svchost.exe</Data>
+      <Data Name="CommandLine">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+    </EventData>
+  </Event>
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" />
+      <EventID>1</EventID>
+      <Version>5</Version>
+      <EventRecordID>12014</EventRecordID>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>web-38.lab</Computer>
+      <TimeCreated SystemTime="2026-08-11T10:03:10.020Z" />
+    </System>
+    <EventData>
+      <Data Name="UtcTime">2026-08-11T10:03:10.020Z</Data>
+      <Data Name="ProcessGuid">{00b9aacd-e71c-ea4f-512e-038c7760ed56}</Data>
+      <Data Name="ProcessId">8751</Data>
+      <Data Name="ParentProcessGuid">{ff363d2b-68ad-d20a-f89a-eff3deeb3d78}</Data>
+      <Data Name="ParentProcessId">4873</Data>
+      <Data Name="Image">C:\IISPurpleLab\app\IisPurpleLab.exe</Data>
+      <Data Name="ParentImage">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+      <Data Name="CommandLine">C:\IISPurpleLab\app\IisPurpleLab.exe Monthly support report</Data>
+    </EventData>
+  </Event>
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" />
+      <EventID>1</EventID>
+      <Version>5</Version>
+      <EventRecordID>12015</EventRecordID>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>web-40.lab</Computer>
+      <TimeCreated SystemTime="2026-08-11T10:03:27.000Z" />
+    </System>
+    <EventData>
+      <Data Name="UtcTime">2026-08-11T10:03:27.000Z</Data>
+      <Data Name="ProcessGuid">{17550179-80e7-c564-15aa-07c49656febf}</Data>
+      <Data Name="ProcessId">3726</Data>
+      <Data Name="ParentProcessGuid">{811c8a31-8c4f-b588-0f6c-729228e42850}</Data>
+      <Data Name="ParentProcessId">720</Data>
+      <Data Name="Image">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+      <Data Name="ParentImage">C:\Windows\System32\svchost.exe</Data>
+      <Data Name="CommandLine">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+    </EventData>
+  </Event>
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" />
+      <EventID>1</EventID>
+      <Version>5</Version>
+      <EventRecordID>12016</EventRecordID>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>web-40.lab</Computer>
+      <TimeCreated SystemTime="2026-08-11T10:03:30.020Z" />
+    </System>
+    <EventData>
+      <Data Name="UtcTime">2026-08-11T10:03:30.020Z</Data>
+      <Data Name="ProcessGuid">{ee622a06-1416-9f65-82ac-3b909acd1669}</Data>
+      <Data Name="ProcessId">8127</Data>
+      <Data Name="ParentProcessGuid">{17550179-80e7-c564-15aa-07c49656febf}</Data>
+      <Data Name="ParentProcessId">3726</Data>
+      <Data Name="Image">C:\IISPurpleLab\app\IisPurpleLab.exe</Data>
+      <Data Name="ParentImage">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+      <Data Name="CommandLine">C:\IISPurpleLab\app\IisPurpleLab.exe Monthly support report</Data>
+    </EventData>
+  </Event>
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" />
+      <EventID>1</EventID>
+      <Version>5</Version>
+      <EventRecordID>12017</EventRecordID>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>web-27.lab</Computer>
+      <TimeCreated SystemTime="2026-08-11T10:03:44.000Z" />
+    </System>
+    <EventData>
+      <Data Name="UtcTime">2026-08-11T10:03:44.000Z</Data>
+      <Data Name="ProcessGuid">{0aebfb48-d296-fe4f-ada7-2a92d61cbba6}</Data>
+      <Data Name="ProcessId">3847</Data>
+      <Data Name="ParentProcessGuid">{75af6ca4-7b6d-372e-2cea-4280b099a620}</Data>
+      <Data Name="ParentProcessId">720</Data>
+      <Data Name="Image">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+      <Data Name="ParentImage">C:\Windows\System32\svchost.exe</Data>
+      <Data Name="CommandLine">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+    </EventData>
+  </Event>
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" />
+      <EventID>1</EventID>
+      <Version>5</Version>
+      <EventRecordID>12018</EventRecordID>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>web-27.lab</Computer>
+      <TimeCreated SystemTime="2026-08-11T10:03:50.020Z" />
+    </System>
+    <EventData>
+      <Data Name="UtcTime">2026-08-11T10:03:50.020Z</Data>
+      <Data Name="ProcessGuid">{16313297-8be3-3041-49fe-a4ac58789dbf}</Data>
+      <Data Name="ProcessId">8345</Data>
+      <Data Name="ParentProcessGuid">{0aebfb48-d296-fe4f-ada7-2a92d61cbba6}</Data>
+      <Data Name="ParentProcessId">3847</Data>
+      <Data Name="Image">C:\IISPurpleLab\app\IisPurpleLab.exe</Data>
+      <Data Name="ParentImage">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+      <Data Name="CommandLine">C:\IISPurpleLab\app\IisPurpleLab.exe Monthly support report</Data>
+    </EventData>
+  </Event>
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" />
+      <EventID>1</EventID>
+      <Version>5</Version>
+      <EventRecordID>12019</EventRecordID>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>web-27.lab</Computer>
+      <TimeCreated SystemTime="2026-08-11T10:03:50.020Z" />
+    </System>
+    <EventData>
+      <Data Name="UtcTime">2026-08-11T10:03:50.020Z</Data>
+      <Data Name="ProcessGuid">{dbf21d14-c6c2-b585-23cb-ffa693eee687}</Data>
+      <Data Name="ProcessId">5416</Data>
+      <Data Name="ParentProcessGuid">{0aebfb48-d296-fe4f-ada7-2a92d61cbba6}</Data>
+      <Data Name="ParentProcessId">3847</Data>
+      <Data Name="Image">C:\IISPurpleLab\app\IisPurpleLab.exe</Data>
+      <Data Name="ParentImage">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+      <Data Name="CommandLine">C:\IISPurpleLab\app\IisPurpleLab.exe Monthly support report</Data>
+    </EventData>
+  </Event>
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" />
+      <EventID>1</EventID>
+      <Version>5</Version>
+      <EventRecordID>12020</EventRecordID>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>web-55.lab</Computer>
+      <TimeCreated SystemTime="2026-08-11T10:04:27.000Z" />
+    </System>
+    <EventData>
+      <Data Name="UtcTime">2026-08-11T10:04:27.000Z</Data>
+      <Data Name="ProcessGuid">{efb75a52-f119-b16f-1d74-4d8eae2686cf}</Data>
+      <Data Name="ProcessId">2848</Data>
+      <Data Name="ParentProcessGuid">{64d20cdc-cfdf-5180-ef4a-c96ce133160c}</Data>
+      <Data Name="ParentProcessId">720</Data>
+      <Data Name="Image">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+      <Data Name="ParentImage">C:\Windows\System32\svchost.exe</Data>
+      <Data Name="CommandLine">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+    </EventData>
+  </Event>
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" />
+      <EventID>1</EventID>
+      <Version>5</Version>
+      <EventRecordID>12021</EventRecordID>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>web-55.lab</Computer>
+      <TimeCreated SystemTime="2026-08-11T10:04:30.020Z" />
+    </System>
+    <EventData>
+      <Data Name="UtcTime">2026-08-11T10:04:30.020Z</Data>
+      <Data Name="ProcessGuid">{1405b47c-c079-2048-cf2d-8f85e614411b}</Data>
+      <Data Name="ProcessId">7205</Data>
+      <Data Name="ParentProcessGuid">{efb75a52-f119-b16f-1d74-4d8eae2686cf}</Data>
+      <Data Name="ParentProcessId">2848</Data>
+      <Data Name="Image">C:\IISPurpleLab\app\IisPurpleLab.exe</Data>
+      <Data Name="ParentImage">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+      <Data Name="CommandLine">C:\IISPurpleLab\app\IisPurpleLab.exe Monthly support report</Data>
+    </EventData>
+  </Event>
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" />
+      <EventID>1</EventID>
+      <Version>5</Version>
+      <EventRecordID>12022</EventRecordID>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>web-31.lab</Computer>
+      <TimeCreated SystemTime="2026-08-11T10:04:42.000Z" />
+    </System>
+    <EventData>
+      <Data Name="UtcTime">2026-08-11T10:04:42.000Z</Data>
+      <Data Name="ProcessGuid">{1280c537-7f20-4575-3107-0e3499a69611}</Data>
+      <Data Name="ProcessId">4348</Data>
+      <Data Name="ParentProcessGuid">{0439bb3c-df67-55c7-4d0c-d720e2dd3b6c}</Data>
+      <Data Name="ParentProcessId">720</Data>
+      <Data Name="Image">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+      <Data Name="ParentImage">C:\Windows\System32\svchost.exe</Data>
+      <Data Name="CommandLine">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+    </EventData>
+  </Event>
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" />
+      <EventID>1</EventID>
+      <Version>5</Version>
+      <EventRecordID>12023</EventRecordID>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>web-31.lab</Computer>
+      <TimeCreated SystemTime="2026-08-11T10:04:50.020Z" />
+    </System>
+    <EventData>
+      <Data Name="UtcTime">2026-08-11T10:04:50.020Z</Data>
+      <Data Name="ProcessGuid">{ab49450c-cf39-fe06-1ad0-9f1abd707e94}</Data>
+      <Data Name="ProcessId">8482</Data>
+      <Data Name="ParentProcessGuid">{1280c537-7f20-4575-3107-0e3499a69611}</Data>
+      <Data Name="ParentProcessId">4348</Data>
+      <Data Name="Image">C:\Windows\System32\cmd.exe</Data>
+      <Data Name="ParentImage">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+      <Data Name="CommandLine">C:\Windows\System32\cmd.exe Monthly support report</Data>
+    </EventData>
+  </Event>
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" />
+      <EventID>1</EventID>
+      <Version>5</Version>
+      <EventRecordID>12024</EventRecordID>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>web-21.lab</Computer>
+      <TimeCreated SystemTime="2026-08-11T10:05:42.000Z" />
+    </System>
+    <EventData>
+      <Data Name="UtcTime">2026-08-11T10:05:42.000Z</Data>
+      <Data Name="ProcessGuid">{dd21f325-10b7-8eec-ca41-4c6bbb498867}</Data>
+      <Data Name="ProcessId">3089</Data>
+      <Data Name="ParentProcessGuid">{240cac78-61c1-015c-d4e8-1e0faa098972}</Data>
+      <Data Name="ParentProcessId">720</Data>
+      <Data Name="Image">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+      <Data Name="ParentImage">C:\Windows\System32\svchost.exe</Data>
+      <Data Name="CommandLine">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+    </EventData>
+  </Event>
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" />
+      <EventID>1</EventID>
+      <Version>5</Version>
+      <EventRecordID>12025</EventRecordID>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>web-21.lab</Computer>
+      <TimeCreated SystemTime="2026-08-11T10:05:50.020Z" />
+    </System>
+    <EventData>
+      <Data Name="UtcTime">2026-08-11T10:05:50.020Z</Data>
+      <Data Name="ProcessGuid">{c69e0ff8-406e-f64e-d3e4-2cb828941a23}</Data>
+      <Data Name="ProcessId">6395</Data>
+      <Data Name="ParentProcessGuid">{dd21f325-10b7-8eec-ca41-4c6bbb498867}</Data>
+      <Data Name="ParentProcessId">3089</Data>
+      <Data Name="Image">C:\Windows\System32\cmd.exe</Data>
+      <Data Name="ParentImage">C:\Windows\System32\inetsrv\w3wp.exe</Data>
+      <Data Name="CommandLine">C:\Windows\System32\cmd.exe Monthly support report &amp; whoami</Data>
+    </EventData>
+  </Event>
+</Events>

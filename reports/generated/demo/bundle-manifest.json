@@ -1,0 +1,136 @@
+{
+  "collection_metadata": {
+    "collected_at": "2026-08-21T10:16:39.000Z",
+    "collection_conditions": "Not collected; deterministic fixture authoring timestamp",
+    "description": "Synthetic parser/rule test data. NOT observed Windows activity. No tool generated native events.",
+    "files": [
+      {
+        "format": "jsonl",
+        "path": "application.jsonl",
+        "sha256": "3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e",
+        "source": "application"
+      },
+      {
+        "format": "w3c",
+        "path": "iis.log",
+        "sha256": "4472e466b779e4ea5903eea9e7f556c0a2e08863d610034295e239b7b5d693a9",
+        "source": "iis"
+      },
+      {
+        "format": "event_xml",
+        "path": "sysmon.xml",
+        "sha256": "8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114",
+        "source": "sysmon"
+      }
+    ],
+    "generator": "datasets/build_fixtures.py",
+    "generator_seed": 1909,
+    "origin": "handcrafted-fixture",
+    "sanitisation": "Generated synthetic values; no real customer or host records",
+    "schema_version": 1,
+    "split": "heldout",
+    "tool_versions": {
+      "IIS": "not executed",
+      "Sysmon": "not executed",
+      "Windows": "not executed"
+    }
+  },
+  "counts": {
+    "alerts": 16,
+    "events": 70,
+    "links": {
+      "ambiguous": 0,
+      "high": 11,
+      "low": 0,
+      "unattributed": 10
+    }
+  },
+  "generated": [
+    {
+      "bytes": 136130,
+      "path": "report.html",
+      "sha256": "da65415d43f2ba49380f66b90a94d9473d0dbb0bc2d43c188c0083ae461edfdf"
+    },
+    {
+      "bytes": 22537,
+      "path": "report.md",
+      "sha256": "c37741928b65f635fc39bff918c5e32527ffe0f0f8005473e2c5b2b46030804c"
+    },
+    {
+      "bytes": 51644,
+      "path": "events.json",
+      "sha256": "5e3f8e8fb195a424c97ce549ba80ca8ef181a4ab7e815ed65f796fd1e48f105e"
+    },
+    {
+      "bytes": 8007,
+      "path": "alerts.json",
+      "sha256": "44cfc45b86f3df301b38642df0f548a585cabdb6f67ad65dbd208452c3f71c55"
+    },
+    {
+      "bytes": 9718,
+      "path": "correlation.json",
+      "sha256": "e1a84a3e4b0383590fdbf1a6b60f00b02da1ab4ed7b90f02244b9361747f33bc"
+    },
+    {
+      "bytes": 2720,
+      "path": "availability.json",
+      "sha256": "347be1146200703e2fbd69bbd652cd8f48a13599143e6271660574b71c42332f"
+    },
+    {
+      "bytes": 1149,
+      "path": "source-manifest.json",
+      "sha256": "3b094b8e05f79745ab5f5c5df3c50d8d90f1dd374f89a6aa442c16b512cff51e"
+    },
+    {
+      "bytes": 308,
+      "path": "detection-policy.json",
+      "sha256": "f83646e0cc66b6e49a9f9da817025b3b2c0e26b05bb8f13e01dda30af2667744"
+    }
+  ],
+  "generated_at": "2026-09-19T07:50:13.615222+00:00",
+  "integrity_limit": "Hashes do not prove the original event producer reported truthfully.",
+  "origin": "handcrafted-fixture",
+  "originals": [
+    {
+      "bytes": 10183,
+      "path": "original/application.jsonl",
+      "sha256": "3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e"
+    },
+    {
+      "bytes": 1513,
+      "path": "original/iis.log",
+      "sha256": "4472e466b779e4ea5903eea9e7f556c0a2e08863d610034295e239b7b5d693a9"
+    },
+    {
+      "bytes": 22432,
+      "path": "original/sysmon.xml",
+      "sha256": "8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114"
+    }
+  ],
+  "pipeline_version": "0.1.0",
+  "python_version": "3.14.4",
+  "rule_versions_at_detection": {
+    "analysis/iis_purple/detection.py": "20d01b7eb220f4186b0b9e1b1513356e9ae23209f3a248365a264eda17dd7a90",
+    "detections/sigma/discovery_process.yml": "4703fa4ace274be7f7395ca8e9e83124fc1efed23f14a263a0647519d3ed4950",
+    "detections/sigma/web_worker_interpreter.yml": "e25c01dfe770499f1b9e61d1a17c3029296bfa4323b4a39942fa243bbbf7699b"
+  },
+  "rules": [
+    {
+      "path": "rules/analysis/iis_purple/correlate.py",
+      "sha256": "3a2b19abdb3a9a3e22774368ac454cff4c384f7eea010fbd35c888f3116f2b93"
+    },
+    {
+      "path": "rules/analysis/iis_purple/detection.py",
+      "sha256": "20d01b7eb220f4186b0b9e1b1513356e9ae23209f3a248365a264eda17dd7a90"
+    },
+    {
+      "path": "rules/detections/sigma/discovery_process.yml",
+      "sha256": "4703fa4ace274be7f7395ca8e9e83124fc1efed23f14a263a0647519d3ed4950"
+    },
+    {
+      "path": "rules/detections/sigma/web_worker_interpreter.yml",
+      "sha256": "e25c01dfe770499f1b9e61d1a17c3029296bfa4323b4a39942fa243bbbf7699b"
+    }
+  ],
+  "schema_version": 1
+}

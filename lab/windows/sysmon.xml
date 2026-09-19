@@ -1,0 +1,18 @@
+<Sysmon schemaversion="4.82">
+  <HashAlgorithms>SHA256</HashAlgorithms>
+  <CheckRevocation>True</CheckRevocation>
+  <EventFiltering>
+    <!-- Dedicated disposable VM only: all process/network events allow descendant discovery.
+         Collector exports only the verified lab process chain and bounded time window. -->
+    <RuleGroup name="process ancestry" groupRelation="or">
+      <ProcessCreate onmatch="exclude" />
+      <ProcessTerminate onmatch="exclude" />
+      <NetworkConnect onmatch="exclude" />
+    </RuleGroup>
+    <RuleGroup name="project file writes" groupRelation="or">
+      <FileCreate onmatch="include">
+        <TargetFilename condition="begin with">C:\IISPurpleLab\data\</TargetFilename>
+      </FileCreate>
+    </RuleGroup>
+  </EventFiltering>
+</Sysmon>

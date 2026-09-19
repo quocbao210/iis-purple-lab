@@ -1,0 +1,170 @@
+{
+  "alerts": [
+    {
+      "alert_id": "153a4d14ba0a58123228",
+      "rule_id": "IPL-001",
+      "title": "Cross-tenant policy violation",
+      "severity": "high",
+      "kind": "policy-violation",
+      "evidence_ids": [
+        "e-6de34ada76dc9b050cfcc9e9"
+      ],
+      "request_id": "a78a2df0-5385-c3d4-4a17-f768b19bf062",
+      "reason": "Successful access violates tenant, sharing and administrator policy.",
+      "host": "web-47.lab"
+    },
+    {
+      "alert_id": "b321490936e8b0b43c82",
+      "rule_id": "IPL-001",
+      "title": "Cross-tenant policy violation",
+      "severity": "high",
+      "kind": "policy-violation",
+      "evidence_ids": [
+        "e-53cfb2c00c785e7334c53234"
+      ],
+      "request_id": "ed921879-b988-0d3c-86a0-48e1d5057b6d",
+      "reason": "Successful access violates tenant, sharing and administrator policy.",
+      "host": "web-48.lab"
+    }
+  ],
+  "availability": {
+    "IPL-001": {
+      "available": true,
+      "required_sources": [
+        "application"
+      ],
+      "missing_sources": [],
+      "eligible_records_by_stage": [
+        8
+      ],
+      "incomplete_records_by_stage": [
+        0
+      ],
+      "missing_fields_by_stage": [
+        []
+      ],
+      "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+    },
+    "IPL-002": {
+      "available": false,
+      "required_sources": [
+        "sysmon"
+      ],
+      "missing_sources": [
+        "sysmon"
+      ],
+      "eligible_records_by_stage": [
+        0
+      ],
+      "incomplete_records_by_stage": [
+        0
+      ],
+      "missing_fields_by_stage": [
+        []
+      ],
+      "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+    },
+    "IPL-003": {
+      "available": false,
+      "required_sources": [
+        "sysmon"
+      ],
+      "missing_sources": [
+        "sysmon"
+      ],
+      "eligible_records_by_stage": [
+        0
+      ],
+      "incomplete_records_by_stage": [
+        0
+      ],
+      "missing_fields_by_stage": [
+        []
+      ],
+      "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+    },
+    "IPL-004": {
+      "available": false,
+      "required_sources": [
+        "sysmon"
+      ],
+      "missing_sources": [
+        "sysmon"
+      ],
+      "eligible_records_by_stage": [
+        0,
+        0
+      ],
+      "incomplete_records_by_stage": [
+        0,
+        0
+      ],
+      "missing_fields_by_stage": [
+        [],
+        []
+      ],
+      "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+    },
+    "IPL-005": {
+      "available": false,
+      "required_sources": [
+        "sysmon"
+      ],
+      "missing_sources": [
+        "sysmon"
+      ],
+      "eligible_records_by_stage": [
+        0,
+        0
+      ],
+      "incomplete_records_by_stage": [
+        0,
+        0
+      ],
+      "missing_fields_by_stage": [
+        [],
+        []
+      ],
+      "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+    },
+    "IPL-006": {
+      "available": false,
+      "required_sources": [
+        "application",
+        "sysmon"
+      ],
+      "missing_sources": [
+        "sysmon"
+      ],
+      "eligible_records_by_stage": [
+        0,
+        9,
+        9
+      ],
+      "incomplete_records_by_stage": [
+        0,
+        0,
+        0
+      ],
+      "missing_fields_by_stage": [
+        [],
+        [],
+        []
+      ],
+      "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+    }
+  },
+  "rule_versions": {
+    "analysis/iis_purple/detection.py": "20d01b7eb220f4186b0b9e1b1513356e9ae23209f3a248365a264eda17dd7a90",
+    "detections/sigma/discovery_process.yml": "4703fa4ace274be7f7395ca8e9e83124fc1efed23f14a263a0647519d3ed4950",
+    "detections/sigma/web_worker_interpreter.yml": "e25c01dfe770499f1b9e61d1a17c3029296bfa4323b4a39942fa243bbbf7699b"
+  },
+  "policy": {
+    "schema_version": 1,
+    "approved_destinations": [],
+    "protected_roots": [
+      "C:\\IISPurpleLab\\data"
+    ],
+    "notes": "Normal report helpers have no network requirement. Native deployments at another root must supply an audited policy using --policy. A connection alert does not prove exfiltration."
+  }
+}

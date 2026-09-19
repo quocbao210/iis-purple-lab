@@ -1,0 +1,294 @@
+[
+  {
+    "candidate_request_ids": [
+      "1d156054-7f3c-d3f9-37b4-70c687b8d267"
+    ],
+    "confidence": "high",
+    "evidence_ids": [
+      "e-3957f8d0de39a5358bda165c",
+      "e-58d588efa579923ed36c1108",
+      "e-7f85ba75f653c7bc7e309c12"
+    ],
+    "host": "web-30.lab",
+    "process_guid": "{09199679-15cd-a432-e22e-0200962fdeb8}",
+    "reason": "Unique host, child/parent PIDs and bounded launch match; observed parent ProcessGuid and start agree",
+    "relation": "launch",
+    "request_id": "1d156054-7f3c-d3f9-37b4-70c687b8d267"
+  },
+  {
+    "candidate_request_ids": [
+      "05399d5c-e978-9f35-71f4-598d688742b1"
+    ],
+    "confidence": "high",
+    "evidence_ids": [
+      "e-63d0fa5936c98eb5ab5f7dac",
+      "e-74b72b2d34528b1833daf021",
+      "e-eacae92f57e42be7251de81e"
+    ],
+    "host": "web-30.lab",
+    "process_guid": "{0c453832-04db-a6a9-5cd9-1a0833483697}",
+    "reason": "Unique host, child/parent PIDs and bounded launch match; observed parent ProcessGuid and start agree",
+    "relation": "launch",
+    "request_id": "05399d5c-e978-9f35-71f4-598d688742b1"
+  },
+  {
+    "confidence": "unattributed",
+    "evidence_ids": [
+      "e-3957f8d0de39a5358bda165c"
+    ],
+    "host": "web-30.lab",
+    "process_guid": "{26a4fd3e-8c08-7e12-d20f-f7f04c7c69cb}",
+    "reason": "No unique instrumented request link; process remains independently observable",
+    "relation": "unattributed",
+    "request_id": null
+  },
+  {
+    "confidence": "unattributed",
+    "evidence_ids": [
+      "e-74b72b2d34528b1833daf021"
+    ],
+    "host": "web-30.lab",
+    "process_guid": "{632e3462-77df-c725-530e-bf66458603e1}",
+    "reason": "No unique instrumented request link; process remains independently observable",
+    "relation": "unattributed",
+    "request_id": null
+  },
+  {
+    "candidate_request_ids": [
+      "8e21e066-b789-c6b9-55ad-2e50c1a54c7f"
+    ],
+    "confidence": "high",
+    "evidence_ids": [
+      "e-6cd4fcb0c6387f3b467b1761",
+      "e-8a333ccd5d8c6647046ccac8",
+      "e-eec27cb386cec4c90aebd6bc"
+    ],
+    "host": "web-59.lab",
+    "process_guid": "{335d029b-c09c-eb4d-b937-938f4ffa0e95}",
+    "reason": "Unique host, child/parent PIDs and bounded launch match; observed parent ProcessGuid and start agree",
+    "relation": "launch",
+    "request_id": "8e21e066-b789-c6b9-55ad-2e50c1a54c7f"
+  },
+  {
+    "confidence": "unattributed",
+    "evidence_ids": [
+      "e-eec27cb386cec4c90aebd6bc"
+    ],
+    "host": "web-59.lab",
+    "process_guid": "{4d6b6814-5e06-10f4-758e-c48e20763a0c}",
+    "reason": "No unique instrumented request link; process remains independently observable",
+    "relation": "unattributed",
+    "request_id": null
+  },
+  {
+    "candidate_request_ids": [
+      "0164fe15-3fe8-504a-7685-06c7961ca4f9"
+    ],
+    "confidence": "high",
+    "evidence_ids": [
+      "e-9f2d769923dfa34d325facb4",
+      "e-eec27cb386cec4c90aebd6bc",
+      "e-ff73efda0acec908a41a17b7"
+    ],
+    "host": "web-59.lab",
+    "process_guid": "{8f5751cb-78e0-520f-9566-cbf3154e2f4b}",
+    "reason": "Unique host, child/parent PIDs and bounded launch match; observed parent ProcessGuid and start agree",
+    "relation": "launch",
+    "request_id": "0164fe15-3fe8-504a-7685-06c7961ca4f9"
+  },
+  {
+    "confidence": "unattributed",
+    "evidence_ids": [
+      "e-44c6350abc3a5c895571f05d"
+    ],
+    "host": "web-67.lab",
+    "process_guid": "{947b812e-b152-47c1-11d8-53ebe3a6c1d3}",
+    "reason": "No unique instrumented request link; process remains independently observable",
+    "relation": "unattributed",
+    "request_id": null
+  },
+  {
+    "candidate_request_ids": [
+      "880f9d36-26da-a95b-2566-8eed8ec92668"
+    ],
+    "confidence": "high",
+    "evidence_ids": [
+      "e-44c6350abc3a5c895571f05d",
+      "e-7cc941d7f2a9908b0ebabd3f",
+      "e-9e25cbbc5c09f242ea2fce79",
+      "e-db60ba62c67ba3bc399bbafb"
+    ],
+    "host": "web-67.lab",
+    "process_guid": "{a04779b9-b299-f219-a53f-28dbb0a0bf09}",
+    "reason": "Observed ParentProcessGuid chain; Unique host, child/parent PIDs and bounded launch match; observed parent ProcessGuid and start agree",
+    "relation": "descendant",
+    "request_id": "880f9d36-26da-a95b-2566-8eed8ec92668"
+  },
+  {
+    "candidate_request_ids": [
+      "880f9d36-26da-a95b-2566-8eed8ec92668"
+    ],
+    "confidence": "high",
+    "evidence_ids": [
+      "e-0f648897a75aefa4f1b25f32",
+      "e-44c6350abc3a5c895571f05d",
+      "e-686c868170dd18e201c7e252",
+      "e-9e25cbbc5c09f242ea2fce79",
+      "e-db60ba62c67ba3bc399bbafb"
+    ],
+    "host": "web-67.lab",
+    "process_guid": "{f2477408-ba9e-aea5-27fb-643d648eecb6}",
+    "reason": "Unique host, child/parent PIDs and bounded launch match; observed parent ProcessGuid and start agree",
+    "relation": "launch",
+    "request_id": "880f9d36-26da-a95b-2566-8eed8ec92668"
+  },
+  {
+    "candidate_request_ids": [
+      "ed9d5314-ef7c-1580-4d35-e4a591fe3ecf"
+    ],
+    "confidence": "high",
+    "evidence_ids": [
+      "e-0050ae31c1536edf2521d3b8",
+      "e-34f6707f04d6e8b98397694f",
+      "e-6bd3dc9d03a346ea4f9686c6",
+      "e-77641da7be8f52fff0b3b730",
+      "e-7d161008b6034f5a503d3c9a"
+    ],
+    "host": "web-70.lab",
+    "process_guid": "{7540f420-b27e-620c-ce45-58e9f4f65222}",
+    "reason": "Unique host, child/parent PIDs and bounded launch match; observed parent ProcessGuid and start agree",
+    "relation": "launch",
+    "request_id": "ed9d5314-ef7c-1580-4d35-e4a591fe3ecf"
+  },
+  {
+    "candidate_request_ids": [
+      "ed9d5314-ef7c-1580-4d35-e4a591fe3ecf"
+    ],
+    "confidence": "high",
+    "evidence_ids": [
+      "e-0050ae31c1536edf2521d3b8",
+      "e-6bd3dc9d03a346ea4f9686c6",
+      "e-7d161008b6034f5a503d3c9a",
+      "e-834fe0244e021a3ddf4e414a"
+    ],
+    "host": "web-70.lab",
+    "process_guid": "{8829f297-ed1a-6565-d7d6-4ae391ec10e7}",
+    "reason": "Observed ParentProcessGuid chain; Unique host, child/parent PIDs and bounded launch match; observed parent ProcessGuid and start agree",
+    "relation": "descendant",
+    "request_id": "ed9d5314-ef7c-1580-4d35-e4a591fe3ecf"
+  },
+  {
+    "confidence": "unattributed",
+    "evidence_ids": [
+      "e-0050ae31c1536edf2521d3b8"
+    ],
+    "host": "web-70.lab",
+    "process_guid": "{dc23aac9-1532-0030-c4cb-e918b4210474}",
+    "reason": "No unique instrumented request link; process remains independently observable",
+    "relation": "unattributed",
+    "request_id": null
+  },
+  {
+    "confidence": "unattributed",
+    "evidence_ids": [
+      "e-cc3b87cc43839ebd40c433db"
+    ],
+    "host": "web-75.lab",
+    "process_guid": "{56303d90-2acb-a141-ce8d-1861d70278b1}",
+    "reason": "No unique instrumented request link; process remains independently observable",
+    "relation": "unattributed",
+    "request_id": null
+  },
+  {
+    "candidate_request_ids": [
+      "411e0779-e65d-a5ce-85b3-978b5466b825"
+    ],
+    "confidence": "high",
+    "evidence_ids": [
+      "e-14793a1aa7fcdf7e45f0686c",
+      "e-5f301bf3435f8cc37f8cee2c",
+      "e-cc3b87cc43839ebd40c433db"
+    ],
+    "host": "web-75.lab",
+    "process_guid": "{9197b6dc-bc50-cae2-1000-2fe0c4a62fc3}",
+    "reason": "Unique host, child/parent PIDs and bounded launch match; observed parent ProcessGuid and start agree",
+    "relation": "launch",
+    "request_id": "411e0779-e65d-a5ce-85b3-978b5466b825"
+  },
+  {
+    "candidate_request_ids": [
+      "0a89b575-4d5e-79c0-3859-ebe20e2e57bc"
+    ],
+    "confidence": "high",
+    "evidence_ids": [
+      "e-5a071b4a17a06082bee6d42a",
+      "e-a9dda72ad80a573c2d9eb5db",
+      "e-edfbccc54f67737793b39083"
+    ],
+    "host": "web-76.lab",
+    "process_guid": "{3e0455f5-669a-2e0d-e00f-fbbd861af995}",
+    "reason": "Unique host, child/parent PIDs and bounded launch match; observed parent ProcessGuid and start agree",
+    "relation": "launch",
+    "request_id": "0a89b575-4d5e-79c0-3859-ebe20e2e57bc"
+  },
+  {
+    "confidence": "unattributed",
+    "evidence_ids": [
+      "e-edfbccc54f67737793b39083"
+    ],
+    "host": "web-76.lab",
+    "process_guid": "{59802d7d-e425-a7f2-c761-62580654fefa}",
+    "reason": "No unique instrumented request link; process remains independently observable",
+    "relation": "unattributed",
+    "request_id": null
+  },
+  {
+    "confidence": "unattributed",
+    "evidence_ids": [
+      "e-7e9c681ebf813d891b3ccf25"
+    ],
+    "host": "web-77.lab",
+    "process_guid": "{70f118b6-4f74-9584-0b23-8e7ed6205010}",
+    "reason": "No unique instrumented request link; process remains independently observable",
+    "relation": "unattributed",
+    "request_id": null
+  },
+  {
+    "confidence": "unattributed",
+    "evidence_ids": [
+      "e-c74ce06592427b10b577b77f"
+    ],
+    "host": "web-77.lab",
+    "process_guid": "{ac654ad6-9207-7b0e-e4ff-60845b51aa92}",
+    "reason": "No unique instrumented request link; process remains independently observable",
+    "relation": "unattributed",
+    "request_id": null
+  },
+  {
+    "confidence": "unattributed",
+    "evidence_ids": [
+      "e-185eb09de78a344c4fff46d6"
+    ],
+    "host": "web-89.lab",
+    "process_guid": "{2f3ea65a-76e8-7551-e5c0-427659c29833}",
+    "reason": "No unique instrumented request link; process remains independently observable",
+    "relation": "unattributed",
+    "request_id": null
+  },
+  {
+    "candidate_request_ids": [
+      "939eff19-9d42-676c-47d4-d5b9040ff020"
+    ],
+    "confidence": "high",
+    "evidence_ids": [
+      "e-185eb09de78a344c4fff46d6",
+      "e-35e0eee8115d291314aabc22",
+      "e-42b620654875aa4d4505e92b"
+    ],
+    "host": "web-89.lab",
+    "process_guid": "{463653af-76dd-4205-2452-c2c7d2080712}",
+    "reason": "Unique host, child/parent PIDs and bounded launch match; observed parent ProcessGuid and start agree",
+    "relation": "launch",
+    "request_id": "939eff19-9d42-676c-47d4-d5b9040ff020"
+  }
+]

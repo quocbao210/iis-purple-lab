@@ -1,0 +1,1779 @@
+{
+  "origin": "handcrafted-fixture",
+  "split": "heldout",
+  "unit": "scenario-run",
+  "case_count": 19,
+  "malicious_cases": 7,
+  "benign_cases": 12,
+  "ground_truth_sha256": "579f43c91c0f3ae7209c5eba444de8937c440b091afc937e717436bcbebde4c0",
+  "live_detection_latency": null,
+  "timing_definition": "Offline evidence parsing + correlation + Sigma conversion/query execution; excludes collection/export/report rendering.",
+  "limitations": [
+    "Handcrafted fixtures are not empirical native Windows coverage.",
+    "Ground-truth case identifiers are used only for scoring, never attribution.",
+    "Undefined denominators are null. False alerts and false-positive cases are distinct.",
+    "Conditional rule recall excludes unavailable prerequisites; overall coverage includes every planned malicious case.",
+    "No analyst-time, collection CPU overhead, financial benefit or real-time latency study."
+  ],
+  "views": {
+    "iis-only": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 7,
+      "tn": 12,
+      "precision": null,
+      "recall": 0.0,
+      "false_positive_case_rate": 0.0,
+      "alert_count": 0,
+      "false_alerts": 0,
+      "false_alerts_per_100_benign_runs": 0.0,
+      "processing_seconds": 0.10806306699987545,
+      "event_counts": {
+        "iis": 19
+      },
+      "source_bytes": {
+        "iis": 1513
+      },
+      "total_source_bytes": 1513,
+      "rule_prerequisites": {
+        "IPL-001": {
+          "available": false,
+          "required_sources": [
+            "application"
+          ],
+          "missing_sources": [
+            "application"
+          ],
+          "eligible_records_by_stage": [
+            0
+          ],
+          "incomplete_records_by_stage": [
+            0
+          ],
+          "missing_fields_by_stage": [
+            []
+          ],
+          "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+        },
+        "IPL-002": {
+          "available": false,
+          "required_sources": [
+            "sysmon"
+          ],
+          "missing_sources": [
+            "sysmon"
+          ],
+          "eligible_records_by_stage": [
+            0
+          ],
+          "incomplete_records_by_stage": [
+            0
+          ],
+          "missing_fields_by_stage": [
+            []
+          ],
+          "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+        },
+        "IPL-003": {
+          "available": false,
+          "required_sources": [
+            "sysmon"
+          ],
+          "missing_sources": [
+            "sysmon"
+          ],
+          "eligible_records_by_stage": [
+            0
+          ],
+          "incomplete_records_by_stage": [
+            0
+          ],
+          "missing_fields_by_stage": [
+            []
+          ],
+          "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+        },
+        "IPL-004": {
+          "available": false,
+          "required_sources": [
+            "sysmon"
+          ],
+          "missing_sources": [
+            "sysmon"
+          ],
+          "eligible_records_by_stage": [
+            0,
+            0
+          ],
+          "incomplete_records_by_stage": [
+            0,
+            0
+          ],
+          "missing_fields_by_stage": [
+            [],
+            []
+          ],
+          "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+        },
+        "IPL-005": {
+          "available": false,
+          "required_sources": [
+            "sysmon"
+          ],
+          "missing_sources": [
+            "sysmon"
+          ],
+          "eligible_records_by_stage": [
+            0,
+            0
+          ],
+          "incomplete_records_by_stage": [
+            0,
+            0
+          ],
+          "missing_fields_by_stage": [
+            [],
+            []
+          ],
+          "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+        },
+        "IPL-006": {
+          "available": false,
+          "required_sources": [
+            "application",
+            "sysmon"
+          ],
+          "missing_sources": [
+            "application",
+            "sysmon"
+          ],
+          "eligible_records_by_stage": [
+            0,
+            0,
+            0
+          ],
+          "incomplete_records_by_stage": [
+            0,
+            0,
+            0
+          ],
+          "missing_fields_by_stage": [
+            [],
+            [],
+            []
+          ],
+          "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+        }
+      },
+      "conditional_rules": {
+        "IPL-001": {
+          "available_positive_cases": 0,
+          "available_negative_cases": 0,
+          "unavailable_positive_cases": 3,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "tn": 0,
+          "precision": null,
+          "recall": null,
+          "false_positive_case_rate": null
+        },
+        "IPL-002": {
+          "available_positive_cases": 0,
+          "available_negative_cases": 0,
+          "unavailable_positive_cases": 4,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "tn": 0,
+          "precision": null,
+          "recall": null,
+          "false_positive_case_rate": null
+        },
+        "IPL-003": {
+          "available_positive_cases": 0,
+          "available_negative_cases": 0,
+          "unavailable_positive_cases": 2,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "tn": 0,
+          "precision": null,
+          "recall": null,
+          "false_positive_case_rate": null
+        },
+        "IPL-004": {
+          "available_positive_cases": 0,
+          "available_negative_cases": 0,
+          "unavailable_positive_cases": 2,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "tn": 0,
+          "precision": null,
+          "recall": null,
+          "false_positive_case_rate": null
+        },
+        "IPL-005": {
+          "available_positive_cases": 0,
+          "available_negative_cases": 0,
+          "unavailable_positive_cases": 2,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "tn": 0,
+          "precision": null,
+          "recall": null,
+          "false_positive_case_rate": null
+        },
+        "IPL-006": {
+          "available_positive_cases": 0,
+          "available_negative_cases": 0,
+          "unavailable_positive_cases": 3,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "tn": 0,
+          "precision": null,
+          "recall": null,
+          "false_positive_case_rate": null
+        }
+      },
+      "cases": [
+        {
+          "case_id": "heldout-01",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-02",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-03",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-04",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-05",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-06",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-07",
+          "malicious": true,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-08",
+          "malicious": true,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-09",
+          "malicious": true,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-10",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-11",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-12",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-13",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-14",
+          "malicious": true,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-15",
+          "malicious": true,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-16",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-17",
+          "malicious": true,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-18",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-19",
+          "malicious": true,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        }
+      ],
+      "attribution": {}
+    },
+    "iis-application": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 5,
+      "tn": 12,
+      "precision": 1.0,
+      "recall": 0.2857142857142857,
+      "false_positive_case_rate": 0.0,
+      "alert_count": 2,
+      "false_alerts": 0,
+      "false_alerts_per_100_benign_runs": 0.0,
+      "processing_seconds": 0.12969370700011496,
+      "event_counts": {
+        "application": 26,
+        "iis": 19
+      },
+      "source_bytes": {
+        "application": 10183,
+        "iis": 1513
+      },
+      "total_source_bytes": 11696,
+      "rule_prerequisites": {
+        "IPL-001": {
+          "available": true,
+          "required_sources": [
+            "application"
+          ],
+          "missing_sources": [],
+          "eligible_records_by_stage": [
+            8
+          ],
+          "incomplete_records_by_stage": [
+            0
+          ],
+          "missing_fields_by_stage": [
+            []
+          ],
+          "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+        },
+        "IPL-002": {
+          "available": false,
+          "required_sources": [
+            "sysmon"
+          ],
+          "missing_sources": [
+            "sysmon"
+          ],
+          "eligible_records_by_stage": [
+            0
+          ],
+          "incomplete_records_by_stage": [
+            0
+          ],
+          "missing_fields_by_stage": [
+            []
+          ],
+          "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+        },
+        "IPL-003": {
+          "available": false,
+          "required_sources": [
+            "sysmon"
+          ],
+          "missing_sources": [
+            "sysmon"
+          ],
+          "eligible_records_by_stage": [
+            0
+          ],
+          "incomplete_records_by_stage": [
+            0
+          ],
+          "missing_fields_by_stage": [
+            []
+          ],
+          "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+        },
+        "IPL-004": {
+          "available": false,
+          "required_sources": [
+            "sysmon"
+          ],
+          "missing_sources": [
+            "sysmon"
+          ],
+          "eligible_records_by_stage": [
+            0,
+            0
+          ],
+          "incomplete_records_by_stage": [
+            0,
+            0
+          ],
+          "missing_fields_by_stage": [
+            [],
+            []
+          ],
+          "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+        },
+        "IPL-005": {
+          "available": false,
+          "required_sources": [
+            "sysmon"
+          ],
+          "missing_sources": [
+            "sysmon"
+          ],
+          "eligible_records_by_stage": [
+            0,
+            0
+          ],
+          "incomplete_records_by_stage": [
+            0,
+            0
+          ],
+          "missing_fields_by_stage": [
+            [],
+            []
+          ],
+          "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+        },
+        "IPL-006": {
+          "available": false,
+          "required_sources": [
+            "application",
+            "sysmon"
+          ],
+          "missing_sources": [
+            "sysmon"
+          ],
+          "eligible_records_by_stage": [
+            0,
+            9,
+            9
+          ],
+          "incomplete_records_by_stage": [
+            0,
+            0,
+            0
+          ],
+          "missing_fields_by_stage": [
+            [],
+            [],
+            []
+          ],
+          "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+        }
+      },
+      "conditional_rules": {
+        "IPL-001": {
+          "available_positive_cases": 2,
+          "available_negative_cases": 6,
+          "unavailable_positive_cases": 1,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "tn": 6,
+          "precision": 1.0,
+          "recall": 1.0,
+          "false_positive_case_rate": 0.0
+        },
+        "IPL-002": {
+          "available_positive_cases": 0,
+          "available_negative_cases": 0,
+          "unavailable_positive_cases": 4,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "tn": 0,
+          "precision": null,
+          "recall": null,
+          "false_positive_case_rate": null
+        },
+        "IPL-003": {
+          "available_positive_cases": 0,
+          "available_negative_cases": 0,
+          "unavailable_positive_cases": 2,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "tn": 0,
+          "precision": null,
+          "recall": null,
+          "false_positive_case_rate": null
+        },
+        "IPL-004": {
+          "available_positive_cases": 0,
+          "available_negative_cases": 0,
+          "unavailable_positive_cases": 2,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "tn": 0,
+          "precision": null,
+          "recall": null,
+          "false_positive_case_rate": null
+        },
+        "IPL-005": {
+          "available_positive_cases": 0,
+          "available_negative_cases": 0,
+          "unavailable_positive_cases": 2,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "tn": 0,
+          "precision": null,
+          "recall": null,
+          "false_positive_case_rate": null
+        },
+        "IPL-006": {
+          "available_positive_cases": 0,
+          "available_negative_cases": 0,
+          "unavailable_positive_cases": 3,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "tn": 0,
+          "precision": null,
+          "recall": null,
+          "false_positive_case_rate": null
+        }
+      },
+      "cases": [
+        {
+          "case_id": "heldout-01",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-02",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-03",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [
+            "ticket-2762"
+          ],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-04",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [
+            "ticket-5101"
+          ],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-05",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-06",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-07",
+          "malicious": true,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-08",
+          "malicious": true,
+          "detected": true,
+          "rules": [
+            "IPL-001"
+          ],
+          "alert_count": 1,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [
+            "ticket-6154"
+          ],
+          "affected_resource_ids": [
+            "ticket-6154"
+          ]
+        },
+        {
+          "case_id": "heldout-09",
+          "malicious": true,
+          "detected": true,
+          "rules": [
+            "IPL-001"
+          ],
+          "alert_count": 1,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [
+            "ticket-2200"
+          ],
+          "affected_resource_ids": [
+            "ticket-2200"
+          ]
+        },
+        {
+          "case_id": "heldout-10",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [
+            "ticket-3243"
+          ],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-11",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-12",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-13",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [
+            "ticket-2807"
+          ],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-14",
+          "malicious": true,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-15",
+          "malicious": true,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-16",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [
+            "ticket-3714"
+          ],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-17",
+          "malicious": true,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-18",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [
+            "ticket-2316"
+          ],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-19",
+          "malicious": true,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        }
+      ],
+      "attribution": {
+        "low": 9
+      }
+    },
+    "windows-only": {
+      "tp": 4,
+      "fp": 1,
+      "fn": 3,
+      "tn": 11,
+      "precision": 0.8,
+      "recall": 0.5714285714285714,
+      "false_positive_case_rate": 0.08333333333333333,
+      "alert_count": 11,
+      "false_alerts": 1,
+      "false_alerts_per_100_benign_runs": 8.333333333333334,
+      "processing_seconds": 0.10135566600001766,
+      "event_counts": {
+        "sysmon": 25
+      },
+      "source_bytes": {
+        "sysmon": 22432
+      },
+      "total_source_bytes": 22432,
+      "rule_prerequisites": {
+        "IPL-001": {
+          "available": false,
+          "required_sources": [
+            "application"
+          ],
+          "missing_sources": [
+            "application"
+          ],
+          "eligible_records_by_stage": [
+            0
+          ],
+          "incomplete_records_by_stage": [
+            0
+          ],
+          "missing_fields_by_stage": [
+            []
+          ],
+          "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+        },
+        "IPL-002": {
+          "available": true,
+          "required_sources": [
+            "sysmon"
+          ],
+          "missing_sources": [],
+          "eligible_records_by_stage": [
+            21
+          ],
+          "incomplete_records_by_stage": [
+            0
+          ],
+          "missing_fields_by_stage": [
+            []
+          ],
+          "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+        },
+        "IPL-003": {
+          "available": true,
+          "required_sources": [
+            "sysmon"
+          ],
+          "missing_sources": [],
+          "eligible_records_by_stage": [
+            21
+          ],
+          "incomplete_records_by_stage": [
+            0
+          ],
+          "missing_fields_by_stage": [
+            []
+          ],
+          "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+        },
+        "IPL-004": {
+          "available": true,
+          "required_sources": [
+            "sysmon"
+          ],
+          "missing_sources": [],
+          "eligible_records_by_stage": [
+            21,
+            2
+          ],
+          "incomplete_records_by_stage": [
+            0,
+            0
+          ],
+          "missing_fields_by_stage": [
+            [],
+            []
+          ],
+          "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+        },
+        "IPL-005": {
+          "available": true,
+          "required_sources": [
+            "sysmon"
+          ],
+          "missing_sources": [],
+          "eligible_records_by_stage": [
+            21,
+            2
+          ],
+          "incomplete_records_by_stage": [
+            0,
+            0
+          ],
+          "missing_fields_by_stage": [
+            [],
+            []
+          ],
+          "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+        },
+        "IPL-006": {
+          "available": false,
+          "required_sources": [
+            "application",
+            "sysmon"
+          ],
+          "missing_sources": [
+            "application"
+          ],
+          "eligible_records_by_stage": [
+            21,
+            0,
+            0
+          ],
+          "incomplete_records_by_stage": [
+            0,
+            0,
+            0
+          ],
+          "missing_fields_by_stage": [
+            [],
+            [],
+            []
+          ],
+          "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+        }
+      },
+      "conditional_rules": {
+        "IPL-001": {
+          "available_positive_cases": 0,
+          "available_negative_cases": 0,
+          "unavailable_positive_cases": 3,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "tn": 0,
+          "precision": null,
+          "recall": null,
+          "false_positive_case_rate": null
+        },
+        "IPL-002": {
+          "available_positive_cases": 4,
+          "available_negative_cases": 6,
+          "unavailable_positive_cases": 0,
+          "tp": 4,
+          "fp": 1,
+          "fn": 0,
+          "tn": 5,
+          "precision": 0.8,
+          "recall": 1.0,
+          "false_positive_case_rate": 0.16666666666666666
+        },
+        "IPL-003": {
+          "available_positive_cases": 2,
+          "available_negative_cases": 8,
+          "unavailable_positive_cases": 0,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "tn": 8,
+          "precision": 1.0,
+          "recall": 1.0,
+          "false_positive_case_rate": 0.0
+        },
+        "IPL-004": {
+          "available_positive_cases": 2,
+          "available_negative_cases": 0,
+          "unavailable_positive_cases": 0,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "tn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "false_positive_case_rate": null
+        },
+        "IPL-005": {
+          "available_positive_cases": 2,
+          "available_negative_cases": 0,
+          "unavailable_positive_cases": 0,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "tn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "false_positive_case_rate": null
+        },
+        "IPL-006": {
+          "available_positive_cases": 0,
+          "available_negative_cases": 0,
+          "unavailable_positive_cases": 3,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "tn": 0,
+          "precision": null,
+          "recall": null,
+          "false_positive_case_rate": null
+        }
+      },
+      "cases": [
+        {
+          "case_id": "heldout-01",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-02",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-03",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-04",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-05",
+          "malicious": false,
+          "detected": true,
+          "rules": [
+            "IPL-002"
+          ],
+          "alert_count": 1,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-06",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-07",
+          "malicious": true,
+          "detected": true,
+          "rules": [
+            "IPL-002",
+            "IPL-003",
+            "IPL-004",
+            "IPL-005"
+          ],
+          "alert_count": 4,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-08",
+          "malicious": true,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-09",
+          "malicious": true,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-10",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-11",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-12",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-13",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-14",
+          "malicious": true,
+          "detected": true,
+          "rules": [
+            "IPL-002"
+          ],
+          "alert_count": 1,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-15",
+          "malicious": true,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-16",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-17",
+          "malicious": true,
+          "detected": true,
+          "rules": [
+            "IPL-002"
+          ],
+          "alert_count": 1,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-18",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-19",
+          "malicious": true,
+          "detected": true,
+          "rules": [
+            "IPL-002",
+            "IPL-003",
+            "IPL-004",
+            "IPL-005"
+          ],
+          "alert_count": 4,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        }
+      ],
+      "attribution": {
+        "unattributed": 21
+      }
+    },
+    "combined": {
+      "tp": 6,
+      "fp": 1,
+      "fn": 1,
+      "tn": 11,
+      "precision": 0.8571428571428571,
+      "recall": 0.8571428571428571,
+      "false_positive_case_rate": 0.08333333333333333,
+      "alert_count": 16,
+      "false_alerts": 1,
+      "false_alerts_per_100_benign_runs": 8.333333333333334,
+      "processing_seconds": 0.18346605199985788,
+      "event_counts": {
+        "sysmon": 25,
+        "application": 26,
+        "iis": 19
+      },
+      "source_bytes": {
+        "application": 10183,
+        "sysmon": 22432,
+        "iis": 1513
+      },
+      "total_source_bytes": 34128,
+      "rule_prerequisites": {
+        "IPL-001": {
+          "available": true,
+          "required_sources": [
+            "application"
+          ],
+          "missing_sources": [],
+          "eligible_records_by_stage": [
+            8
+          ],
+          "incomplete_records_by_stage": [
+            0
+          ],
+          "missing_fields_by_stage": [
+            []
+          ],
+          "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+        },
+        "IPL-002": {
+          "available": true,
+          "required_sources": [
+            "sysmon"
+          ],
+          "missing_sources": [],
+          "eligible_records_by_stage": [
+            21
+          ],
+          "incomplete_records_by_stage": [
+            0
+          ],
+          "missing_fields_by_stage": [
+            []
+          ],
+          "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+        },
+        "IPL-003": {
+          "available": true,
+          "required_sources": [
+            "sysmon"
+          ],
+          "missing_sources": [],
+          "eligible_records_by_stage": [
+            21
+          ],
+          "incomplete_records_by_stage": [
+            0
+          ],
+          "missing_fields_by_stage": [
+            []
+          ],
+          "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+        },
+        "IPL-004": {
+          "available": true,
+          "required_sources": [
+            "sysmon"
+          ],
+          "missing_sources": [],
+          "eligible_records_by_stage": [
+            21,
+            2
+          ],
+          "incomplete_records_by_stage": [
+            0,
+            0
+          ],
+          "missing_fields_by_stage": [
+            [],
+            []
+          ],
+          "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+        },
+        "IPL-005": {
+          "available": true,
+          "required_sources": [
+            "sysmon"
+          ],
+          "missing_sources": [],
+          "eligible_records_by_stage": [
+            21,
+            2
+          ],
+          "incomplete_records_by_stage": [
+            0,
+            0
+          ],
+          "missing_fields_by_stage": [
+            [],
+            []
+          ],
+          "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+        },
+        "IPL-006": {
+          "available": true,
+          "required_sources": [
+            "application",
+            "sysmon"
+          ],
+          "missing_sources": [],
+          "eligible_records_by_stage": [
+            21,
+            9,
+            9
+          ],
+          "incomplete_records_by_stage": [
+            0,
+            0,
+            0
+          ],
+          "missing_fields_by_stage": [
+            [],
+            [],
+            []
+          ],
+          "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+        }
+      },
+      "conditional_rules": {
+        "IPL-001": {
+          "available_positive_cases": 2,
+          "available_negative_cases": 6,
+          "unavailable_positive_cases": 1,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "tn": 6,
+          "precision": 1.0,
+          "recall": 1.0,
+          "false_positive_case_rate": 0.0
+        },
+        "IPL-002": {
+          "available_positive_cases": 4,
+          "available_negative_cases": 6,
+          "unavailable_positive_cases": 0,
+          "tp": 4,
+          "fp": 1,
+          "fn": 0,
+          "tn": 5,
+          "precision": 0.8,
+          "recall": 1.0,
+          "false_positive_case_rate": 0.16666666666666666
+        },
+        "IPL-003": {
+          "available_positive_cases": 2,
+          "available_negative_cases": 8,
+          "unavailable_positive_cases": 0,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "tn": 8,
+          "precision": 1.0,
+          "recall": 1.0,
+          "false_positive_case_rate": 0.0
+        },
+        "IPL-004": {
+          "available_positive_cases": 2,
+          "available_negative_cases": 0,
+          "unavailable_positive_cases": 0,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "tn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "false_positive_case_rate": null
+        },
+        "IPL-005": {
+          "available_positive_cases": 2,
+          "available_negative_cases": 0,
+          "unavailable_positive_cases": 0,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "tn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "false_positive_case_rate": null
+        },
+        "IPL-006": {
+          "available_positive_cases": 3,
+          "available_negative_cases": 6,
+          "unavailable_positive_cases": 0,
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "tn": 6,
+          "precision": 1.0,
+          "recall": 1.0,
+          "false_positive_case_rate": 0.0
+        }
+      },
+      "cases": [
+        {
+          "case_id": "heldout-01",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 1,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-02",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 1,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-03",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [
+            "ticket-2762"
+          ],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-04",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [
+            "ticket-5101"
+          ],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-05",
+          "malicious": false,
+          "detected": true,
+          "rules": [
+            "IPL-002"
+          ],
+          "alert_count": 1,
+          "high_confidence_process_links": 1,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-06",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 1,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-07",
+          "malicious": true,
+          "detected": true,
+          "rules": [
+            "IPL-002",
+            "IPL-003",
+            "IPL-004",
+            "IPL-005",
+            "IPL-006"
+          ],
+          "alert_count": 5,
+          "high_confidence_process_links": 2,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-08",
+          "malicious": true,
+          "detected": true,
+          "rules": [
+            "IPL-001"
+          ],
+          "alert_count": 1,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [
+            "ticket-6154"
+          ],
+          "affected_resource_ids": [
+            "ticket-6154"
+          ]
+        },
+        {
+          "case_id": "heldout-09",
+          "malicious": true,
+          "detected": true,
+          "rules": [
+            "IPL-001"
+          ],
+          "alert_count": 1,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [
+            "ticket-2200"
+          ],
+          "affected_resource_ids": [
+            "ticket-2200"
+          ]
+        },
+        {
+          "case_id": "heldout-10",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [
+            "ticket-3243"
+          ],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-11",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 1,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-12",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 1,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-13",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [
+            "ticket-2807"
+          ],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-14",
+          "malicious": true,
+          "detected": true,
+          "rules": [
+            "IPL-002"
+          ],
+          "alert_count": 1,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-15",
+          "malicious": true,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-16",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [
+            "ticket-3714"
+          ],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-17",
+          "malicious": true,
+          "detected": true,
+          "rules": [
+            "IPL-002",
+            "IPL-006"
+          ],
+          "alert_count": 2,
+          "high_confidence_process_links": 1,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-18",
+          "malicious": false,
+          "detected": false,
+          "rules": [],
+          "alert_count": 0,
+          "high_confidence_process_links": 0,
+          "observed_resource_ids": [
+            "ticket-2316"
+          ],
+          "affected_resource_ids": []
+        },
+        {
+          "case_id": "heldout-19",
+          "malicious": true,
+          "detected": true,
+          "rules": [
+            "IPL-002",
+            "IPL-003",
+            "IPL-004",
+            "IPL-005",
+            "IPL-006"
+          ],
+          "alert_count": 5,
+          "high_confidence_process_links": 2,
+          "observed_resource_ids": [],
+          "affected_resource_ids": []
+        }
+      ],
+      "attribution": {
+        "high": 11,
+        "unattributed": 10
+      }
+    }
+  },
+  "process_rule_comparison": {
+    "basic-any-worker-child": {
+      "tp": 4,
+      "fp": 6,
+      "fn": 0,
+      "tn": 0,
+      "precision": 0.4,
+      "recall": 1.0,
+      "false_positive_case_rate": 1.0
+    },
+    "tuned-interpreter-child": {
+      "tp": 4,
+      "fp": 1,
+      "fn": 0,
+      "tn": 5,
+      "precision": 0.8,
+      "recall": 1.0,
+      "false_positive_case_rate": 0.16666666666666666
+    }
+  }
+}

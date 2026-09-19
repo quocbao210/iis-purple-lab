@@ -1,0 +1,49 @@
+name: Portable preview checks
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  replay:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: '3.14.4'
+      - run: python -m pip install -r requirements.lock
+      - run: python -m pip install --no-deps --no-build-isolation -e .
+      - run: python -m pytest tests scenarios/test_harness.py -q
+      - run: python -m iis_purple demo --dataset datasets/fixtures/heldout --output artifacts/demo
+      - run: python -m iis_purple evaluate --dataset datasets/fixtures/heldout --output artifacts/evaluation
+  application:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          global-json-file: global.json
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: '3.14.4'
+      - run: dotnet restore app/IisPurpleLab.Tests/IisPurpleLab.Tests.csproj --locked-mode
+      - run: dotnet test app/IisPurpleLab.Tests/IisPurpleLab.Tests.csproj --no-restore
+      - name: Actual portable HTTP policy and managed export checks (no host payloads)
+        run: python scenarios/portable_check.py --output artifacts/portable-http.json
+  powershell-static:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Parse and test path boundaries only; no lab installation
+        shell: powershell
+        run: .\lab\windows\Test-Scripts.ps1
+# Native IIS setup, B/C execution, Sysmon/audit changes and capture are deliberately
+# absent from shared runners. Run their separate gates in the disposable VM.

@@ -1,0 +1,61 @@
+IIS Purple Lab — Windows Web-to-Host Detection and Response
+
+The idea
+
+Build a Windows purple-team lab that investigates how a web application attack becomes a business security incident.
+
+The fictional company operates an IIS customer-support portal containing private customer records and a report-export feature. The project examines whether defenders can recognise exploitation, determine which records or Windows processes were affected, and verify that the underlying vulnerability has been fixed.
+
+Its specific research focus is connecting web requests with Windows activity while clearly explaining the strength and limitations of the evidence.
+
+What it does
+
+The project reproduces controlled attacks against the lab application, collects security logs, develops detections, reconstructs incidents, and retests remediation.
+
+It covers three scenarios: unauthorised access to another customer organisation’s records, unsafe report processing that triggers Windows command execution, and harmless follow-on activity involving discovery and dummy-file staging.
+
+IIS logs show the requests. Application events provide user, organisation, and resource context. Windows events provide evidence of processes and host activity. The analysis pipeline connects these sources into an investigation timeline.
+
+Each scenario ends with a vulnerability fix and repeated tests of both the attack and legitimate business activity.
+
+How it helps the company
+
+The project could help a company answer practical questions: Did the attack succeed? Which customer records were affected? Did the application launch unexpected Windows activity? What should the response team contain?
+
+For developers, it provides a reproducible vulnerability report and evidence that a fix works. For SOC analysts, it supplies contextual alerts and investigation guidance. For incident responders, it provides a timeline and evidence supporting scope and containment decisions.
+
+It also helps evaluate which logs are useful and which detections generate unnecessary alerts. Faster investigations and reduced disruption are potential benefits to measure, rather than assumed financial savings.
+
+What the outcome is
+
+The planned deliverables are a working Windows lab, a portable demonstration, approximately six tested detections, three investigation reports, at least two vulnerability-and-remediation reports, and a reusable evidence collector.
+
+The measurable outcomes are more important than the number of files produced. The evaluation will report which attack cases were detected or missed, how many false alerts occurred during legitimate activity, which affected resources were identified, and which request-to-process connections remained uncertain.
+
+Remediation is successful when the original exploit fails while authorised workflows continue to function. Every completed claim should link to a test result or captured evidence.
+
+How it compares with another method
+
+The project will compare the same scenarios using four approaches:
+
+Approach	What the comparison investigates
+IIS access logs only	Whether request metadata reveals the attack and establishes its outcome
+IIS plus application events	Whether user, tenant, and resource context improves scope assessment
+Windows events only	Whether process and host evidence identifies the demonstrated activity
+Combined evidence	Whether linking the sources improves detection and attribution
+
+The combined method earns a claim of improvement only if the results show better coverage, clearer attribution, or fewer false alerts for the evaluated cases.
+
+It also has costs: additional instrumentation, log storage, configuration, and maintenance. These trade-offs must be documented.
+
+A vulnerability reproduction and fix test establishes exploitability and remediation. This project additionally evaluates whether defenders can observe, detect, investigate, and recognise the same attack after security changes. It can complement a company’s SIEM or EDR.
+
+Experience gained
+
+The project develops offensive skills through vulnerability reproduction, root-cause analysis, impact assessment, Windows execution-context analysis, and remediation testing.
+
+It develops defensive skills through Windows logging configuration, Sigma rule development, event correlation, false-positive investigation, evidence collection, and incident reconstruction.
+
+The purple-team experience comes from completing the feedback cycle: reproduce an attack, identify missing visibility, improve a detection, implement a fix, and repeat the exercise.
+
+To demonstrate ownership in an interview, I should be able to investigate an unfamiliar case, modify a detection and explain the trade-off, reproduce a remediation test, and describe a limitation that the project does not solve.

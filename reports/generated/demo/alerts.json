@@ -1,0 +1,237 @@
+[
+  {
+    "alert_id": "4d761c91fdc15b9817e8",
+    "evidence_ids": [
+      "e-c81d582516c96afacff0e20e"
+    ],
+    "host": "web-43.lab",
+    "kind": "policy-violation",
+    "reason": "Successful access violates tenant, sharing and administrator policy.",
+    "request_id": "ab8de87b-99be-dd9d-a4cb-b94d56088687",
+    "rule_id": "IPL-001",
+    "severity": "high",
+    "title": "Cross-tenant policy violation"
+  },
+  {
+    "alert_id": "5f342af0c807ae25978e",
+    "evidence_ids": [
+      "e-1a99c365bc06037f51882aef"
+    ],
+    "host": "web-73.lab",
+    "kind": "policy-violation",
+    "reason": "Successful access violates tenant, sharing and administrator policy.",
+    "request_id": "41ca66b1-c20a-c475-4b13-4213dd9c4550",
+    "rule_id": "IPL-001",
+    "severity": "high",
+    "title": "Cross-tenant policy violation"
+  },
+  {
+    "alert_id": "36f4392fcdf3db6a272e",
+    "evidence_ids": [
+      "e-db60ba62c67ba3bc399bbafb"
+    ],
+    "host": "web-67.lab",
+    "kind": "hunting-lead",
+    "reason": "An IIS worker launched an interpreter. Legitimate legacy exports remain an alternative.",
+    "request_id": "880f9d36-26da-a95b-2566-8eed8ec92668",
+    "rule_id": "IPL-002",
+    "severity": "medium",
+    "title": "Interpreter child of IIS"
+  },
+  {
+    "alert_id": "65f22ca928d6273279d4",
+    "evidence_ids": [
+      "e-a9dda72ad80a573c2d9eb5db"
+    ],
+    "host": "web-76.lab",
+    "kind": "hunting-lead",
+    "reason": "An IIS worker launched an interpreter. Legitimate legacy exports remain an alternative.",
+    "request_id": "0a89b575-4d5e-79c0-3859-ebe20e2e57bc",
+    "rule_id": "IPL-002",
+    "severity": "medium",
+    "title": "Interpreter child of IIS"
+  },
+  {
+    "alert_id": "c6fccb0cb4ea41dbf288",
+    "evidence_ids": [
+      "e-6bd3dc9d03a346ea4f9686c6"
+    ],
+    "host": "web-70.lab",
+    "kind": "hunting-lead",
+    "reason": "An IIS worker launched an interpreter. Legitimate legacy exports remain an alternative.",
+    "request_id": "ed9d5314-ef7c-1580-4d35-e4a591fe3ecf",
+    "rule_id": "IPL-002",
+    "severity": "medium",
+    "title": "Interpreter child of IIS"
+  },
+  {
+    "alert_id": "d22608dfd7090f55628b",
+    "evidence_ids": [
+      "e-5f301bf3435f8cc37f8cee2c"
+    ],
+    "host": "web-75.lab",
+    "kind": "hunting-lead",
+    "reason": "An IIS worker launched an interpreter. Legitimate legacy exports remain an alternative.",
+    "request_id": "411e0779-e65d-a5ce-85b3-978b5466b825",
+    "rule_id": "IPL-002",
+    "severity": "medium",
+    "title": "Interpreter child of IIS"
+  },
+  {
+    "alert_id": "f10e0bd84f5cb03d9734",
+    "evidence_ids": [
+      "e-c74ce06592427b10b577b77f"
+    ],
+    "host": "web-77.lab",
+    "kind": "hunting-lead",
+    "reason": "An IIS worker launched an interpreter. Legitimate legacy exports remain an alternative.",
+    "request_id": null,
+    "rule_id": "IPL-002",
+    "severity": "medium",
+    "title": "Interpreter child of IIS"
+  },
+  {
+    "alert_id": "672631add63374f5d03d",
+    "evidence_ids": [
+      "e-0050ae31c1536edf2521d3b8",
+      "e-6bd3dc9d03a346ea4f9686c6",
+      "e-834fe0244e021a3ddf4e414a"
+    ],
+    "host": "web-70.lab",
+    "kind": "hunting-lead",
+    "reason": "Observed ProcessGuid ancestry connects identity/host discovery to IIS; intent is inferred.",
+    "request_id": "ed9d5314-ef7c-1580-4d35-e4a591fe3ecf",
+    "rule_id": "IPL-003",
+    "severity": "medium",
+    "title": "Discovery in IIS descendants"
+  },
+  {
+    "alert_id": "7f6e515f55bfbcccd931",
+    "evidence_ids": [
+      "e-44c6350abc3a5c895571f05d",
+      "e-7cc941d7f2a9908b0ebabd3f",
+      "e-db60ba62c67ba3bc399bbafb"
+    ],
+    "host": "web-67.lab",
+    "kind": "hunting-lead",
+    "reason": "Observed ProcessGuid ancestry connects identity/host discovery to IIS; intent is inferred.",
+    "request_id": "880f9d36-26da-a95b-2566-8eed8ec92668",
+    "rule_id": "IPL-003",
+    "severity": "medium",
+    "title": "Discovery in IIS descendants"
+  },
+  {
+    "alert_id": "b5b610df0c2b3d830e33",
+    "evidence_ids": [
+      "e-0f648897a75aefa4f1b25f32",
+      "e-44c6350abc3a5c895571f05d",
+      "e-db60ba62c67ba3bc399bbafb"
+    ],
+    "host": "web-67.lab",
+    "kind": "hunting-lead",
+    "reason": "An interpreter descendant wrote under a protected application data root; no read is established.",
+    "request_id": "880f9d36-26da-a95b-2566-8eed8ec92668",
+    "rule_id": "IPL-004",
+    "severity": "medium",
+    "title": "Unexpected write by IIS interpreter chain"
+  },
+  {
+    "alert_id": "f279c722ebd0842702b8",
+    "evidence_ids": [
+      "e-0050ae31c1536edf2521d3b8",
+      "e-34f6707f04d6e8b98397694f",
+      "e-6bd3dc9d03a346ea4f9686c6"
+    ],
+    "host": "web-70.lab",
+    "kind": "hunting-lead",
+    "reason": "An interpreter descendant wrote under a protected application data root; no read is established.",
+    "request_id": "ed9d5314-ef7c-1580-4d35-e4a591fe3ecf",
+    "rule_id": "IPL-004",
+    "severity": "medium",
+    "title": "Unexpected write by IIS interpreter chain"
+  },
+  {
+    "alert_id": "b2f5c1c0429b10ad42a5",
+    "evidence_ids": [
+      "e-44c6350abc3a5c895571f05d",
+      "e-686c868170dd18e201c7e252",
+      "e-db60ba62c67ba3bc399bbafb"
+    ],
+    "host": "web-67.lab",
+    "kind": "hunting-lead",
+    "reason": "Connection outside the configured report destination policy; connection alone does not establish transfer.",
+    "request_id": "880f9d36-26da-a95b-2566-8eed8ec92668",
+    "rule_id": "IPL-005",
+    "severity": "medium",
+    "title": "Unexpected connection from IIS descendants"
+  },
+  {
+    "alert_id": "eb0e4ba89944636a6516",
+    "evidence_ids": [
+      "e-0050ae31c1536edf2521d3b8",
+      "e-6bd3dc9d03a346ea4f9686c6",
+      "e-77641da7be8f52fff0b3b730"
+    ],
+    "host": "web-70.lab",
+    "kind": "hunting-lead",
+    "reason": "Connection outside the configured report destination policy; connection alone does not establish transfer.",
+    "request_id": "ed9d5314-ef7c-1580-4d35-e4a591fe3ecf",
+    "rule_id": "IPL-005",
+    "severity": "medium",
+    "title": "Unexpected connection from IIS descendants"
+  },
+  {
+    "alert_id": "011643f059667f439098",
+    "evidence_ids": [
+      "e-0f648897a75aefa4f1b25f32",
+      "e-44c6350abc3a5c895571f05d",
+      "e-686c868170dd18e201c7e252",
+      "e-73632973018b03632f84775d",
+      "e-7cc941d7f2a9908b0ebabd3f",
+      "e-9e25cbbc5c09f242ea2fce79",
+      "e-db60ba62c67ba3bc399bbafb"
+    ],
+    "host": "web-67.lab",
+    "kind": "correlated-incident",
+    "reason": "Shell-control syntax in an accepted report request and independently observed endpoint execution share a high-confidence launch link.",
+    "request_id": "880f9d36-26da-a95b-2566-8eed8ec92668",
+    "rule_id": "IPL-006",
+    "severity": "high",
+    "title": "Request and endpoint execution incident"
+  },
+  {
+    "alert_id": "9b125f4d1405ea330d60",
+    "evidence_ids": [
+      "e-5a071b4a17a06082bee6d42a",
+      "e-a9dda72ad80a573c2d9eb5db",
+      "e-d80ff433f8159581ada2f1a8",
+      "e-edfbccc54f67737793b39083"
+    ],
+    "host": "web-76.lab",
+    "kind": "correlated-incident",
+    "reason": "Shell-control syntax in an accepted report request and independently observed endpoint execution share a high-confidence launch link.",
+    "request_id": "0a89b575-4d5e-79c0-3859-ebe20e2e57bc",
+    "rule_id": "IPL-006",
+    "severity": "high",
+    "title": "Request and endpoint execution incident"
+  },
+  {
+    "alert_id": "a4829a615049ee4e33db",
+    "evidence_ids": [
+      "e-0050ae31c1536edf2521d3b8",
+      "e-34f6707f04d6e8b98397694f",
+      "e-6bd3dc9d03a346ea4f9686c6",
+      "e-77641da7be8f52fff0b3b730",
+      "e-7d161008b6034f5a503d3c9a",
+      "e-834fe0244e021a3ddf4e414a",
+      "e-c487aab91defb92d16a9369e"
+    ],
+    "host": "web-70.lab",
+    "kind": "correlated-incident",
+    "reason": "Shell-control syntax in an accepted report request and independently observed endpoint execution share a high-confidence launch link.",
+    "request_id": "ed9d5314-ef7c-1580-4d35-e4a591fe3ecf",
+    "rule_id": "IPL-006",
+    "severity": "high",
+    "title": "Request and endpoint execution incident"
+  }
+]

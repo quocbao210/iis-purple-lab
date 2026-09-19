@@ -1,0 +1,360 @@
+{
+  "schema_version": 2,
+  "kind": "independent-fresh-copy-portable-validation",
+  "validation_date": "2026-09-19",
+  "passed": true,
+  "environment": {
+    "platform": "Linux x64",
+    "python": "3.14.4",
+    "dotnet_sdk": "10.0.401",
+    "dotnet_target_framework": "net10.0",
+    "execution_mode": "Portable development and replay; local HTTP uses Kestrel",
+    "native_windows_validated": false
+  },
+  "isolation": {
+    "method": "Copied the final repository sources into a new temporary directory, created a fresh Python venv, and restored/rebuilt both .NET projects without copied build output. Verified the loaded Python module belongs to this copy.",
+    "excluded": [
+      ".git",
+      ".venv",
+      ".dotnet",
+      "bin",
+      "obj",
+      "__pycache__",
+      ".pytest_cache",
+      "*.egg-info",
+      "artifacts",
+      "*.trx",
+      "*.db*",
+      "*.evtx",
+      "*.pfx",
+      ".env",
+      "lab-settings.local.json",
+      "*preflight*.json",
+      "datasets/native",
+      "datasets/sanitised",
+      "reports/generated",
+      "reports/validation"
+    ],
+    "dependency_cache_note": "Package-manager download caches were available. This verifies a fresh environment and fresh build output, not a cold-cache or offline installation.",
+    "public_summary_note": "Temporary absolute paths and local account names are omitted. Commands use the documented dotnet executable name; execution resolved the externally installed SDK pinned by global.json. Raw JUnit/TRX output stayed in the temporary copy."
+  },
+  "commands": [
+    {
+      "command": "python3 -m venv .venv",
+      "exit_code": 0,
+      "result": "Created a new isolated environment."
+    },
+    {
+      "command": ".venv/bin/python -m pip install -r requirements.lock",
+      "exit_code": 0,
+      "result": "Installed all 23 pinned packages successfully; independently verified installed distribution versions against every lock entry."
+    },
+    {
+      "command": ".venv/bin/python -m pip install --no-deps --no-build-isolation -e .",
+      "exit_code": 0,
+      "result": "Built and installed editable iis-purple-lab 0.1.0 successfully."
+    },
+    {
+      "command": ".venv/bin/python -m pip check",
+      "exit_code": 0,
+      "result": "No broken requirements found."
+    },
+    {
+      "command": ".venv/bin/python -m pytest tests scenarios/test_harness.py -q --junitxml=artifacts/test-results/pytest.xml",
+      "exit_code": 0,
+      "passed": 63,
+      "passed_subtests": 7,
+      "junit_test_records": 70,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "reported_duration_seconds": 0.39,
+      "scope": "Parser, correlation, detection, Sigma SQLite execution, source-removal evaluation, report integrity and localhost scenario harness tests. Includes six new evidence-integrity regressions.",
+      "warnings": []
+    },
+    {
+      "command": "dotnet restore app/IisPurpleLab.Tests/IisPurpleLab.Tests.csproj --locked-mode",
+      "exit_code": 0,
+      "result": "Both application and test projects restored from their committed lock files."
+    },
+    {
+      "command": "dotnet test app/IisPurpleLab.Tests/IisPurpleLab.Tests.csproj --no-restore --logger 'trx;LogFileName=fresh-checkout.trx' --results-directory artifacts/test-results",
+      "exit_code": 0,
+      "passed": 22,
+      "failed": 0,
+      "skipped": 0,
+      "reported_duration_seconds": 3,
+      "scope": "Fresh application build and in-process HTTP behavior tests, with native process launch mocked. Includes attachment/export response regression.",
+      "warnings": []
+    },
+    {
+      "command": ".venv/bin/python scenarios/portable_check.py --dotnet dotnet --output artifacts/portable-http.json",
+      "exit_code": 0,
+      "passed_checks": 14,
+      "failed_checks": 0,
+      "scope": "Real local HTTP against freshly built vulnerable and hardened Kestrel applications. No interpreter/helper attack payload was executed."
+    },
+    {
+      "command": ".venv/bin/python -m iis_purple demo --dataset datasets/fixtures/heldout --output artifacts/demo",
+      "exit_code": 0,
+      "events": 70,
+      "alerts": 16,
+      "process_links": {
+        "ambiguous": 0,
+        "high": 11,
+        "low": 0,
+        "unattributed": 10
+      },
+      "offline_processing_seconds": 0.015328,
+      "timing_scope": "One local run including normalization, correlation, detection and report writing; not live detection latency or a general performance benchmark."
+    },
+    {
+      "command": ".venv/bin/python -m iis_purple evaluate --dataset datasets/fixtures/heldout --output artifacts/evaluation",
+      "exit_code": 0,
+      "unit": "scenario-run",
+      "cases": 19,
+      "malicious_cases": 7,
+      "benign_cases": 12,
+      "origin": "handcrafted-fixture",
+      "views": {
+        "iis-only": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 7,
+          "tn": 12,
+          "alert_count": 0
+        },
+        "iis-application": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 5,
+          "tn": 12,
+          "alert_count": 2
+        },
+        "windows-only": {
+          "tp": 4,
+          "fp": 1,
+          "fn": 3,
+          "tn": 11,
+          "alert_count": 11
+        },
+        "combined": {
+          "tp": 6,
+          "fp": 1,
+          "fn": 1,
+          "tn": 11,
+          "alert_count": 16
+        }
+      }
+    }
+  ],
+  "additional_verification": {
+    "generated_bundle_files_with_matching_sha256": 15,
+    "detection_time_rule_hashes_matched": 3,
+    "html_evidence_anchors": 70,
+    "html_evidence_link_targets_resolved": 70,
+    "broken_evidence_fragment_links": 0,
+    "broken_local_file_links": 0,
+    "verified_locked_package_versions": 23,
+    "copied_source_files_compared_with_workspace": 63,
+    "mismatched_source_files": 0,
+    "verification_method": "Independent standard-library SHA-256 checks against every generated/original/rule entry in bundle-manifest.json; detection-time rule hashes matched the copied rules. Parsed HTML and verified evidence fragments and local-file links. Compared 63 copied source/configuration/test/fixture files with the live workspace after execution.",
+    "source_hash_scope": "Fingerprints below identify the copied source snapshot. Hashing Windows scripts does not mean that they were executed."
+  },
+  "actual_http_results": {
+    "origin": "executed-portable-http",
+    "hosting": "Kestrel on development platform, not IIS",
+    "native_windows_validated": false,
+    "process_payloads_executed": false,
+    "passed": true,
+    "runs": [
+      {
+        "mode": "vulnerable",
+        "family": "A",
+        "passed": true,
+        "checks": [
+          {
+            "name": "A private cross-tenant ticket",
+            "status": 200,
+            "expected_status": 200,
+            "passed": true
+          },
+          {
+            "name": "A private attachment",
+            "status": 200,
+            "expected_status": 200,
+            "passed": true
+          },
+          {
+            "name": "A same tenant control",
+            "status": 200,
+            "expected_status": 200,
+            "passed": true
+          },
+          {
+            "name": "A legitimate sharing control",
+            "status": 200,
+            "expected_status": 200,
+            "passed": true
+          },
+          {
+            "name": "A admin policy control",
+            "status": 200,
+            "expected_status": 200,
+            "passed": true
+          }
+        ]
+      },
+      {
+        "mode": "hardened",
+        "family": "A",
+        "passed": true,
+        "checks": [
+          {
+            "name": "A private cross-tenant ticket",
+            "status": 403,
+            "expected_status": 403,
+            "passed": true
+          },
+          {
+            "name": "A private attachment",
+            "status": 403,
+            "expected_status": 403,
+            "passed": true
+          },
+          {
+            "name": "A same tenant control",
+            "status": 200,
+            "expected_status": 200,
+            "passed": true
+          },
+          {
+            "name": "A legitimate sharing control",
+            "status": 200,
+            "expected_status": 200,
+            "passed": true
+          },
+          {
+            "name": "A admin policy control",
+            "status": 200,
+            "expected_status": 200,
+            "passed": true
+          }
+        ]
+      },
+      {
+        "mode": "hardened",
+        "family": "benign",
+        "passed": true,
+        "checks": [
+          {
+            "name": "benign repeated request 0",
+            "status": 200,
+            "expected_status": 200,
+            "passed": true
+          },
+          {
+            "name": "benign repeated request 1",
+            "status": 200,
+            "expected_status": 200,
+            "passed": true
+          },
+          {
+            "name": "benign repeated request 2",
+            "status": 200,
+            "expected_status": 200,
+            "passed": true
+          },
+          {
+            "name": "benign normal report",
+            "status": 200,
+            "expected_status": 200,
+            "passed": true
+          }
+        ]
+      }
+    ]
+  },
+  "tested_source_sha256": {
+    ".gitattributes": "0694c42095228a3b6b4e77e4545ae5f100e48a950ce495f408e91cc3c9616946",
+    "analysis/iis_purple/__init__.py": "dd6902f0cfd194317e54bf53e01cde136440a3452974a985323b9fe8feaf96a3",
+    "analysis/iis_purple/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "analysis/iis_purple/cli.py": "27978aa4ad4303d3c0ef7e6b34d85710739d6d3463b55767bba79b3c66ff2e3e",
+    "analysis/iis_purple/correlate.py": "3a2b19abdb3a9a3e22774368ac454cff4c384f7eea010fbd35c888f3116f2b93",
+    "analysis/iis_purple/detection.py": "20d01b7eb220f4186b0b9e1b1513356e9ae23209f3a248365a264eda17dd7a90",
+    "analysis/iis_purple/evaluation.py": "e31f9a4c43253f143fba9625b820b4ae14e5abba07a0d8c57ec7df6ae3c2d721",
+    "analysis/iis_purple/normalize.py": "7f52ae69ae8f293aa954ff8d4f5a447755d855fc665d4f5f01e7c5b22cdc5158",
+    "analysis/iis_purple/report.py": "761911a427256ecde3a3bf2fee93697abf258fb53a57635bde191458431c1e63",
+    "app/IisPurpleLab/Domain.cs": "ea20fd58617c78b965676d1fb84a50c43fe43b4288f79956b8abfdd907b80e58",
+    "app/IisPurpleLab/IisPurpleLab.csproj": "cd40b4891ecc26f7e8f1ad97ece61981584a06cb9235e09c29b8052d0462feeb",
+    "app/IisPurpleLab/LabKeyStorage.cs": "214c805541f93225919811e2b8852749eb79e4655ce8e0faea8b5441b47353b3",
+    "app/IisPurpleLab/Program.cs": "6da771b25dee347ffc32096f1f09eebea73f8c07a31379be17bc5ceead04ca38",
+    "app/IisPurpleLab/Reports.cs": "8c15ec60221738eb45c7807c47f1747cb9d3b6d9203efc0d3e11519371ef086a",
+    "app/IisPurpleLab/Telemetry.cs": "bf833dd16ec917a7379caf2b0a25336ba2700a153edb12e5c930222ff900e77f",
+    "app/IisPurpleLab/appsettings.json": "682b57e160b6b6b7f4ea95d6a11f3306a2ccd35b0a0ede0f07d994c85602edeb",
+    "app/IisPurpleLab/packages.lock.json": "8446cb40af4b4ecf5f0312027437e0029dd6e5a377dfbd8be9173d95edf663d2",
+    "app/IisPurpleLab.Tests/ApplicationTests.cs": "faa75482a20ef3ed2143346d5ba85712443c374f94c0c3a2dd572429b8a9f1c1",
+    "app/IisPurpleLab.Tests/IisPurpleLab.Tests.csproj": "54fb94b9d46829c60f2e1fca5f34ddcfa7219dbb8f27c07d6f2fc72c8d1a539d",
+    "app/IisPurpleLab.Tests/packages.lock.json": "34ed6edf9f35345e7af73cc720e45d039beaa75c86e1ee555ca8e8693b9fdd69",
+    "datasets/README.md": "ec1e013e215282e58d961cf2084afaf578a171dd10f4ad1d42414ff51948ab38",
+    "datasets/build_fixtures.py": "ff4ffb02a6d8c778661edb749bf15a62f7d14c247019803e1df8cb31b5a863fc",
+    "datasets/fixtures/development/application.jsonl": "cc03eb4f27572db3a884b8d6fef6dd7938e0b55f2820006fc40060c0c9eb8076",
+    "datasets/fixtures/development/ground_truth.json": "1d6865ff5fc5af3f103fae67b21434886c35f416392e353de01e034f3a765e3a",
+    "datasets/fixtures/development/iis.log": "ce21a84749d69bda9404f3b0468620fea4792282292166eb4b1a648443f2b980",
+    "datasets/fixtures/development/manifest.json": "129244d83ce4e719b51eefbf60e29fa8cb8eddd26e8f65faa9c9f2cff9bb64cf",
+    "datasets/fixtures/development/sysmon.xml": "5c01c6693f3cd0e552f774b63b8609373463ecceea64e5e7276afe2a02612057",
+    "datasets/fixtures/heldout/application.jsonl": "3edb51e65113a7489936ddb0d0e434d599decaf38730a167d980759e7f2f721e",
+    "datasets/fixtures/heldout/ground_truth.json": "579f43c91c0f3ae7209c5eba444de8937c440b091afc937e717436bcbebde4c0",
+    "datasets/fixtures/heldout/iis.log": "4472e466b779e4ea5903eea9e7f556c0a2e08863d610034295e239b7b5d693a9",
+    "datasets/fixtures/heldout/manifest.json": "a605adac7fba40e2070f5779146292516d96adc492a13e1fe696d04af6000f47",
+    "datasets/fixtures/heldout/sysmon.xml": "8f16f360c1ee6c089430fc4ce8e708bf84c8308842ca6155267c908ccfdb8114",
+    "detections/README.md": "de6a234382b7599be517494b9c83782797c4ed180b0aff69b8208f3380014565",
+    "detections/correlation/README.md": "926da1e45f82e0b18dd6253a40db35e7ad0c5b65f2d23248a19b8a16440e3034",
+    "detections/policy.json": "47796d9d42f6edc7ff6d4f63c4151c98ae122c9f503111487b4b058caf8a925f",
+    "detections/sigma/discovery_process.yml": "4703fa4ace274be7f7395ca8e9e83124fc1efed23f14a263a0647519d3ed4950",
+    "detections/sigma/web_worker_interpreter.yml": "e25c01dfe770499f1b9e61d1a17c3029296bfa4323b4a39942fa243bbbf7699b",
+    "global.json": "9969064a379ad96f0fd9358b4133bf2652018a32c60d44f37a0638168381a90d",
+    "lab/windows/Collect-Evidence.ps1": "e716850713ac65d14275c60b31440d9832f0e62e1d5e05f38b586416f8fa4f76",
+    "lab/windows/Common.ps1": "666a2f61a3ca273e1c9bb0c0cc0ea425e095f69996767fc7adae23ca5040103c",
+    "lab/windows/Contain-Lab.ps1": "5c818dd9368dee8273933d45eac8d0ef3fd8d05c1472eaa1f8b752e93d7365d4",
+    "lab/windows/Install-Lab.ps1": "e65867984f53118a2efb7059034a812ee4dff5da67b4661c83bdb964393b6c55",
+    "lab/windows/Install-Telemetry.ps1": "493833f31999ccead15fc79e6a04f076f91bc15df2a3a102ec2455fa08840dde",
+    "lab/windows/Invoke-Capture.ps1": "84b778a727c86da3a20f9b4e386e37ded9e71804602217003fdbd8ff6d3783a3",
+    "lab/windows/Remove-Lab.ps1": "b0ad91af7628216c511b5a7604e23a91466ecd8b1338456989c2205ba6a2c2a2",
+    "lab/windows/Restore-Lab.ps1": "3970122503ca7b29e903fd613ff9580f20d7a8c2c860554ac9085822dd211354",
+    "lab/windows/Set-LabMode.ps1": "dfce6eed9df787e6a44170ea1316ede2b42d72293e51b805c89c35fb66aa438f",
+    "lab/windows/Set-SupplementalAudit.ps1": "b4cc369cd036eea6b6db189f7c3e8ef7234abb34b5c2c85fa6b410495c3ed1cc",
+    "lab/windows/Test-Capture.ps1": "5ec6cf138256639b71a8891c9e9d6b5f6974a8bea527174c08e9710e68a3fd18",
+    "lab/windows/Test-Lab.ps1": "dddb98d11e8f51a2eac61a2ee5f7ac81fad15a639367d939137e52603be01ab7",
+    "lab/windows/Test-Scripts.ps1": "4fa76f293a251d28ced93bd99925b1253c4a3937f3ce4920386ee9e39b33c676",
+    "lab/windows/sysmon.xml": "0e13c8fe2198b63da8683ec3cb1e9eab1964c4379b9cf335510e4591d8978211",
+    "pyproject.toml": "1d5a8c0467b37d0e00cb7d69453c25f26e4c4da7c3132ff4d12fdda0d811e4ba",
+    "requirements.lock": "9c2be51a0a755d329b2c58e280c195062d0dd898327836c4b34466592bd01136",
+    "scenarios/README.md": "ca56c709924688d40c78706a100ec3a528198d34f978b6a4f1a1ece5e1ae9cac",
+    "scenarios/portable_check.py": "76257c7a2dd85546f2217af4a5cbc4e8f18e2c612be8778a4756e75cb8a2ce92",
+    "scenarios/run.py": "16ce198cb3d4a7248d87ecddacee9a36c8b674b47b0b140ae9e3a498dcc59040",
+    "scenarios/test_harness.py": "c5e200f33038ea7bbb66d3fa5bb72e7f38e355f316e70ac7a382ffb041896667",
+    "tests/test_correlate.py": "c7b71987714ba714d1b76f5c3340857bbb81a461bddab4bf1ee93fe8af18fd67",
+    "tests/test_detection.py": "ed29d5bed07579d940640fff11bde99e3a033d7b52dfb39e74e59c3bb055b8bb",
+    "tests/test_evaluation.py": "2da4cca2dd0d85f536f6b6116aabd231b6f05f525fff13ff3c1bf20f8463dd0d",
+    "tests/test_normalize.py": "ee9fc88a8b4c1a516e2fa009f70a5d4d485a810c65a01f524fa3f16162ea3ddb",
+    "tests/test_report.py": "554c0bc3957af3c4314a44fde7a69a8120d1273999490795c84e4224a1c6622e"
+  },
+  "previous_validation": {
+    "validation_date": "2026-09-19",
+    "superseded": true,
+    "python_tests_passed": 57,
+    "dotnet_tests_passed": 21,
+    "dotnet_analyzer_warnings": 2,
+    "portable_http_checks_passed": 14,
+    "note": "The initial fresh-copy check preceded the final polish. The commands and fingerprints above describe the independent rerun of the final source."
+  },
+  "limitations": [
+    "This is a temporary source-copy check, not a clone of a published GitHub repository.",
+    "The check ran on one Linux x64 environment. Windows and macOS portable installation were not independently executed here.",
+    "The Windows-only evaluation view replays handcrafted Sysmon-shaped fixtures; it is not native Windows validation.",
+    "No IIS worker, real Sysmon collection, Windows audit policy, native exploit-derived process execution, follow-on transfer, or native hardened-mode retest was validated by this check.",
+    "A passed portable preview gate is not a validated Windows release.",
+    "No raw endpoint logs, local account names, bootstrap credentials, or private host paths are included in this public summary."
+  ]
+}

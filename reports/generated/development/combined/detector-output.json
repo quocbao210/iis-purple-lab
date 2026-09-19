@@ -1,0 +1,369 @@
+{
+  "alerts": [
+    {
+      "alert_id": "153a4d14ba0a58123228",
+      "rule_id": "IPL-001",
+      "title": "Cross-tenant policy violation",
+      "severity": "high",
+      "kind": "policy-violation",
+      "evidence_ids": [
+        "e-6de34ada76dc9b050cfcc9e9"
+      ],
+      "request_id": "a78a2df0-5385-c3d4-4a17-f768b19bf062",
+      "reason": "Successful access violates tenant, sharing and administrator policy.",
+      "host": "web-47.lab"
+    },
+    {
+      "alert_id": "b321490936e8b0b43c82",
+      "rule_id": "IPL-001",
+      "title": "Cross-tenant policy violation",
+      "severity": "high",
+      "kind": "policy-violation",
+      "evidence_ids": [
+        "e-53cfb2c00c785e7334c53234"
+      ],
+      "request_id": "ed921879-b988-0d3c-86a0-48e1d5057b6d",
+      "reason": "Successful access violates tenant, sharing and administrator policy.",
+      "host": "web-48.lab"
+    },
+    {
+      "alert_id": "62784202aa4c68c9f923",
+      "rule_id": "IPL-002",
+      "title": "Interpreter child of IIS",
+      "severity": "medium",
+      "kind": "hunting-lead",
+      "evidence_ids": [
+        "e-89e832c61079414fd13b5260"
+      ],
+      "request_id": "9f298f0d-9b1d-9ae7-7184-2a39d4288944",
+      "reason": "An IIS worker launched an interpreter. Legitimate legacy exports remain an alternative.",
+      "host": "web-76.lab"
+    },
+    {
+      "alert_id": "7709cae876b09cc087aa",
+      "rule_id": "IPL-002",
+      "title": "Interpreter child of IIS",
+      "severity": "medium",
+      "kind": "hunting-lead",
+      "evidence_ids": [
+        "e-1cebd2678d231a16220893a6"
+      ],
+      "request_id": "4e226311-4004-0717-ae34-f68a536aab35",
+      "reason": "An IIS worker launched an interpreter. Legitimate legacy exports remain an alternative.",
+      "host": "web-71.lab"
+    },
+    {
+      "alert_id": "aab65808c9cb0722dbdd",
+      "rule_id": "IPL-002",
+      "title": "Interpreter child of IIS",
+      "severity": "medium",
+      "kind": "hunting-lead",
+      "evidence_ids": [
+        "e-ff5a07af849990d990b1debd"
+      ],
+      "request_id": null,
+      "reason": "An IIS worker launched an interpreter. Legitimate legacy exports remain an alternative.",
+      "host": "web-21.lab"
+    },
+    {
+      "alert_id": "d11eafab62abdf305f83",
+      "rule_id": "IPL-002",
+      "title": "Interpreter child of IIS",
+      "severity": "medium",
+      "kind": "hunting-lead",
+      "evidence_ids": [
+        "e-38029724094fa58f110054cb"
+      ],
+      "request_id": "86081b49-51b0-96a8-9c8c-5e9c588ea0d7",
+      "reason": "An IIS worker launched an interpreter. Legitimate legacy exports remain an alternative.",
+      "host": "web-31.lab"
+    },
+    {
+      "alert_id": "fd312ca93ba48fb9237f",
+      "rule_id": "IPL-002",
+      "title": "Interpreter child of IIS",
+      "severity": "medium",
+      "kind": "hunting-lead",
+      "evidence_ids": [
+        "e-b336daf7ac5328aebe0e211e"
+      ],
+      "request_id": "fb721db5-b5b7-7564-3671-961f69ee80c5",
+      "reason": "An IIS worker launched an interpreter. Legitimate legacy exports remain an alternative.",
+      "host": "web-78.lab"
+    },
+    {
+      "alert_id": "2d6673fb6fce117a0b93",
+      "rule_id": "IPL-003",
+      "title": "Discovery in IIS descendants",
+      "severity": "medium",
+      "kind": "hunting-lead",
+      "evidence_ids": [
+        "e-880ccde9e087ba9534530b90",
+        "e-89e832c61079414fd13b5260",
+        "e-f1a6c530ba54c1ca498c2668"
+      ],
+      "request_id": "9f298f0d-9b1d-9ae7-7184-2a39d4288944",
+      "reason": "Observed ProcessGuid ancestry connects identity/host discovery to IIS; intent is inferred.",
+      "host": "web-76.lab"
+    },
+    {
+      "alert_id": "68a701a38c7cbc8a2fd9",
+      "rule_id": "IPL-003",
+      "title": "Discovery in IIS descendants",
+      "severity": "medium",
+      "kind": "hunting-lead",
+      "evidence_ids": [
+        "e-4920865d7a0f2949acb1dc0d",
+        "e-695ff7df110303528f6836a4",
+        "e-b336daf7ac5328aebe0e211e"
+      ],
+      "request_id": "fb721db5-b5b7-7564-3671-961f69ee80c5",
+      "reason": "Observed ProcessGuid ancestry connects identity/host discovery to IIS; intent is inferred.",
+      "host": "web-78.lab"
+    },
+    {
+      "alert_id": "4235dbcb4f2e0d591d81",
+      "rule_id": "IPL-004",
+      "title": "Unexpected write by IIS interpreter chain",
+      "severity": "medium",
+      "kind": "hunting-lead",
+      "evidence_ids": [
+        "e-880ccde9e087ba9534530b90",
+        "e-89e832c61079414fd13b5260",
+        "e-a2597fd9f1a23fdfde7075e8"
+      ],
+      "request_id": "9f298f0d-9b1d-9ae7-7184-2a39d4288944",
+      "reason": "An interpreter descendant wrote under a protected application data root; no read is established.",
+      "host": "web-76.lab"
+    },
+    {
+      "alert_id": "6c2140da2cd830c7c70f",
+      "rule_id": "IPL-004",
+      "title": "Unexpected write by IIS interpreter chain",
+      "severity": "medium",
+      "kind": "hunting-lead",
+      "evidence_ids": [
+        "e-4920865d7a0f2949acb1dc0d",
+        "e-b336daf7ac5328aebe0e211e",
+        "e-d83683110d4e58a39db32e53"
+      ],
+      "request_id": "fb721db5-b5b7-7564-3671-961f69ee80c5",
+      "reason": "An interpreter descendant wrote under a protected application data root; no read is established.",
+      "host": "web-78.lab"
+    },
+    {
+      "alert_id": "3c51db722c955d200c54",
+      "rule_id": "IPL-005",
+      "title": "Unexpected connection from IIS descendants",
+      "severity": "medium",
+      "kind": "hunting-lead",
+      "evidence_ids": [
+        "e-8020e0c3e3ea79fdb36693ab",
+        "e-880ccde9e087ba9534530b90",
+        "e-89e832c61079414fd13b5260"
+      ],
+      "request_id": "9f298f0d-9b1d-9ae7-7184-2a39d4288944",
+      "reason": "Connection outside the configured report destination policy; connection alone does not establish transfer.",
+      "host": "web-76.lab"
+    },
+    {
+      "alert_id": "9a59c3c55d6aa0ad4e43",
+      "rule_id": "IPL-005",
+      "title": "Unexpected connection from IIS descendants",
+      "severity": "medium",
+      "kind": "hunting-lead",
+      "evidence_ids": [
+        "e-4920865d7a0f2949acb1dc0d",
+        "e-9710e45b395b4c22a63ae816",
+        "e-b336daf7ac5328aebe0e211e"
+      ],
+      "request_id": "fb721db5-b5b7-7564-3671-961f69ee80c5",
+      "reason": "Connection outside the configured report destination policy; connection alone does not establish transfer.",
+      "host": "web-78.lab"
+    },
+    {
+      "alert_id": "653b5a1aa39e97396f2d",
+      "rule_id": "IPL-006",
+      "title": "Request and endpoint execution incident",
+      "severity": "high",
+      "kind": "correlated-incident",
+      "evidence_ids": [
+        "e-0bc501be84aa743149d4a805",
+        "e-8020e0c3e3ea79fdb36693ab",
+        "e-880ccde9e087ba9534530b90",
+        "e-89e832c61079414fd13b5260",
+        "e-90cf429eb80353a1989e07df",
+        "e-a2597fd9f1a23fdfde7075e8",
+        "e-f1a6c530ba54c1ca498c2668"
+      ],
+      "request_id": "9f298f0d-9b1d-9ae7-7184-2a39d4288944",
+      "reason": "Shell-control syntax in an accepted report request and independently observed endpoint execution share a high-confidence launch link.",
+      "host": "web-76.lab"
+    },
+    {
+      "alert_id": "750fce763c48527de80d",
+      "rule_id": "IPL-006",
+      "title": "Request and endpoint execution incident",
+      "severity": "high",
+      "kind": "correlated-incident",
+      "evidence_ids": [
+        "e-4920865d7a0f2949acb1dc0d",
+        "e-695ff7df110303528f6836a4",
+        "e-9710e45b395b4c22a63ae816",
+        "e-abd64566062e1e6c666b9bc1",
+        "e-b336daf7ac5328aebe0e211e",
+        "e-d83683110d4e58a39db32e53",
+        "e-ebe8853dadaba63300ffe495"
+      ],
+      "request_id": "fb721db5-b5b7-7564-3671-961f69ee80c5",
+      "reason": "Shell-control syntax in an accepted report request and independently observed endpoint execution share a high-confidence launch link.",
+      "host": "web-78.lab"
+    },
+    {
+      "alert_id": "c47949603e936660c380",
+      "rule_id": "IPL-006",
+      "title": "Request and endpoint execution incident",
+      "severity": "high",
+      "kind": "correlated-incident",
+      "evidence_ids": [
+        "e-16919fbba1fe771a015e45f9",
+        "e-1cebd2678d231a16220893a6",
+        "e-21356765884ace44a86878db",
+        "e-9bc5cb997778694f9fe2c8d2"
+      ],
+      "request_id": "4e226311-4004-0717-ae34-f68a536aab35",
+      "reason": "Shell-control syntax in an accepted report request and independently observed endpoint execution share a high-confidence launch link.",
+      "host": "web-71.lab"
+    }
+  ],
+  "availability": {
+    "IPL-001": {
+      "available": true,
+      "required_sources": [
+        "application"
+      ],
+      "missing_sources": [],
+      "eligible_records_by_stage": [
+        8
+      ],
+      "incomplete_records_by_stage": [
+        0
+      ],
+      "missing_fields_by_stage": [
+        []
+      ],
+      "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+    },
+    "IPL-002": {
+      "available": true,
+      "required_sources": [
+        "sysmon"
+      ],
+      "missing_sources": [],
+      "eligible_records_by_stage": [
+        21
+      ],
+      "incomplete_records_by_stage": [
+        0
+      ],
+      "missing_fields_by_stage": [
+        []
+      ],
+      "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+    },
+    "IPL-003": {
+      "available": true,
+      "required_sources": [
+        "sysmon"
+      ],
+      "missing_sources": [],
+      "eligible_records_by_stage": [
+        21
+      ],
+      "incomplete_records_by_stage": [
+        0
+      ],
+      "missing_fields_by_stage": [
+        []
+      ],
+      "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+    },
+    "IPL-004": {
+      "available": true,
+      "required_sources": [
+        "sysmon"
+      ],
+      "missing_sources": [],
+      "eligible_records_by_stage": [
+        21,
+        2
+      ],
+      "incomplete_records_by_stage": [
+        0,
+        0
+      ],
+      "missing_fields_by_stage": [
+        [],
+        []
+      ],
+      "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+    },
+    "IPL-005": {
+      "available": true,
+      "required_sources": [
+        "sysmon"
+      ],
+      "missing_sources": [],
+      "eligible_records_by_stage": [
+        21,
+        2
+      ],
+      "incomplete_records_by_stage": [
+        0,
+        0
+      ],
+      "missing_fields_by_stage": [
+        [],
+        []
+      ],
+      "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+    },
+    "IPL-006": {
+      "available": true,
+      "required_sources": [
+        "application",
+        "sysmon"
+      ],
+      "missing_sources": [],
+      "eligible_records_by_stage": [
+        21,
+        9,
+        9
+      ],
+      "incomplete_records_by_stage": [
+        0,
+        0,
+        0
+      ],
+      "missing_fields_by_stage": [
+        [],
+        [],
+        []
+      ],
+      "note": "Zero eligible records means prerequisites unavailable in this evidence. Presence does not establish continuous collection or a valid correlation."
+    }
+  },
+  "rule_versions": {
+    "analysis/iis_purple/detection.py": "20d01b7eb220f4186b0b9e1b1513356e9ae23209f3a248365a264eda17dd7a90",
+    "detections/sigma/discovery_process.yml": "4703fa4ace274be7f7395ca8e9e83124fc1efed23f14a263a0647519d3ed4950",
+    "detections/sigma/web_worker_interpreter.yml": "e25c01dfe770499f1b9e61d1a17c3029296bfa4323b4a39942fa243bbbf7699b"
+  },
+  "policy": {
+    "schema_version": 1,
+    "approved_destinations": [],
+    "protected_roots": [
+      "C:\\IISPurpleLab\\data"
+    ],
+    "notes": "Normal report helpers have no network requirement. Native deployments at another root must supply an audited policy using --policy. A connection alert does not prove exfiltration."
+  }
+}

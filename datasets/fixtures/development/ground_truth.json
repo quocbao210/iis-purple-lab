@@ -1,0 +1,483 @@
+{
+  "unit": "scenario-run",
+  "origin": "evaluation-only labels for handcrafted fixtures",
+  "cases": [
+    {
+      "case_id": "development-01",
+      "family": "A",
+      "malicious": true,
+      "behaviour": "cross-tenant",
+      "request_id": "ed921879-b988-0d3c-86a0-48e1d5057b6d",
+      "refs": [
+        {
+          "path": "iis.log",
+          "record": 3
+        },
+        {
+          "path": "application.jsonl",
+          "record": 1
+        }
+      ],
+      "expected_rules": [
+        "IPL-001"
+      ],
+      "limitation": "Handcrafted fixture"
+    },
+    {
+      "case_id": "development-02",
+      "family": "A",
+      "malicious": true,
+      "behaviour": "attachment",
+      "request_id": "a78a2df0-5385-c3d4-4a17-f768b19bf062",
+      "refs": [
+        {
+          "path": "iis.log",
+          "record": 4
+        },
+        {
+          "path": "application.jsonl",
+          "record": 2
+        }
+      ],
+      "expected_rules": [
+        "IPL-001"
+      ],
+      "limitation": "Handcrafted fixture"
+    },
+    {
+      "case_id": "development-03",
+      "family": "A",
+      "malicious": false,
+      "behaviour": "same-tenant",
+      "request_id": "9cb2025a-75fe-2546-52a5-5482c620af79",
+      "refs": [
+        {
+          "path": "iis.log",
+          "record": 5
+        },
+        {
+          "path": "application.jsonl",
+          "record": 3
+        }
+      ],
+      "expected_rules": [],
+      "limitation": "Handcrafted fixture"
+    },
+    {
+      "case_id": "development-04",
+      "family": "A",
+      "malicious": false,
+      "behaviour": "sharing",
+      "request_id": "d31fcc89-44fb-a742-92ba-fae2977156f5",
+      "refs": [
+        {
+          "path": "iis.log",
+          "record": 6
+        },
+        {
+          "path": "application.jsonl",
+          "record": 4
+        }
+      ],
+      "expected_rules": [],
+      "limitation": "Handcrafted fixture"
+    },
+    {
+      "case_id": "development-05",
+      "family": "A",
+      "malicious": false,
+      "behaviour": "admin",
+      "request_id": "21640ec5-fe8e-72b6-6f84-a6105e0c4f6b",
+      "refs": [
+        {
+          "path": "iis.log",
+          "record": 7
+        },
+        {
+          "path": "application.jsonl",
+          "record": 5
+        }
+      ],
+      "expected_rules": [],
+      "limitation": "Handcrafted fixture"
+    },
+    {
+      "case_id": "development-06",
+      "family": "A",
+      "malicious": false,
+      "behaviour": "denied",
+      "request_id": "b04a4891-fc22-c716-968f-72187667ee1e",
+      "refs": [
+        {
+          "path": "iis.log",
+          "record": 8
+        },
+        {
+          "path": "application.jsonl",
+          "record": 6
+        }
+      ],
+      "expected_rules": [],
+      "limitation": "Handcrafted fixture"
+    },
+    {
+      "case_id": "development-07",
+      "family": "B",
+      "malicious": true,
+      "behaviour": "injection",
+      "request_id": "4e226311-4004-0717-ae34-f68a536aab35",
+      "refs": [
+        {
+          "path": "iis.log",
+          "record": 9
+        },
+        {
+          "path": "application.jsonl",
+          "record": 7
+        },
+        {
+          "path": "application.jsonl",
+          "record": 8
+        },
+        {
+          "path": "sysmon.xml",
+          "record": 2
+        }
+      ],
+      "expected_rules": [
+        "IPL-002",
+        "IPL-006"
+      ],
+      "limitation": "Handcrafted fixture"
+    },
+    {
+      "case_id": "development-08",
+      "family": "C",
+      "malicious": true,
+      "behaviour": "follow-on",
+      "request_id": "fb721db5-b5b7-7564-3671-961f69ee80c5",
+      "refs": [
+        {
+          "path": "iis.log",
+          "record": 10
+        },
+        {
+          "path": "application.jsonl",
+          "record": 9
+        },
+        {
+          "path": "application.jsonl",
+          "record": 10
+        },
+        {
+          "path": "sysmon.xml",
+          "record": 4
+        },
+        {
+          "path": "sysmon.xml",
+          "record": 5
+        },
+        {
+          "path": "sysmon.xml",
+          "record": 6
+        },
+        {
+          "path": "sysmon.xml",
+          "record": 7
+        }
+      ],
+      "expected_rules": [
+        "IPL-002",
+        "IPL-003",
+        "IPL-004",
+        "IPL-005",
+        "IPL-006"
+      ],
+      "limitation": "Handcrafted fixture"
+    },
+    {
+      "case_id": "development-09",
+      "family": "C",
+      "malicious": true,
+      "behaviour": "follow-on",
+      "request_id": "9f298f0d-9b1d-9ae7-7184-2a39d4288944",
+      "refs": [
+        {
+          "path": "iis.log",
+          "record": 11
+        },
+        {
+          "path": "application.jsonl",
+          "record": 11
+        },
+        {
+          "path": "application.jsonl",
+          "record": 12
+        },
+        {
+          "path": "sysmon.xml",
+          "record": 9
+        },
+        {
+          "path": "sysmon.xml",
+          "record": 10
+        },
+        {
+          "path": "sysmon.xml",
+          "record": 11
+        },
+        {
+          "path": "sysmon.xml",
+          "record": 12
+        }
+      ],
+      "expected_rules": [
+        "IPL-002",
+        "IPL-003",
+        "IPL-004",
+        "IPL-005",
+        "IPL-006"
+      ],
+      "limitation": "Handcrafted fixture"
+    },
+    {
+      "case_id": "development-10",
+      "family": "B",
+      "malicious": false,
+      "behaviour": "helper",
+      "request_id": "26909716-f7ad-9464-31b6-87a25b7d1926",
+      "refs": [
+        {
+          "path": "iis.log",
+          "record": 12
+        },
+        {
+          "path": "application.jsonl",
+          "record": 13
+        },
+        {
+          "path": "application.jsonl",
+          "record": 14
+        },
+        {
+          "path": "sysmon.xml",
+          "record": 14
+        }
+      ],
+      "expected_rules": [],
+      "limitation": "Handcrafted fixture"
+    },
+    {
+      "case_id": "development-11",
+      "family": "B",
+      "malicious": false,
+      "behaviour": "helper",
+      "request_id": "dfe8ccbd-2408-0862-9273-eb429d969dfb",
+      "refs": [
+        {
+          "path": "iis.log",
+          "record": 13
+        },
+        {
+          "path": "application.jsonl",
+          "record": 15
+        },
+        {
+          "path": "application.jsonl",
+          "record": 16
+        },
+        {
+          "path": "sysmon.xml",
+          "record": 16
+        }
+      ],
+      "expected_rules": [],
+      "limitation": "Handcrafted fixture"
+    },
+    {
+      "case_id": "development-12",
+      "family": "B",
+      "malicious": false,
+      "behaviour": "concurrent-helper",
+      "request_id": "502977de-e861-ab41-e28a-49d59391d1ce",
+      "refs": [
+        {
+          "path": "iis.log",
+          "record": 14
+        },
+        {
+          "path": "application.jsonl",
+          "record": 17
+        },
+        {
+          "path": "application.jsonl",
+          "record": 18
+        },
+        {
+          "path": "sysmon.xml",
+          "record": 18
+        }
+      ],
+      "expected_rules": [],
+      "limitation": "Handcrafted fixture"
+    },
+    {
+      "case_id": "development-13",
+      "family": "B",
+      "malicious": false,
+      "behaviour": "concurrent-helper",
+      "request_id": "fd53fade-8fcf-e52f-1a6a-31854e260745",
+      "refs": [
+        {
+          "path": "iis.log",
+          "record": 15
+        },
+        {
+          "path": "application.jsonl",
+          "record": 19
+        },
+        {
+          "path": "application.jsonl",
+          "record": 20
+        },
+        {
+          "path": "sysmon.xml",
+          "record": 19
+        }
+      ],
+      "expected_rules": [],
+      "limitation": "Handcrafted fixture"
+    },
+    {
+      "case_id": "development-14",
+      "family": "B",
+      "malicious": false,
+      "behaviour": "recycled-helper",
+      "request_id": "1c55a8ed-bf2d-efb5-f02a-47b086300927",
+      "refs": [
+        {
+          "path": "iis.log",
+          "record": 16
+        },
+        {
+          "path": "application.jsonl",
+          "record": 21
+        },
+        {
+          "path": "application.jsonl",
+          "record": 22
+        },
+        {
+          "path": "sysmon.xml",
+          "record": 21
+        }
+      ],
+      "expected_rules": [],
+      "limitation": "Handcrafted fixture"
+    },
+    {
+      "case_id": "development-15",
+      "family": "B",
+      "malicious": false,
+      "behaviour": "maintenance-shell",
+      "request_id": "86081b49-51b0-96a8-9c8c-5e9c588ea0d7",
+      "refs": [
+        {
+          "path": "iis.log",
+          "record": 17
+        },
+        {
+          "path": "application.jsonl",
+          "record": 23
+        },
+        {
+          "path": "application.jsonl",
+          "record": 24
+        },
+        {
+          "path": "sysmon.xml",
+          "record": 23
+        }
+      ],
+      "expected_rules": [],
+      "limitation": "Handcrafted fixture"
+    },
+    {
+      "case_id": "development-16",
+      "family": "A",
+      "malicious": false,
+      "behaviour": "same-tenant",
+      "request_id": "d2e0b7d5-a0fc-26cf-f40d-0e9dfa6057c8",
+      "refs": [
+        {
+          "path": "iis.log",
+          "record": 18
+        },
+        {
+          "path": "application.jsonl",
+          "record": 25
+        }
+      ],
+      "expected_rules": [],
+      "limitation": "Handcrafted fixture"
+    },
+    {
+      "case_id": "development-17",
+      "family": "A",
+      "malicious": false,
+      "behaviour": "same-tenant",
+      "request_id": "2f1e4c82-dd6f-880f-a596-32353ca271fb",
+      "refs": [
+        {
+          "path": "iis.log",
+          "record": 19
+        },
+        {
+          "path": "application.jsonl",
+          "record": 26
+        }
+      ],
+      "expected_rules": [],
+      "limitation": "Handcrafted fixture"
+    },
+    {
+      "case_id": "development-18",
+      "family": "B",
+      "malicious": true,
+      "behaviour": "uninstrumented",
+      "request_id": "fae9d615-0853-5777-2070-e07daa4a3244",
+      "refs": [
+        {
+          "path": "iis.log",
+          "record": 20
+        },
+        {
+          "path": "sysmon.xml",
+          "record": 25
+        }
+      ],
+      "expected_rules": [
+        "IPL-002"
+      ],
+      "limitation": "Handcrafted fixture"
+    },
+    {
+      "case_id": "development-19",
+      "family": "A",
+      "malicious": true,
+      "behaviour": "unlogged-policy",
+      "request_id": "e5741074-8574-878b-3a9b-f2e8bcd8927d",
+      "refs": [
+        {
+          "path": "iis.log",
+          "record": 21
+        }
+      ],
+      "expected_rules": [
+        "IPL-001"
+      ],
+      "limitation": "No application context exists"
+    }
+  ],
+  "notes": "Not used by normalisation, correlation or detection. Expected rules define positives for conditional rule metrics; incident coverage includes all malicious cases."
+}

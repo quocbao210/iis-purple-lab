@@ -1,0 +1,114 @@
+{
+  "origin": "executed-portable-http",
+  "hosting": "Kestrel on development platform, not IIS",
+  "native_windows_validated": false,
+  "process_payloads_executed": false,
+  "passed": true,
+  "runs": [
+    {
+      "mode": "vulnerable",
+      "family": "A",
+      "passed": true,
+      "checks": [
+        {
+          "name": "A private cross-tenant ticket",
+          "status": 200,
+          "expected_status": 200,
+          "passed": true
+        },
+        {
+          "name": "A private attachment",
+          "status": 200,
+          "expected_status": 200,
+          "passed": true
+        },
+        {
+          "name": "A same tenant control",
+          "status": 200,
+          "expected_status": 200,
+          "passed": true
+        },
+        {
+          "name": "A legitimate sharing control",
+          "status": 200,
+          "expected_status": 200,
+          "passed": true
+        },
+        {
+          "name": "A admin policy control",
+          "status": 200,
+          "expected_status": 200,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "mode": "hardened",
+      "family": "A",
+      "passed": true,
+      "checks": [
+        {
+          "name": "A private cross-tenant ticket",
+          "status": 403,
+          "expected_status": 403,
+          "passed": true
+        },
+        {
+          "name": "A private attachment",
+          "status": 403,
+          "expected_status": 403,
+          "passed": true
+        },
+        {
+          "name": "A same tenant control",
+          "status": 200,
+          "expected_status": 200,
+          "passed": true
+        },
+        {
+          "name": "A legitimate sharing control",
+          "status": 200,
+          "expected_status": 200,
+          "passed": true
+        },
+        {
+          "name": "A admin policy control",
+          "status": 200,
+          "expected_status": 200,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "mode": "hardened",
+      "family": "benign",
+      "passed": true,
+      "checks": [
+        {
+          "name": "benign repeated request 0",
+          "status": 200,
+          "expected_status": 200,
+          "passed": true
+        },
+        {
+          "name": "benign repeated request 1",
+          "status": 200,
+          "expected_status": 200,
+          "passed": true
+        },
+        {
+          "name": "benign repeated request 2",
+          "status": 200,
+          "expected_status": 200,
+          "passed": true
+        },
+        {
+          "name": "benign normal report",
+          "status": 200,
+          "expected_status": 200,
+          "passed": true
+        }
+      ]
+    }
+  ]
+}

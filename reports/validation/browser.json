@@ -1,0 +1,44 @@
+{
+  "kind": "actual-browser-report-validation",
+  "origin": "rendered-handcrafted-fixture-report",
+  "browser": "Chromium 153.0.8010.12",
+  "views": [
+    {
+      "viewport": "desktop",
+      "width": 1440,
+      "height": 1000,
+      "color_scheme": "light",
+      "records": 70,
+      "alerts": 16,
+      "source_filter_passed": true,
+      "evidence_expansion_passed": true,
+      "horizontal_overflow": false,
+      "javascript_errors": []
+    },
+    {
+      "viewport": "mobile",
+      "width": 390,
+      "height": 844,
+      "color_scheme": "light",
+      "records": 70,
+      "alerts": 16,
+      "source_filter_passed": true,
+      "evidence_expansion_passed": true,
+      "horizontal_overflow": false,
+      "javascript_errors": []
+    },
+    {
+      "viewport": "dark",
+      "width": 1440,
+      "height": 1000,
+      "color_scheme": "dark",
+      "records": 70,
+      "alerts": 16,
+      "source_filter_passed": true,
+      "evidence_expansion_passed": true,
+      "horizontal_overflow": false,
+      "javascript_errors": []
+    }
+  ],
+  "native_windows_evidence": false
+}
